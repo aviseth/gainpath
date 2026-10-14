@@ -2,8 +2,9 @@
 /**
  * Account admin for an invite-only deployment (see docs/hosted.md).
  *
- *   pnpm users add <email>       create an account; they sign in with a code
- *   pnpm users list              every account, with status and last sign-in
+ *   pnpm users add <email> [--ai]       create an account; they sign in with a code
+ *   pnpm users plan <email> ai|basic    whether AI is included (with AI_REQUIRES_PLAN=true)
+ *   pnpm users list              every account, with plan, status and last sign-in
  *   pnpm users disable <email>   block sign-in, keep their data (e.g. lapsed payment)
  *   pnpm users enable <email>    undo disable
  *   pnpm users remove <email>    delete the account and all its synced data
@@ -14,10 +15,17 @@
  */
 import { createClient } from "@supabase/supabase-js";
 
-const [command, email] = process.argv.slice(2);
-const COMMANDS = ["add", "list", "disable", "enable", "remove"];
-if (!COMMANDS.includes(command) || (command !== "list" && !email)) {
-  console.error("Usage: pnpm users <add|list|disable|enable|remove> [email]");
+const [command, email, ...rest] = process.argv.slice(2);
+const COMMANDS = ["add", "list", "plan", "disable", "enable", "remove"];
+const PLANS = { ai: true, basic: false };
+if (
+  !COMMANDS.includes(command) ||
+  (command !== "list" && !email) ||
+  (command === "plan" && !Object.hasOwn(PLANS, rest[0] ?? ""))
+) {
+  console.error(
+    "Usage: pnpm users add <email> [--ai] | plan <email> ai|basic | list | disable|enable|remove <email>",
+  );
   process.exit(1);
 }
 
@@ -52,15 +60,32 @@ const isDisabled = (u) => Boolean(u.banned_until && new Date(u.banned_until) > n
 
 const commands = {
   async add(email) {
-    const { error } = await admin.createUser({ email: email.trim(), email_confirm: true });
+    const ai = rest.includes("--ai");
+    const { error } = await admin.createUser({
+      email: email.trim(),
+      email_confirm: true,
+      app_metadata: { ai },
+    });
     if (error) throw error;
-    console.log(`Added ${email}. They sign in from Settings with their email.`);
+    const plan = ai ? "AI" : "basic";
+    console.log(`Added ${email} on the ${plan} plan. They sign in from Settings with their email.`);
+  },
+  async plan(email) {
+    const user = await find(email);
+    const ai = PLANS[rest[0]];
+    const { error } = await admin.updateUserById(user.id, {
+      app_metadata: { ...user.app_metadata, ai },
+    });
+    if (error) throw error;
+    console.log(`${email} is now on the ${ai ? "AI" : "basic"} plan.`);
   },
   async list() {
     const users = await allUsers();
     for (const u of users) {
       const last = u.last_sign_in_at ? u.last_sign_in_at.slice(0, 10) : "never";
-      console.log(`${u.email}\t${isDisabled(u) ? "disabled" : "active"}\tlast sign-in ${last}`);
+      const plan = u.app_metadata?.ai === true ? "ai" : "basic";
+      const state = isDisabled(u) ? "disabled" : "active";
+      console.log(`${u.email}\t${plan}\t${state}\tlast sign-in ${last}`);
     }
     console.log(`${users.length} account(s).`);
   },

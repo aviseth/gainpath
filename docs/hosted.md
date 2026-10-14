@@ -6,8 +6,12 @@ let friends pay you for an account on it, deploy it the same way and switch it
 to invite-only.
 
 Nobody can create their own account. When someone pays, you add their email;
-they open Settings, enter that email and type in the code they receive. They
-use your Anthropic key, capped per person per day.
+they open Settings, enter that email and type in the code they receive.
+
+There are two plans. **AI** accounts use your Anthropic key, capped per person
+per day. **Basic** accounts get everything else (planning, progression, swaps,
+sync) and can't use AI even if they switch it on: the server refuses their AI
+calls. You decide the price of each.
 
 ## Set up
 
@@ -22,6 +26,7 @@ use your Anthropic key, capped per person per day.
    | ------------------------- | ------------------------------------------------------------------------ |
    | `NEXT_PUBLIC_INVITE_ONLY` | `true`: invite-only copy in Settings                                     |
    | `NEXT_PUBLIC_ACCESS_URL`  | Optional. Your payment link (Stripe, Gumroad, Ko-fi …)                   |
+   | `AI_REQUIRES_PLAN`        | `true`: only accounts on the AI plan can use AI                          |
    | `AI_MODEL_DEEP`           | Optional. `claude-haiku-5-5` puts every AI feature on the cheapest model |
    | `AI_DAILY_LIMIT`          | Calls per person per day (default 20)                                    |
 
@@ -32,7 +37,9 @@ Run these on your own machine with `NEXT_PUBLIC_SUPABASE_URL` and
 security, so never add it to the deployed app's variables.
 
 ```sh
-pnpm users add friend@example.com
+pnpm users add you@example.com --ai     # your own account, AI included
+pnpm users add friend@example.com       # basic plan, no AI
+pnpm users plan friend@example.com ai   # upgrade (or `basic` to downgrade)
 pnpm users list
 pnpm users disable friend@example.com   # blocks sign-in, keeps their data
 pnpm users enable friend@example.com

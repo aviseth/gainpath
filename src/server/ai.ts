@@ -38,9 +38,26 @@ export function aiConfigured(): boolean {
   );
 }
 
-/** A Supabase client acting as the caller, so RLS and auth.uid() apply. */
+/**
+ * Hosted deployments with paid plans set AI_REQUIRES_PLAN=true; AI then works
+ * only for accounts whose app_metadata has `ai: true` (`pnpm users plan <email> ai`).
+ * app_metadata can only be written with the secret key, so users can't grant it
+ * to themselves. Unset (self-hosting), every signed-in user can use AI.
+ */
+export function aiIncluded(user: { app_metadata?: Record<string, unknown> }): boolean {
+  return process.env.AI_REQUIRES_PLAN !== "true" || user.app_metadata?.ai === true;
+}
+
+/**
+ * A Supabase client acting as the caller, so RLS and auth.uid() apply.
+ * Throws 403 when the caller's plan doesn't include AI.
+ */
 export async function authenticate(request: Request): Promise<SupabaseClient> {
-  return (await authenticateUser(request)).client;
+  const { client, user } = await authenticateUser(request);
+  if (!aiIncluded(user)) {
+    throw new RouteError(403, "not_included", "Your plan doesn't include AI.");
+  }
+  return client;
 }
 
 export function dailyLimit(requested: unknown): number {
