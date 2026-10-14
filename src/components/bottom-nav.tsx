@@ -16,7 +16,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Main"
-      className="fixed inset-x-0 bottom-0 border-t border-zinc-800 bg-zinc-950/95 pb-[env(safe-area-inset-bottom)] backdrop-blur"
+      className="fixed inset-x-0 bottom-0 border-t-2 border-zinc-100 bg-zinc-950 pb-[env(safe-area-inset-bottom)]"
     >
       <ul className="mx-auto flex max-w-lg">
         {items.map(({ href, label }) => {
@@ -26,8 +26,10 @@ export function BottomNav() {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`flex min-h-14 items-center justify-center text-sm font-medium ${
-                  active ? "text-lime-400" : "text-zinc-400"
+                className={`flex min-h-14 items-center justify-center text-sm ${
+                  active
+                    ? "font-semibold text-zinc-100 underline decoration-lime-400 decoration-2 underline-offset-4"
+                    : "text-zinc-500"
                 }`}
               >
                 {label}

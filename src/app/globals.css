@@ -1,16 +1,77 @@
 @import "tailwindcss";
 
+/*
+ * Gainpath look: a printed training log. Warm light ground, near-black ink,
+ * one accent (competition-plate red) used sparingly for what's current or
+ * behind. Hairline rules and square corners instead of floating cards.
+ *
+ * Components use Tailwind's zinc/lime/amber/red classes; those palettes are
+ * remapped here so the whole app follows the design from one place:
+ *   zinc  = ink → ground scale (950 is the page, 100 is the text)
+ *   lime  = plate red (accent)
+ *   amber = ochre (warnings), red = oxblood (errors)
+ */
+@theme {
+  --color-zinc-50: #0e0f10;
+  --color-zinc-100: #16181a;
+  --color-zinc-200: #22252a;
+  --color-zinc-300: #2e3134;
+  --color-zinc-400: #45484c;
+  --color-zinc-500: #5a5d61;
+  --color-zinc-600: #7a7d81;
+  --color-zinc-700: #a9a79f;
+  --color-zinc-800: #dddbd3;
+  --color-zinc-900: #f8f7f3;
+  --color-zinc-950: #f2f1ec;
+
+  --color-lime-100: #6e1c0f;
+  --color-lime-200: #7f2112;
+  --color-lime-300: #9e2814;
+  --color-lime-400: #b8301a;
+  --color-lime-500: #a12a17;
+
+  --color-amber-100: #5c400b;
+  --color-amber-200: #6b4a0c;
+  --color-amber-300: #7d560e;
+  --color-amber-400: #b9811c;
+
+  --color-red-200: #6d1222;
+  --color-red-300: #7a1424;
+  --color-red-400: #9a1f33;
+  --color-red-500: #8f1d2c;
+
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 3px;
+  --radius-2xl: 4px;
+}
+
 @theme inline {
-  --font-sans:
-    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-barlow-condensed), var(--font-public-sans), sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
   font-family: var(--font-sans);
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Headings read like a scoreboard. */
+h1,
+h2 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+h1 {
+  font-weight: 700;
+}
+h2 {
+  font-weight: 600;
 }

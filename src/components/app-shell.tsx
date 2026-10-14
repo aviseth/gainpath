@@ -23,9 +23,9 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <header className="sticky top-0 z-10 border-b border-zinc-800 bg-zinc-950/95 pt-[env(safe-area-inset-top)] backdrop-blur">
+      <header className="sticky top-0 z-10 border-b-2 border-zinc-100 bg-zinc-950 pt-[env(safe-area-inset-top)]">
         <div className="mx-auto flex max-w-lg items-center justify-between px-4 py-2">
-          <span className="text-lg font-bold tracking-tight">Gainpath</span>
+          <span className="font-display text-xl font-bold uppercase tracking-wide">Gainpath</span>
           <SyncIndicator />
         </div>
       </header>

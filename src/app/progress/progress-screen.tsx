@@ -24,15 +24,15 @@ import { useTrainingContext } from "@/hooks/use-training";
 import { formatDate, formatKg } from "@/lib/labels";
 import { WeeklyReview } from "./weekly-review";
 
-const AXIS = { stroke: "#71717a", fontSize: 11 };
+const AXIS = { stroke: "#5a5d61", fontSize: 11 };
 const TOOLTIP = {
   contentStyle: {
-    background: "#18181b",
-    border: "1px solid #3f3f46",
+    background: "#fbfaf7",
+    border: "1px solid #16181a",
     borderRadius: 12,
     fontSize: 12,
   },
-  labelStyle: { color: "#a1a1aa" },
+  labelStyle: { color: "#5a5d61" },
 };
 
 export function ProgressScreen() {
@@ -107,14 +107,14 @@ export function ProgressScreen() {
                     e1rm: Math.round(p.e1rm * 10) / 10,
                   }))}
                 >
-                  <CartesianGrid stroke="#27272a" vertical={false} />
+                  <CartesianGrid stroke="#dddbd3" vertical={false} />
                   <XAxis dataKey="date" tick={AXIS} />
                   <YAxis tick={AXIS} width={40} domain={["auto", "auto"]} />
                   <Tooltip {...TOOLTIP} formatter={(v) => [`${v} kg`, "e1RM"]} />
                   <Line
                     type="monotone"
                     dataKey="e1rm"
-                    stroke="#a3e635"
+                    stroke="#b8301a"
                     strokeWidth={2}
                     dot={{ r: 3 }}
                     isAnimationActive={false}
@@ -133,21 +133,21 @@ export function ProgressScreen() {
         <div className="h-[28rem]" data-testid="volume-chart">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={volumeRows} layout="vertical" margin={{ left: 8 }}>
-              <CartesianGrid stroke="#27272a" horizontal={false} />
+              <CartesianGrid stroke="#dddbd3" horizontal={false} />
               <XAxis type="number" tick={AXIS} />
               <YAxis type="category" dataKey="muscle" tick={AXIS} width={80} />
               <Tooltip {...TOOLTIP} />
               <Bar
                 dataKey="target"
                 name="Target"
-                fill="#3f3f46"
+                fill="#dddbd3"
                 barSize={8}
                 isAnimationActive={false}
               />
               <Bar
                 dataKey="done"
                 name="Done"
-                fill="#a3e635"
+                fill="#16181a"
                 barSize={8}
                 isAnimationActive={false}
               />
@@ -161,7 +161,7 @@ export function ProgressScreen() {
               <XAxis dataKey="week" tick={AXIS} />
               <YAxis tick={AXIS} width={30} allowDecimals={false} />
               <Tooltip {...TOOLTIP} />
-              <Bar dataKey="sets" fill="#65a30d" isAnimationActive={false} />
+              <Bar dataKey="sets" fill="#16181a" isAnimationActive={false} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -186,10 +186,10 @@ function RecoveryMap({ recovery }: { recovery: Record<Muscle, number> }) {
         const r = Math.max(0, Math.min(1, recovery[m] ?? 1));
         const tone =
           r >= 0.85
-            ? "bg-lime-400/20 text-lime-200"
+            ? "bg-zinc-900 text-zinc-100"
             : r >= 0.6
               ? "bg-amber-400/20 text-amber-100"
-              : "bg-red-500/20 text-red-200";
+              : "bg-red-500/15 text-red-200";
         return (
           <li
             key={m}

@@ -111,7 +111,7 @@ const css = `
   * { box-sizing: border-box; margin: 0; }
   body { background: transparent; }
   .row { display: inline-flex; gap: 16px; padding: 4px; }
-  img { width: 260px; height: auto; display: block; border-radius: 12px; border: 1px solid #3f3f46; }
+  img { width: 260px; height: auto; display: block; border-radius: 12px; border: 1px solid #c9c7bf; }
 `;
 
 async function render(file, shots) {

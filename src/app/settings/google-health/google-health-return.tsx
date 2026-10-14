@@ -40,7 +40,7 @@ export function GoogleHealthReturn() {
       <h1 className="text-2xl font-bold">Google Health</h1>
       <Notice>{state.message}</Notice>
       {state.done && (
-        <Link href="/settings" className="text-lime-400 underline">
+        <Link href="/settings" className="text-zinc-100 underline decoration-1 underline-offset-4">
           Back to Settings
         </Link>
       )}

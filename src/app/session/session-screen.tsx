@@ -64,7 +64,7 @@ export function SessionScreen() {
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl font-bold">Session</h1>
         <Notice>No session today yet.</Notice>
-        <Link href="/" className="text-lime-400">
+        <Link href="/" className="text-zinc-100 underline decoration-1 underline-offset-4">
           ← Today
         </Link>
       </div>
@@ -185,7 +185,11 @@ export function SessionScreen() {
         <h1 className="text-2xl font-bold">
           {session.status === "done" ? "Session done" : "Session"}
         </h1>
-        <button type="button" className="text-sm text-lime-400" onClick={() => setWhy(true)}>
+        <button
+          type="button"
+          className="text-sm text-zinc-100 underline decoration-1 underline-offset-4"
+          onClick={() => setWhy(true)}
+        >
           Why?
         </button>
       </div>
@@ -327,14 +331,14 @@ export function SessionScreen() {
       {toast && (
         <div
           role="status"
-          className="fixed inset-x-4 top-16 z-30 mx-auto flex max-w-lg items-center justify-between gap-3 rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-sm shadow-lg"
+          className="fixed inset-x-4 top-16 z-30 mx-auto flex max-w-lg items-center justify-between gap-3 border-2 border-zinc-100 bg-zinc-950 p-3 text-sm shadow-lg"
         >
           <span>{toast.text}</span>
           <span className="flex shrink-0 gap-2">
             {toast.undo && (
               <button
                 type="button"
-                className="font-semibold text-lime-400"
+                className="font-semibold text-zinc-100 underline decoration-1 underline-offset-4"
                 onClick={() => void undo(toast.undo!)}
               >
                 Undo

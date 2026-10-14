@@ -83,7 +83,7 @@ export function AddEquipmentSheet({
                         }}
                       >
                         <span>{t.name}</span>
-                        <span className="text-lime-400">+ Add</span>
+                        <span className="font-semibold underline underline-offset-4">+ Add</span>
                       </button>
                     </li>
                   ))}

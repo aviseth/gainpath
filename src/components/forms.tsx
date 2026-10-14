@@ -113,7 +113,11 @@ export function Segmented<T extends string | number>({
   label: string;
 }) {
   return (
-    <div role="radiogroup" aria-label={label} className="grid grid-flow-col auto-cols-fr gap-2">
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className="grid grid-flow-col auto-cols-fr divide-x divide-zinc-100 border border-zinc-100"
+    >
       {options.map((o) => {
         const active = o.value === value;
         return (
@@ -123,10 +127,8 @@ export function Segmented<T extends string | number>({
             role="radio"
             aria-checked={active}
             onClick={() => onChange(o.value)}
-            className={`min-h-12 rounded-xl border px-2 text-sm font-semibold ${
-              active
-                ? "border-lime-400 bg-lime-400/15 text-lime-300"
-                : "border-zinc-700 bg-zinc-900 text-zinc-300"
+            className={`min-h-12 px-2 text-sm font-semibold ${
+              active ? "bg-zinc-100 text-zinc-950" : "bg-transparent text-zinc-300"
             }`}
           >
             {o.label}
@@ -151,8 +153,8 @@ export function Chip({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`min-h-10 shrink-0 rounded-full border px-3 text-sm ${
-        active ? "border-lime-400 bg-lime-400/15 text-lime-300" : "border-zinc-700 text-zinc-300"
+      className={`min-h-10 shrink-0 rounded-sm border px-3 text-sm ${
+        active ? "border-zinc-100 bg-zinc-100 text-zinc-950" : "border-zinc-700 text-zinc-300"
       }`}
     >
       {children}
@@ -168,13 +170,15 @@ export function Badge({
   children: ReactNode;
 }) {
   const tones = {
-    neutral: "bg-zinc-800 text-zinc-300",
-    good: "bg-lime-400/15 text-lime-300",
-    warn: "bg-amber-400/15 text-amber-300",
-    bad: "bg-red-500/15 text-red-300",
+    neutral: "border-zinc-700 text-zinc-400",
+    good: "border-zinc-100 text-zinc-100",
+    warn: "border-amber-400 text-amber-300",
+    bad: "border-red-500 text-red-300",
   };
   return (
-    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${tones[tone]}`}>
+    <span
+      className={`rounded-sm border px-1.5 py-px text-xs font-medium uppercase tracking-wide ${tones[tone]}`}
+    >
       {children}
     </span>
   );
@@ -213,9 +217,9 @@ export function Sheet({
       aria-labelledby={titleId}
       className="fixed inset-0 z-30 flex flex-col bg-zinc-950"
     >
-      <div className="border-b border-zinc-800 pt-[env(safe-area-inset-top)]">
+      <div className="border-b-2 border-zinc-100 pt-[env(safe-area-inset-top)]">
         <div className="mx-auto flex max-w-lg items-center justify-between gap-2 px-4 py-2">
-          <h2 id={titleId} className="truncate text-lg font-semibold">
+          <h2 id={titleId} className="truncate text-xl">
             {title}
           </h2>
           <button

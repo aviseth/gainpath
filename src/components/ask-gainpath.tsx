@@ -86,7 +86,7 @@ export function AskGainpath({ onClose }: { onClose: () => void }) {
             <p
               key={i}
               className={`whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm ${
-                line.kind === "user" ? "self-end bg-lime-400/15 text-lime-100" : "bg-zinc-900"
+                line.kind === "user" ? "self-end bg-zinc-100 text-zinc-950" : "bg-zinc-900"
               }`}
             >
               {line.text}

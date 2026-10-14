@@ -32,17 +32,15 @@ export function RestTimer({
     <div
       role="timer"
       aria-live="polite"
-      className={`fixed inset-x-0 bottom-14 z-20 border-t px-4 py-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] ${
-        remaining === 0
-          ? "border-lime-400 bg-lime-400 text-zinc-950"
-          : "border-zinc-800 bg-zinc-900"
+      className={`fixed inset-x-0 bottom-14 z-20 border-t-2 px-4 py-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] ${
+        remaining === 0 ? "border-lime-400 bg-lime-400 text-white" : "border-zinc-100 bg-zinc-950"
       }`}
     >
       <div className="mx-auto flex max-w-lg items-center justify-between gap-3">
         <span className="text-sm font-medium">
           {remaining === 0 ? "Rest done. Next set!" : "Rest"}
         </span>
-        <span className="text-2xl font-bold tabular-nums">
+        <span className="font-display text-3xl font-bold tabular-nums">
           {mm}:{ss}
         </span>
         <div className="flex gap-2">

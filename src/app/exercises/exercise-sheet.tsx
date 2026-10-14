@@ -48,7 +48,7 @@ export function ExerciseSheet({
         )}
       </div>
 
-      <section className="rounded-2xl border border-zinc-800 p-4 text-sm">
+      <section className="border-t-2 border-zinc-100 pt-3 text-sm">
         <p>
           <span className="text-zinc-400">Prime movers (1 set each): </span>
           {primaryMuscles(e).map(muscleLabel).join(", ")}

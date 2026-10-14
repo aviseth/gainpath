@@ -12,7 +12,7 @@ export default function OfflinePage() {
         This page hasn&apos;t been loaded on this device yet. Today, your session and your gym all
         work offline; your data is saved on the device and syncs when you&apos;re back online.
       </p>
-      <Link href="/" className="text-lime-400 underline">
+      <Link href="/" className="text-zinc-100 underline decoration-1 underline-offset-4">
         Go to Today
       </Link>
     </div>

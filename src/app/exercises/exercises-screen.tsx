@@ -83,7 +83,7 @@ export function ExercisesScreen() {
               <button
                 type="button"
                 onClick={() => setOpen(e.id)}
-                className={`flex min-h-14 w-full items-center justify-between gap-3 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-left ${
+                className={`flex min-h-14 w-full items-center justify-between gap-3 border-b border-zinc-700 px-3 py-2 text-left ${
                   ctx.excludedExercises.has(e.id) ? "opacity-50" : ""
                 }`}
               >

@@ -50,7 +50,7 @@ export function AdvancedSection() {
               type="button"
               onClick={() => setFilter(f)}
               aria-pressed={filter === f}
-              className={`min-h-9 rounded-full border px-3 ${filter === f ? "border-lime-400 text-lime-300" : "border-zinc-700"}`}
+              className={`min-h-9 rounded-sm border px-3 ${filter === f ? "border-zinc-100 bg-zinc-100 text-zinc-950" : "border-zinc-700"}`}
             >
               {f === "heuristic" ? "Rules of thumb" : f === "changed" ? "Changed" : "All"}
             </button>
@@ -61,7 +61,7 @@ export function AdvancedSection() {
             const current = key in overrides ? overrides[key] : entry.value;
             const draft = drafts[key];
             return (
-              <li key={key} className="rounded-xl bg-zinc-950 p-3">
+              <li key={key} className="border-b border-zinc-700 py-3">
                 <div className="flex items-start justify-between gap-2">
                   <label htmlFor={`cfg-${key}`} className="text-sm">
                     {entry.label}

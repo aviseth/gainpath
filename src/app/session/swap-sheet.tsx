@@ -187,7 +187,7 @@ export function SwapSheet({
               type="button"
               disabled={busy}
               onClick={() => void pickReason(r.value)}
-              className="flex min-h-14 flex-col items-start justify-center rounded-xl border border-zinc-800 bg-zinc-900 px-4 text-left"
+              className="flex min-h-14 flex-col items-start justify-center border-b border-zinc-700 px-4 text-left"
             >
               <span className="font-medium">{r.label}</span>
               <span className="text-xs text-zinc-500">{r.hint}</span>
@@ -284,7 +284,7 @@ export function SwapSheet({
         <>
           {empty && <Notice>{empty}</Notice>}
           {options.map(({ option, loads }, i) => (
-            <div key={i} className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4">
+            <div key={i} className="border-t-2 border-zinc-100 pt-3 pb-2">
               <div className="mb-2 flex items-center justify-between gap-2">
                 <Badge tone={option.matchPct >= 85 ? "good" : "warn"}>
                   {option.matchPct}% match

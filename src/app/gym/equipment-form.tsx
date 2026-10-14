@@ -95,7 +95,7 @@ export function EquipmentForm({
       </Field>
 
       {showSuggestion && suggestion && (
-        <div className="rounded-xl border border-lime-400/30 bg-lime-400/10 p-3 text-sm">
+        <div className="border-l-2 border-zinc-100 bg-zinc-900 p-3 text-sm">
           <p className="text-lime-200">
             Looks like a {EQUIPMENT_TYPE_SHORT[suggestion.type].toLowerCase()} machine for:{" "}
             {suggestion.exerciseIds.map((id) => catalog.get(id)?.name ?? id).join(", ")}.

@@ -27,7 +27,7 @@ export function GymScreen() {
         <EmptyState>No gym yet.</EmptyState>
         <Link
           href="/onboarding"
-          className="flex min-h-12 items-center justify-center rounded-xl bg-lime-400 font-semibold text-zinc-950"
+          className="flex min-h-12 items-center justify-center rounded-sm bg-zinc-100 font-display text-lg font-bold uppercase tracking-wider text-zinc-950"
         >
           Set up your gym
         </Link>
@@ -43,7 +43,10 @@ export function GymScreen() {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-2">
         <h1 className="text-2xl font-bold">My gym</h1>
-        <Link href="/gym/check" className="text-sm font-medium text-lime-400">
+        <Link
+          href="/gym/check"
+          className="text-sm text-zinc-100 underline decoration-1 underline-offset-4"
+        >
           Check my gym
         </Link>
       </div>
@@ -175,7 +178,7 @@ function EquipmentRow({
     <button
       type="button"
       onClick={onClick}
-      className={`flex min-h-14 w-full items-center justify-between gap-3 rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-left ${
+      className={`flex min-h-14 w-full items-center justify-between gap-3 border-b border-zinc-700 px-3 py-2 text-left ${
         broken || excluded || e.status === "archived" ? "opacity-50" : ""
       }`}
     >

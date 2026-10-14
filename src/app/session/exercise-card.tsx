@@ -34,7 +34,7 @@ function Stepper({
           type="button"
           aria-label={`Less ${label.toLowerCase()}`}
           onClick={onDown}
-          className="h-12 w-12 rounded-xl bg-zinc-800 text-2xl"
+          className="h-12 w-12 rounded-sm border border-zinc-100 text-2xl"
         >
           −
         </button>
@@ -49,7 +49,7 @@ function Stepper({
           type="button"
           aria-label={`More ${label.toLowerCase()}`}
           onClick={onUp}
-          className="h-12 w-12 rounded-xl bg-zinc-800 text-2xl"
+          className="h-12 w-12 rounded-sm border border-zinc-100 text-2xl"
         >
           +
         </button>
@@ -129,7 +129,7 @@ export function ExerciseCard({
   return (
     <article
       aria-label={exercise?.name}
-      className={`rounded-2xl border p-4 ${current ? "border-lime-400/60 bg-zinc-900" : "border-zinc-800 bg-zinc-900/60"}`}
+      className={`border-t-2 pt-3 pb-4 ${current ? "border-lime-400" : "border-zinc-100"}`}
     >
       <ExerciseSummary e={live} exercise={exercise} equipment={equipmentById} />
       {equipment?.notes && <p className="mt-1 text-xs text-amber-200">{equipment.notes}</p>}
@@ -234,7 +234,7 @@ export function ExerciseCard({
                     onClick={() => setRpe(r)}
                     className={`min-h-11 rounded-lg border text-sm font-semibold ${
                       rpe === r
-                        ? "border-lime-400 bg-lime-400/15 text-lime-300"
+                        ? "border-zinc-100 bg-zinc-100 text-zinc-950"
                         : "border-zinc-700 bg-zinc-950"
                     }`}
                   >
@@ -246,6 +246,7 @@ export function ExerciseCard({
           )}
           <Button
             variant="primary"
+            className="bg-lime-400! hover:bg-lime-500! text-white!"
             disabled={
               busy || (!amrapNext && rpe === null) || (amrapNext && live.predictedRir == null)
             }

@@ -61,7 +61,7 @@ export function TodayScreen() {
         <Notice>Register your gym to get a session.</Notice>
         <Link
           href="/gym"
-          className="flex min-h-12 items-center justify-center rounded-xl bg-lime-400 font-semibold text-zinc-950"
+          className="flex min-h-12 items-center justify-center rounded-sm bg-zinc-100 font-display text-lg font-bold uppercase tracking-wider text-zinc-950"
         >
           My gym
         </Link>
@@ -107,7 +107,7 @@ export function TodayScreen() {
       {checkedIn && (
         <Section title="Readiness">
           <div className="flex items-center gap-3">
-            <span className="text-4xl font-bold tabular-nums">{readiness.score}</span>
+            <span className="font-display text-5xl font-bold tabular-nums">{readiness.score}</span>
             <Badge tone={band[readiness.band]}>
               {readiness.band === "normal"
                 ? "Ready"
@@ -189,7 +189,7 @@ export function TodayScreen() {
               .map((e) => (
                 <li
                   key={`${e.exerciseId}-${e.replaces ?? ""}`}
-                  className="rounded-xl border border-zinc-800 bg-zinc-950 p-3"
+                  className="border-b border-zinc-700 py-3"
                 >
                   <ExerciseSummary
                     e={e}
@@ -201,7 +201,7 @@ export function TodayScreen() {
           </ul>
           <button
             type="button"
-            className="min-h-10 text-left text-sm text-lime-400"
+            className="min-h-10 text-left text-sm text-zinc-100 underline decoration-1 underline-offset-4"
             onClick={() => setWhy(true)}
           >
             Why does today look like this?
@@ -209,7 +209,7 @@ export function TodayScreen() {
           {session.status !== "done" && live.exercises.length > 0 && (
             <Link
               href="/session"
-              className="flex min-h-14 items-center justify-center rounded-xl bg-lime-400 text-lg font-semibold text-zinc-950"
+              className="flex min-h-14 items-center justify-center rounded-sm bg-zinc-100 font-display text-xl font-bold uppercase tracking-wider text-zinc-950"
             >
               {session.status === "active" ? "Continue session" : "Start session"}
             </Link>

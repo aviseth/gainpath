@@ -59,7 +59,10 @@ export default function AuthCallbackPage() {
       {error ? (
         <>
           <Notice tone="error">{error}</Notice>
-          <Link href="/settings" className="text-lime-400">
+          <Link
+            href="/settings"
+            className="text-zinc-100 underline decoration-1 underline-offset-4"
+          >
             Back to settings
           </Link>
         </>
