@@ -55,4 +55,11 @@ test("check-in, generated session, logging, swapping and finishing", async ({ pa
   await page.getByRole("button", { name: "Finish session" }).click();
   await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Done for today" })).toBeVisible();
+
+  // Progress shows the logged set's e1RM and this week's volume.
+  await page.getByRole("link", { name: "Progress" }).click();
+  await expect(page.getByRole("heading", { name: "Progress" })).toBeVisible();
+  await expect(page.getByTestId("e1rm-chart")).toBeVisible();
+  await expect(page.getByLabel("Exercise and machine")).toBeVisible();
+  await expect(page.getByRole("list", { name: "Recovery by muscle" })).toBeVisible();
 });
