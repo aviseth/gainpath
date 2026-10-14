@@ -14,8 +14,10 @@ describe("google health", () => {
     expect(verifyState(state, "user-2", "secret", 2000)).toBe(false);
     expect(verifyState(state, "user-1", "other", 2000)).toBe(false);
     expect(verifyState(state, "user-1", "secret", 1000 + 11 * 60_000)).toBe(false);
-    // Change the last signature character to a different one (never a no-op).
-    const tampered = state.slice(0, -1) + (state.endsWith("A") ? "B" : "A");
+    // Change the signature's first character: always significant (the last
+    // base64url character carries padding bits the decoder ignores).
+    const [payload, mac] = state.split(".");
+    const tampered = `${payload}.${mac[0] === "A" ? "B" : "A"}${mac.slice(1)}`;
     expect(verifyState(tampered, "user-1", "secret", 2000)).toBe(false);
   });
 
