@@ -1,0 +1,202 @@
+[
+  {
+    "from": "barbell_back_squat",
+    "to": "leg_press",
+    "ratio": 1.8
+  },
+  {
+    "from": "barbell_bench_press",
+    "to": "machine_chest_press",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_bench_press",
+    "to": "dumbbell_bench_press",
+    "ratio": 0.38
+  },
+  {
+    "from": "barbell_bench_press",
+    "to": "barbell_incline_bench_press",
+    "ratio": 0.8
+  },
+  {
+    "from": "barbell_bench_press",
+    "to": "close_grip_bench_press",
+    "ratio": 0.9
+  },
+  {
+    "from": "barbell_bench_press",
+    "to": "barbell_decline_bench_press",
+    "ratio": 1.05
+  },
+  {
+    "from": "barbell_bench_press",
+    "to": "smith_bench_press",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_bench_press",
+    "to": "barbell_overhead_press",
+    "ratio": 0.62
+  },
+  {
+    "from": "barbell_bench_press",
+    "to": "iso_lateral_chest_press",
+    "ratio": 1.1
+  },
+  {
+    "from": "barbell_incline_bench_press",
+    "to": "dumbbell_incline_bench_press",
+    "ratio": 0.38
+  },
+  {
+    "from": "barbell_incline_bench_press",
+    "to": "machine_incline_chest_press",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_incline_bench_press",
+    "to": "smith_incline_bench_press",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_back_squat",
+    "to": "barbell_front_squat",
+    "ratio": 0.82
+  },
+  {
+    "from": "barbell_back_squat",
+    "to": "hack_squat",
+    "ratio": 1.1
+  },
+  {
+    "from": "barbell_back_squat",
+    "to": "smith_squat",
+    "ratio": 1.05
+  },
+  {
+    "from": "barbell_back_squat",
+    "to": "pendulum_squat",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_back_squat",
+    "to": "belt_squat",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_back_squat",
+    "to": "goblet_squat",
+    "ratio": 0.35
+  },
+  {
+    "from": "barbell_back_squat",
+    "to": "dumbbell_bulgarian_split_squat",
+    "ratio": 0.25
+  },
+  {
+    "from": "barbell_back_squat",
+    "to": "seated_leg_press",
+    "ratio": 1.2
+  },
+  {
+    "from": "barbell_deadlift",
+    "to": "barbell_romanian_deadlift",
+    "ratio": 0.7
+  },
+  {
+    "from": "barbell_deadlift",
+    "to": "trap_bar_deadlift",
+    "ratio": 1.05
+  },
+  {
+    "from": "barbell_deadlift",
+    "to": "sumo_deadlift",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_romanian_deadlift",
+    "to": "dumbbell_romanian_deadlift",
+    "ratio": 0.4
+  },
+  {
+    "from": "barbell_deadlift",
+    "to": "barbell_hip_thrust",
+    "ratio": 1.1
+  },
+  {
+    "from": "barbell_hip_thrust",
+    "to": "machine_hip_thrust",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_overhead_press",
+    "to": "dumbbell_shoulder_press",
+    "ratio": 0.38
+  },
+  {
+    "from": "barbell_overhead_press",
+    "to": "machine_shoulder_press",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_overhead_press",
+    "to": "smith_overhead_press",
+    "ratio": 1.05
+  },
+  {
+    "from": "barbell_bent_over_row",
+    "to": "seated_cable_row",
+    "ratio": 0.9
+  },
+  {
+    "from": "barbell_bent_over_row",
+    "to": "machine_seated_row",
+    "ratio": 0.9
+  },
+  {
+    "from": "barbell_bent_over_row",
+    "to": "dumbbell_single_arm_row",
+    "ratio": 0.45
+  },
+  {
+    "from": "barbell_bent_over_row",
+    "to": "t_bar_row",
+    "ratio": 1.0
+  },
+  {
+    "from": "lat_pulldown_wide",
+    "to": "lat_pulldown_neutral",
+    "ratio": 1.05
+  },
+  {
+    "from": "lat_pulldown_wide",
+    "to": "seated_cable_row",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_curl",
+    "to": "ez_bar_curl",
+    "ratio": 1.0
+  },
+  {
+    "from": "barbell_curl",
+    "to": "dumbbell_curl",
+    "ratio": 0.45
+  },
+  {
+    "from": "cable_triceps_pushdown",
+    "to": "cable_rope_pushdown",
+    "ratio": 0.85
+  },
+  {
+    "from": "lying_leg_curl",
+    "to": "seated_leg_curl",
+    "ratio": 1.1
+  },
+  {
+    "from": "dumbbell_lateral_raise",
+    "to": "cable_lateral_raise",
+    "ratio": 0.6
+  }
+]

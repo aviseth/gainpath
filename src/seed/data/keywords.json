@@ -1,0 +1,801 @@
+[
+  {
+    "keywords": ["chest press", "chest press machine", "seated chest press"],
+    "exercise_ids": ["machine_chest_press", "machine_incline_chest_press"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["iso lateral chest press", "plate loaded chest press", "iso chest press"],
+    "exercise_ids": ["iso_lateral_chest_press"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["incline press", "incline chest press", "incline press machine"],
+    "exercise_ids": ["machine_incline_chest_press", "iso_lateral_incline_press"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["iso lateral incline press", "plate loaded incline"],
+    "exercise_ids": ["iso_lateral_incline_press"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["decline press", "decline chest press", "decline machine"],
+    "exercise_ids": ["iso_lateral_decline_press"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["decline bench", "decline"],
+    "exercise_ids": ["barbell_decline_bench_press", "decline_sit_up"],
+    "equipment_type": "bench_rack"
+  },
+  {
+    "keywords": ["pec deck", "fly", "pec fly", "butterfly", "fly machine", "pec deck rear delt"],
+    "exercise_ids": ["pec_deck_fly", "reverse_pec_deck"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["rear delt", "reverse fly", "rear delt fly", "reverse pec deck"],
+    "exercise_ids": ["reverse_pec_deck"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["lat pull", "lat pulldown", "lat pull down", "pulldown", "pull down"],
+    "exercise_ids": ["lat_pulldown_wide", "lat_pulldown_neutral", "lat_pulldown_underhand"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["iso lateral pulldown", "front pulldown", "plate loaded pulldown"],
+    "exercise_ids": ["iso_lateral_pulldown"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["high row", "iso lateral high row"],
+    "exercise_ids": ["iso_lateral_high_row"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["seated row", "row machine", "seated row machine", "chest supported row"],
+    "exercise_ids": ["machine_seated_row"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["low row", "iso lateral row", "iso lateral low row", "plate loaded row"],
+    "exercise_ids": ["iso_lateral_row"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["cable row", "seated cable row", "low pulley row", "low pulley"],
+    "exercise_ids": ["seated_cable_row", "single_arm_cable_row"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["t-bar", "t bar", "t bar row", "tbar"],
+    "exercise_ids": ["t_bar_row"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["leg ext", "leg extension", "quad extension", "knee extension"],
+    "exercise_ids": ["leg_extension"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["leg curl", "hamstring curl", "leg flexion"],
+    "exercise_ids": ["lying_leg_curl", "seated_leg_curl", "standing_leg_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["lying leg curl", "prone leg curl", "prone curl"],
+    "exercise_ids": ["lying_leg_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["seated leg curl", "seated hamstring curl"],
+    "exercise_ids": ["seated_leg_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["standing leg curl", "kneeling leg curl"],
+    "exercise_ids": ["standing_leg_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["leg ext curl", "leg extension curl combo", "leg extension leg curl"],
+    "exercise_ids": ["leg_extension", "seated_leg_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["hack", "hack squat", "hack squat machine"],
+    "exercise_ids": ["hack_squat"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["pendulum", "pendulum squat"],
+    "exercise_ids": ["pendulum_squat"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["belt squat", "belt squat machine", "hip belt squat"],
+    "exercise_ids": ["belt_squat"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["v squat", "power squat", "squat machine"],
+    "exercise_ids": ["v_squat", "hack_squat"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["leg press", "leg press machine", "45 leg press", "sled"],
+    "exercise_ids": ["leg_press", "single_leg_press", "leg_press_calf_raise"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["seated leg press", "horizontal leg press"],
+    "exercise_ids": ["seated_leg_press"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["abductor", "abduction", "hip abduction", "outer thigh", "abductors"],
+    "exercise_ids": ["hip_abduction_machine"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["adductor", "adduction", "hip adduction", "inner thigh", "adductors"],
+    "exercise_ids": ["hip_adduction_machine"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["abductor adductor", "hip ab ad", "abduction adduction", "inner outer thigh"],
+    "exercise_ids": ["hip_abduction_machine", "hip_adduction_machine"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["multi hip", "multi-hip", "hip machine"],
+    "exercise_ids": ["glute_kickback_machine"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": [
+      "glute kickback",
+      "kickback machine",
+      "glute machine",
+      "glute isolator",
+      "rear kick"
+    ],
+    "exercise_ids": ["glute_kickback_machine"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["hip thrust", "hip thrust machine", "glute drive", "glute bridge machine"],
+    "exercise_ids": ["machine_hip_thrust"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["calf raise", "calf", "calf machine", "calves"],
+    "exercise_ids": ["standing_calf_raise_machine", "seated_calf_raise"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["standing calf", "standing calf raise"],
+    "exercise_ids": ["standing_calf_raise_machine"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["seated calf", "seated calf raise", "soleus"],
+    "exercise_ids": ["seated_calf_raise"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": [
+      "shoulder press",
+      "shoulder press machine",
+      "overhead press machine",
+      "military press machine"
+    ],
+    "exercise_ids": ["machine_shoulder_press"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["iso lateral shoulder press", "plate loaded shoulder press"],
+    "exercise_ids": ["iso_lateral_shoulder_press"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["lateral raise", "lateral raise machine", "delt raise", "side raise"],
+    "exercise_ids": ["machine_lateral_raise"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["preacher", "preacher curl", "bicep curl machine", "biceps curl", "arm curl"],
+    "exercise_ids": ["machine_preacher_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["triceps machine", "triceps extension", "tricep extension", "triceps press"],
+    "exercise_ids": ["machine_triceps_extension"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["seated dip", "dip machine", "dip press"],
+    "exercise_ids": ["machine_seated_dip"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": [
+      "assisted pull",
+      "assisted pull up",
+      "assisted chin",
+      "gravitron",
+      "chin dip assist"
+    ],
+    "exercise_ids": ["assisted_pull_up_machine", "assisted_dip_machine"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["assisted dip"],
+    "exercise_ids": ["assisted_dip_machine"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["ab crunch", "ab machine", "abdominal", "crunch machine", "abs"],
+    "exercise_ids": ["machine_crunch"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["back extension machine", "lower back", "lumbar extension"],
+    "exercise_ids": ["machine_back_extension"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["pullover", "pullover machine"],
+    "exercise_ids": ["machine_pullover"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["reverse hyper", "reverse hyperextension"],
+    "exercise_ids": ["reverse_hyperextension"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": [
+      "cable",
+      "cables",
+      "crossover",
+      "cable crossover",
+      "functional trainer",
+      "dual pulley",
+      "dual adjustable pulley",
+      "cable tower",
+      "cable station",
+      "pulley"
+    ],
+    "exercise_ids": [
+      "cable_crossover",
+      "cable_fly_low_to_high",
+      "cable_lateral_raise",
+      "cable_upright_row",
+      "cable_face_pull",
+      "cable_rear_delt_fly",
+      "seated_cable_row",
+      "single_arm_cable_row",
+      "single_arm_cable_pulldown",
+      "straight_arm_pulldown",
+      "cable_curl",
+      "cable_bayesian_curl",
+      "cable_hammer_curl",
+      "cable_triceps_pushdown",
+      "cable_rope_pushdown",
+      "cable_overhead_triceps_extension",
+      "cable_triceps_kickback",
+      "cable_pull_through",
+      "cable_glute_kickback",
+      "cable_hip_abduction",
+      "cable_hip_adduction",
+      "cable_crunch",
+      "cable_woodchop",
+      "pallof_press"
+    ],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["cable fly", "cable chest fly"],
+    "exercise_ids": ["cable_crossover", "cable_fly_low_to_high"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["triceps pushdown", "pushdown", "tricep pushdown"],
+    "exercise_ids": ["cable_triceps_pushdown", "cable_rope_pushdown"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["face pull"],
+    "exercise_ids": ["cable_face_pull"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["single cable", "single stack cable", "adjustable cable", "cable column"],
+    "exercise_ids": [
+      "cable_crossover",
+      "cable_fly_low_to_high",
+      "cable_lateral_raise",
+      "cable_upright_row",
+      "cable_face_pull",
+      "cable_rear_delt_fly",
+      "seated_cable_row",
+      "single_arm_cable_row",
+      "single_arm_cable_pulldown",
+      "straight_arm_pulldown",
+      "cable_curl",
+      "cable_bayesian_curl",
+      "cable_hammer_curl",
+      "cable_triceps_pushdown",
+      "cable_rope_pushdown",
+      "cable_overhead_triceps_extension",
+      "cable_triceps_kickback",
+      "cable_pull_through",
+      "cable_glute_kickback",
+      "cable_hip_abduction",
+      "cable_hip_adduction",
+      "cable_crunch",
+      "cable_woodchop",
+      "pallof_press"
+    ],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["smith", "smith machine", "smith rack"],
+    "exercise_ids": [
+      "smith_bench_press",
+      "smith_incline_bench_press",
+      "smith_overhead_press",
+      "smith_squat",
+      "smith_split_squat",
+      "smith_hip_thrust",
+      "smith_calf_raise"
+    ],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": [
+      "squat rack",
+      "power rack",
+      "rack",
+      "squat stand",
+      "half rack",
+      "cage",
+      "power cage"
+    ],
+    "exercise_ids": [
+      "barbell_bench_press",
+      "barbell_incline_bench_press",
+      "barbell_decline_bench_press",
+      "close_grip_bench_press",
+      "barbell_overhead_press",
+      "barbell_wrist_curl",
+      "barbell_back_squat",
+      "barbell_front_squat",
+      "barbell_reverse_lunge",
+      "good_morning",
+      "barbell_hip_thrust"
+    ],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["barbell", "olympic bar", "olympic barbell", "bar", "straight bar"],
+    "exercise_ids": [
+      "barbell_bench_press",
+      "barbell_incline_bench_press",
+      "barbell_decline_bench_press",
+      "close_grip_bench_press",
+      "barbell_overhead_press",
+      "landmine_press",
+      "barbell_bent_over_row",
+      "barbell_curl",
+      "barbell_wrist_curl",
+      "barbell_back_squat",
+      "barbell_front_squat",
+      "barbell_reverse_lunge",
+      "barbell_deadlift",
+      "sumo_deadlift",
+      "barbell_romanian_deadlift",
+      "good_morning",
+      "barbell_hip_thrust",
+      "landmine_row"
+    ],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["landmine", "landmine attachment"],
+    "exercise_ids": ["landmine_press", "landmine_row"],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["ez bar", "ez curl bar", "curl bar", "cambered bar"],
+    "exercise_ids": [
+      "ez_bar_curl",
+      "ez_bar_preacher_curl",
+      "ez_bar_reverse_curl",
+      "ez_bar_skull_crusher"
+    ],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["trap bar", "hex bar", "hexagonal bar"],
+    "exercise_ids": ["trap_bar_carry", "trap_bar_deadlift"],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["dumbbells", "dumbbell", "dbs", "db rack", "dumbbell rack", "free weights"],
+    "exercise_ids": [
+      "dumbbell_bench_press",
+      "dumbbell_incline_bench_press",
+      "dumbbell_fly",
+      "dumbbell_incline_fly",
+      "dumbbell_shoulder_press",
+      "arnold_press",
+      "dumbbell_front_raise",
+      "dumbbell_lateral_raise",
+      "dumbbell_rear_delt_fly",
+      "dumbbell_single_arm_row",
+      "chest_supported_dumbbell_row",
+      "dumbbell_pullover",
+      "dumbbell_curl",
+      "hammer_curl",
+      "incline_dumbbell_curl",
+      "concentration_curl",
+      "dumbbell_overhead_triceps_extension",
+      "dumbbell_triceps_kickback",
+      "dumbbell_wrist_curl",
+      "dumbbell_reverse_wrist_curl",
+      "farmers_carry",
+      "goblet_squat",
+      "dumbbell_walking_lunge",
+      "dumbbell_reverse_lunge",
+      "dumbbell_bulgarian_split_squat",
+      "dumbbell_step_up",
+      "dumbbell_lateral_lunge",
+      "dumbbell_romanian_deadlift",
+      "single_leg_romanian_deadlift",
+      "dumbbell_single_leg_calf_raise"
+    ],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["kettlebell", "kettlebells", "kb", "kbs"],
+    "exercise_ids": [
+      "kettlebell_overhead_press",
+      "kettlebell_suitcase_carry",
+      "kettlebell_goblet_squat",
+      "kettlebell_swing"
+    ],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["dip station", "dip bars", "parallel bars", "dip"],
+    "exercise_ids": ["parallel_bar_dip"],
+    "equipment_type": "bodyweight_station"
+  },
+  {
+    "keywords": ["pull up bar", "pullup bar", "chin up bar", "chin bar"],
+    "exercise_ids": ["pull_up", "chin_up", "neutral_grip_pull_up", "hanging_leg_raise"],
+    "equipment_type": "bodyweight_station"
+  },
+  {
+    "keywords": ["dip pull up station", "power tower", "pull up dip station", "vkr"],
+    "exercise_ids": [
+      "pull_up",
+      "chin_up",
+      "neutral_grip_pull_up",
+      "parallel_bar_dip",
+      "hanging_leg_raise",
+      "captains_chair_leg_raise"
+    ],
+    "equipment_type": "bodyweight_station"
+  },
+  {
+    "keywords": ["captain's chair", "captains chair", "knee raise station", "vertical knee raise"],
+    "exercise_ids": ["captains_chair_leg_raise", "parallel_bar_dip"],
+    "equipment_type": "bodyweight_station"
+  },
+  {
+    "keywords": [
+      "roman chair",
+      "hyperextension",
+      "hyper extension",
+      "45 degree back extension",
+      "back extension bench"
+    ],
+    "exercise_ids": ["back_extension_45"],
+    "equipment_type": "bodyweight_station"
+  },
+  {
+    "keywords": ["glute ham", "ghd", "glute ham developer", "glute ham raise"],
+    "exercise_ids": ["glute_ham_raise", "back_extension_45"],
+    "equipment_type": "bodyweight_station"
+  },
+  {
+    "keywords": ["bench", "flat bench", "utility bench", "weight bench"],
+    "exercise_ids": [
+      "bench_dip",
+      "inverted_row",
+      "bodyweight_bulgarian_split_squat",
+      "single_leg_hip_thrust",
+      "nordic_hamstring_curl",
+      "copenhagen_plank",
+      "decline_sit_up"
+    ],
+    "equipment_type": "bench_rack"
+  },
+  {
+    "keywords": ["adjustable bench", "incline bench", "fid bench", "incline decline bench"],
+    "exercise_ids": [
+      "bench_dip",
+      "inverted_row",
+      "bodyweight_bulgarian_split_squat",
+      "single_leg_hip_thrust",
+      "nordic_hamstring_curl",
+      "copenhagen_plank",
+      "decline_sit_up"
+    ],
+    "equipment_type": "bench_rack"
+  },
+  {
+    "keywords": ["preacher bench", "preacher curl bench", "scott bench"],
+    "exercise_ids": ["ez_bar_preacher_curl"],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["bench press", "bench press station", "flat bench press"],
+    "exercise_ids": ["barbell_bench_press", "close_grip_bench_press"],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["incline bench press", "incline bench station"],
+    "exercise_ids": ["barbell_incline_bench_press"],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["decline bench press"],
+    "exercise_ids": ["barbell_decline_bench_press"],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["nordic bench", "nordic curl station", "nordic"],
+    "exercise_ids": ["nordic_hamstring_curl"],
+    "equipment_type": "bench_rack"
+  },
+  {
+    "keywords": ["deadlift platform", "lifting platform", "platform"],
+    "exercise_ids": [
+      "barbell_deadlift",
+      "sumo_deadlift",
+      "barbell_romanian_deadlift",
+      "trap_bar_deadlift"
+    ],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["chest supported t bar", "chest supported row machine"],
+    "exercise_ids": ["t_bar_row", "iso_lateral_row"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["plate loaded", "plate-loaded", "hammer"],
+    "exercise_ids": [
+      "iso_lateral_chest_press",
+      "iso_lateral_row",
+      "iso_lateral_shoulder_press",
+      "iso_lateral_pulldown"
+    ],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["selectorized", "pin loaded", "stack machine"],
+    "exercise_ids": [
+      "machine_chest_press",
+      "machine_seated_row",
+      "lat_pulldown_wide",
+      "leg_extension",
+      "seated_leg_curl"
+    ],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["leg machine", "leg station"],
+    "exercise_ids": ["leg_extension", "seated_leg_curl", "lying_leg_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["chest machine", "chest station"],
+    "exercise_ids": ["machine_chest_press", "pec_deck_fly"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["back machine", "row pulldown combo", "lat row combo"],
+    "exercise_ids": ["lat_pulldown_wide", "machine_seated_row", "seated_cable_row"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["shoulder machine", "delt machine"],
+    "exercise_ids": ["machine_shoulder_press", "machine_lateral_raise"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["arm machine", "arms station"],
+    "exercise_ids": ["machine_preacher_curl", "machine_triceps_extension"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["glute", "glutes", "booty"],
+    "exercise_ids": ["machine_hip_thrust", "glute_kickback_machine"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["squat", "squat machine plate"],
+    "exercise_ids": ["hack_squat", "pendulum_squat", "v_squat"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["rotary torso", "torso rotation", "rotation machine"],
+    "exercise_ids": ["cable_woodchop"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["upright row"],
+    "exercise_ids": ["cable_upright_row"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["curl", "curls"],
+    "exercise_ids": ["machine_preacher_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["row", "rows"],
+    "exercise_ids": ["machine_seated_row", "iso_lateral_row"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["press", "presses"],
+    "exercise_ids": ["machine_chest_press", "machine_shoulder_press"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["lat", "lats"],
+    "exercise_ids": ["lat_pulldown_wide", "lat_pulldown_neutral", "machine_pullover"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["hamstring", "hamstrings", "hammies"],
+    "exercise_ids": ["lying_leg_curl", "seated_leg_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["quad", "quads"],
+    "exercise_ids": ["leg_extension"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["chest", "pec", "pecs"],
+    "exercise_ids": ["machine_chest_press", "pec_deck_fly"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["triceps", "tricep", "tris"],
+    "exercise_ids": ["machine_triceps_extension"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["biceps", "bicep", "bis"],
+    "exercise_ids": ["machine_preacher_curl"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["kickback"],
+    "exercise_ids": ["glute_kickback_machine"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["crunch"],
+    "exercise_ids": ["machine_crunch"],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["step up box", "plyo box", "box"],
+    "exercise_ids": ["dumbbell_step_up"],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["sissy squat bench", "sissy squat station"],
+    "exercise_ids": ["sissy_squat"],
+    "equipment_type": "bench_rack"
+  },
+  {
+    "keywords": ["jungle gym", "multi gym", "home gym"],
+    "exercise_ids": [
+      "lat_pulldown_wide",
+      "machine_chest_press",
+      "leg_extension",
+      "seated_cable_row"
+    ],
+    "equipment_type": "selectorized"
+  },
+  {
+    "keywords": ["kneeling pulldown", "single arm pulldown"],
+    "exercise_ids": ["single_arm_cable_pulldown"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["straight arm pulldown"],
+    "exercise_ids": ["straight_arm_pulldown"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["pallof", "woodchop", "wood chop"],
+    "exercise_ids": ["pallof_press", "cable_woodchop"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["pull through"],
+    "exercise_ids": ["cable_pull_through"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["rope", "rope attachment"],
+    "exercise_ids": ["cable_rope_pushdown", "cable_face_pull", "cable_crunch", "cable_hammer_curl"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["ankle strap", "ankle cuff"],
+    "exercise_ids": ["cable_glute_kickback", "cable_hip_abduction", "cable_hip_adduction"],
+    "equipment_type": "cable_station"
+  },
+  {
+    "keywords": ["iso lateral", "iso-lateral", "isolateral"],
+    "exercise_ids": [
+      "iso_lateral_chest_press",
+      "iso_lateral_incline_press",
+      "iso_lateral_decline_press",
+      "iso_lateral_shoulder_press",
+      "iso_lateral_row",
+      "iso_lateral_pulldown",
+      "iso_lateral_high_row"
+    ],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["front raise"],
+    "exercise_ids": ["dumbbell_front_raise"],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["farmer handles", "farmers walk handles", "farmers carry"],
+    "exercise_ids": ["farmers_carry"],
+    "equipment_type": "free_weights"
+  },
+  {
+    "keywords": ["calf press", "leg press calf"],
+    "exercise_ids": ["leg_press_calf_raise"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["single leg press", "unilateral leg press"],
+    "exercise_ids": ["single_leg_press"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["pull up", "pullup", "chin up", "chinup"],
+    "exercise_ids": ["pull_up", "chin_up", "neutral_grip_pull_up"],
+    "equipment_type": "bodyweight_station"
+  },
+  {
+    "keywords": ["leg press hack combo", "leg press hack squat"],
+    "exercise_ids": ["leg_press", "hack_squat"],
+    "equipment_type": "plate_loaded"
+  },
+  {
+    "keywords": ["dumbbell bench", "db bench"],
+    "exercise_ids": ["dumbbell_bench_press", "dumbbell_incline_bench_press"],
+    "equipment_type": "free_weights"
+  }
+]

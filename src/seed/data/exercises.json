@@ -1,0 +1,3843 @@
+[
+  {
+    "id": "barbell_bench_press",
+    "name": "Barbell Bench Press",
+    "aliases": ["bench press", "flat bench", "bb bench"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 0.5,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "barbell_incline_bench_press",
+    "name": "Barbell Incline Bench Press",
+    "aliases": ["incline bench", "incline barbell press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5,
+      "triceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "barbell_decline_bench_press",
+    "name": "Barbell Decline Bench Press",
+    "aliases": ["decline bench", "decline press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 0.5,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [4, 8],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "close_grip_bench_press",
+    "name": "Close-Grip Bench Press",
+    "aliases": ["cgbp", "close grip bench"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "triceps": 1,
+      "chest": 1,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [4, 8],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_bench_press",
+    "name": "Dumbbell Bench Press",
+    "aliases": ["db bench", "dumbbell press", "flat dumbbell press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 0.5,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_incline_bench_press",
+    "name": "Dumbbell Incline Bench Press",
+    "aliases": ["incline db press", "incline dumbbell press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5,
+      "triceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "machine_chest_press",
+    "name": "Machine Chest Press",
+    "aliases": ["chest press", "seated chest press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 0.5,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "machine_incline_chest_press",
+    "name": "Machine Incline Chest Press",
+    "aliases": ["incline chest press", "incline press machine"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5,
+      "triceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "iso_lateral_chest_press",
+    "name": "Iso-Lateral Chest Press",
+    "aliases": ["plate loaded chest press", "iso lateral bench press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 0.5,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "iso_lateral_incline_press",
+    "name": "Iso-Lateral Incline Press",
+    "aliases": ["plate loaded incline press", "incline iso press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5,
+      "triceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "iso_lateral_decline_press",
+    "name": "Iso-Lateral Decline Press",
+    "aliases": ["decline chest press", "decline press machine"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 0.5,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "smith_bench_press",
+    "name": "Smith Machine Bench Press",
+    "aliases": ["smith bench", "smith flat press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 0.5,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "smith",
+    "equipment_types": ["plate_loaded", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [5, 8],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "smith_incline_bench_press",
+    "name": "Smith Machine Incline Bench Press",
+    "aliases": ["smith incline", "smith incline press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5,
+      "triceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "smith",
+    "equipment_types": ["plate_loaded", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [5, 8],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "push_up",
+    "name": "Push-Up",
+    "aliases": ["pushup", "press up", "press-up"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 0.5,
+      "front_delt": 0.5,
+      "abs": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": [],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [5, 12],
+      "hypertrophy": [8, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "parallel_bar_dip",
+    "name": "Parallel Bar Dip",
+    "aliases": ["dips", "chest dip", "dip"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 1,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": ["bodyweight_station"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [4, 8],
+      "hypertrophy": [6, 15]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "assisted_dip_machine",
+    "name": "Assisted Dip",
+    "aliases": ["assisted dip machine", "dip assist"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "chest": 1,
+      "triceps": 1,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "assisted",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "machine_seated_dip",
+    "name": "Seated Dip Machine",
+    "aliases": ["seated dip", "triceps dip machine", "dip press"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "triceps": 1,
+      "chest": 0.5,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "bench_dip",
+    "name": "Bench Dip",
+    "aliases": ["triceps bench dip"],
+    "pattern": "horizontal_push",
+    "vector": {
+      "triceps": 1,
+      "chest": 0.5,
+      "front_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": ["bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "pec_deck_fly",
+    "name": "Pec Deck Fly",
+    "aliases": ["pec deck", "butterfly", "pec fly", "machine fly"],
+    "pattern": "chest_fly",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "cable_crossover",
+    "name": "Cable Crossover",
+    "aliases": ["cable fly", "high to low cable fly", "crossover"],
+    "pattern": "chest_fly",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "cable_fly_low_to_high",
+    "name": "Low-to-High Cable Fly",
+    "aliases": ["low cable fly", "upward cable fly"],
+    "pattern": "chest_fly",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_fly",
+    "name": "Dumbbell Fly",
+    "aliases": ["db fly", "flat dumbbell fly"],
+    "pattern": "chest_fly",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_incline_fly",
+    "name": "Incline Dumbbell Fly",
+    "aliases": ["incline db fly", "incline fly"],
+    "pattern": "chest_fly",
+    "vector": {
+      "chest": 1,
+      "front_delt": 0.5
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "barbell_overhead_press",
+    "name": "Barbell Overhead Press",
+    "aliases": ["ohp", "military press", "standing press", "shoulder press"],
+    "pattern": "vertical_push",
+    "vector": {
+      "front_delt": 1,
+      "triceps": 0.5,
+      "side_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_shoulder_press",
+    "name": "Dumbbell Shoulder Press",
+    "aliases": ["db shoulder press", "seated dumbbell press", "db ohp"],
+    "pattern": "vertical_push",
+    "vector": {
+      "front_delt": 1,
+      "triceps": 0.5,
+      "side_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "arnold_press",
+    "name": "Arnold Press",
+    "aliases": ["arnold dumbbell press"],
+    "pattern": "vertical_push",
+    "vector": {
+      "front_delt": 1,
+      "triceps": 0.5,
+      "side_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "machine_shoulder_press",
+    "name": "Machine Shoulder Press",
+    "aliases": ["shoulder press machine", "seated shoulder press"],
+    "pattern": "vertical_push",
+    "vector": {
+      "front_delt": 1,
+      "triceps": 0.5,
+      "side_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "iso_lateral_shoulder_press",
+    "name": "Iso-Lateral Shoulder Press",
+    "aliases": ["plate loaded shoulder press", "iso shoulder press"],
+    "pattern": "vertical_push",
+    "vector": {
+      "front_delt": 1,
+      "triceps": 0.5,
+      "side_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "smith_overhead_press",
+    "name": "Smith Machine Overhead Press",
+    "aliases": ["smith shoulder press", "smith ohp"],
+    "pattern": "vertical_push",
+    "vector": {
+      "front_delt": 1,
+      "triceps": 0.5,
+      "side_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "smith",
+    "equipment_types": ["plate_loaded", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [5, 8],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "landmine_press",
+    "name": "Landmine Press",
+    "aliases": ["single arm landmine press", "angled press"],
+    "pattern": "vertical_push",
+    "vector": {
+      "front_delt": 1,
+      "chest": 0.5,
+      "triceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "kettlebell_overhead_press",
+    "name": "Kettlebell Overhead Press",
+    "aliases": ["kb press", "kettlebell press"],
+    "pattern": "vertical_push",
+    "vector": {
+      "front_delt": 1,
+      "triceps": 0.5,
+      "side_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "kettlebell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "pike_push_up",
+    "name": "Pike Push-Up",
+    "aliases": ["pike pushup"],
+    "pattern": "vertical_push",
+    "vector": {
+      "front_delt": 1,
+      "triceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": [],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [5, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_front_raise",
+    "name": "Dumbbell Front Raise",
+    "aliases": ["db front raise", "front raise"],
+    "pattern": "shoulder_flexion",
+    "vector": {
+      "front_delt": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_lateral_raise",
+    "name": "Dumbbell Lateral Raise",
+    "aliases": ["lateral raise", "side raise", "db lateral raise", "side lateral"],
+    "pattern": "shoulder_abduction",
+    "vector": {
+      "side_delt": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "cable_lateral_raise",
+    "name": "Cable Lateral Raise",
+    "aliases": ["single arm cable lateral", "cable side raise"],
+    "pattern": "shoulder_abduction",
+    "vector": {
+      "side_delt": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "machine_lateral_raise",
+    "name": "Machine Lateral Raise",
+    "aliases": ["lateral raise machine", "delt raise machine"],
+    "pattern": "shoulder_abduction",
+    "vector": {
+      "side_delt": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "cable_upright_row",
+    "name": "Cable Upright Row",
+    "aliases": ["upright row"],
+    "pattern": "shoulder_abduction",
+    "vector": {
+      "side_delt": 1,
+      "upper_back": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 1,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "reverse_pec_deck",
+    "name": "Reverse Pec Deck",
+    "aliases": ["rear delt fly machine", "reverse fly", "rear delt machine"],
+    "pattern": "rear_delt_fly",
+    "vector": {
+      "rear_delt": 1,
+      "upper_back": 0.5
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "cable_face_pull",
+    "name": "Cable Face Pull",
+    "aliases": ["face pull", "rope face pull"],
+    "pattern": "rear_delt_fly",
+    "vector": {
+      "rear_delt": 1,
+      "upper_back": 0.5
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "cable_rear_delt_fly",
+    "name": "Cable Rear Delt Fly",
+    "aliases": ["cable reverse fly", "reverse cable crossover"],
+    "pattern": "rear_delt_fly",
+    "vector": {
+      "rear_delt": 1,
+      "upper_back": 0.5
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_rear_delt_fly",
+    "name": "Dumbbell Rear Delt Fly",
+    "aliases": ["bent over reverse fly", "rear delt raise", "db reverse fly"],
+    "pattern": "rear_delt_fly",
+    "vector": {
+      "rear_delt": 1,
+      "upper_back": 0.5
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["shoulder", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "barbell_bent_over_row",
+    "name": "Barbell Bent-Over Row",
+    "aliases": ["barbell row", "bent over row", "bb row"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "upper_back": 1,
+      "lats": 1,
+      "rear_delt": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [5, 8],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["lower_back", "hip", "shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_single_arm_row",
+    "name": "Single-Arm Dumbbell Row",
+    "aliases": ["one arm row", "db row", "dumbbell row"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "lats": 1,
+      "upper_back": 1,
+      "biceps": 0.5,
+      "rear_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "chest_supported_dumbbell_row",
+    "name": "Chest-Supported Dumbbell Row",
+    "aliases": ["incline db row", "seal row dumbbell"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "upper_back": 1,
+      "lats": 1,
+      "rear_delt": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "seated_cable_row",
+    "name": "Seated Cable Row",
+    "aliases": ["cable row", "low row", "close grip cable row"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "upper_back": 1,
+      "lats": 1,
+      "rear_delt": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "single_arm_cable_row",
+    "name": "Single-Arm Cable Row",
+    "aliases": ["one arm cable row"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "lats": 1,
+      "upper_back": 1,
+      "biceps": 0.5,
+      "rear_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "machine_seated_row",
+    "name": "Machine Seated Row",
+    "aliases": ["seated row", "row machine", "chest supported row"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "upper_back": 1,
+      "lats": 1,
+      "rear_delt": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "iso_lateral_row",
+    "name": "Iso-Lateral Row",
+    "aliases": ["plate loaded row", "iso row", "iso lateral low row"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "upper_back": 1,
+      "lats": 1,
+      "rear_delt": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "t_bar_row",
+    "name": "Chest-Supported T-Bar Row",
+    "aliases": ["t bar row", "tbar row", "t-bar"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "upper_back": 1,
+      "lats": 1,
+      "rear_delt": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "inverted_row",
+    "name": "Inverted Row",
+    "aliases": ["bodyweight row", "australian pull up"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "upper_back": 1,
+      "lats": 0.5,
+      "rear_delt": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": ["bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 12],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "pull_up",
+    "name": "Pull-Up",
+    "aliases": ["pullup", "overhand pull up"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "upper_back": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": ["bodyweight_station"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "chin_up",
+    "name": "Chin-Up",
+    "aliases": ["chinup", "underhand pull up"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "biceps": 0.5,
+      "upper_back": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": ["bodyweight_station"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "neutral_grip_pull_up",
+    "name": "Neutral-Grip Pull-Up",
+    "aliases": ["hammer grip pull up", "parallel grip pull up"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "upper_back": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": ["bodyweight_station"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "assisted_pull_up_machine",
+    "name": "Assisted Pull-Up",
+    "aliases": ["assisted pull up machine", "assisted chin up", "gravitron"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "upper_back": 0.5,
+      "biceps": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "assisted",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "lat_pulldown_wide",
+    "name": "Wide-Grip Lat Pulldown",
+    "aliases": ["lat pulldown", "lat pull down", "wide pulldown"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "biceps": 0.5,
+      "upper_back": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "lat_pulldown_neutral",
+    "name": "Neutral-Grip Lat Pulldown",
+    "aliases": ["close grip pulldown", "v bar pulldown", "neutral pulldown"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "biceps": 0.5,
+      "upper_back": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "lat_pulldown_underhand",
+    "name": "Underhand Lat Pulldown",
+    "aliases": ["reverse grip pulldown", "supinated pulldown"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "biceps": 0.5,
+      "upper_back": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "iso_lateral_pulldown",
+    "name": "Iso-Lateral Front Pulldown",
+    "aliases": ["plate loaded pulldown", "iso pulldown"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "biceps": 0.5,
+      "upper_back": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "iso_lateral_high_row",
+    "name": "Iso-Lateral High Row",
+    "aliases": ["high row", "plate loaded high row"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "upper_back": 1,
+      "biceps": 0.5,
+      "rear_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "single_arm_cable_pulldown",
+    "name": "Single-Arm Cable Pulldown",
+    "aliases": ["one arm pulldown", "single arm lat pulldown"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "biceps": 0.5,
+      "upper_back": 0.5
+    },
+    "kind": "compound",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "straight_arm_pulldown",
+    "name": "Straight-Arm Cable Pulldown",
+    "aliases": ["straight arm pulldown", "cable pullover", "stiff arm pulldown"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_pullover",
+    "name": "Dumbbell Pullover",
+    "aliases": ["db pullover", "pullover"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1,
+      "chest": 0.5
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "machine_pullover",
+    "name": "Machine Pullover",
+    "aliases": ["pullover machine"],
+    "pattern": "vertical_pull",
+    "vector": {
+      "lats": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder"],
+    "timed": false
+  },
+  {
+    "id": "barbell_curl",
+    "name": "Barbell Curl",
+    "aliases": ["bb curl", "standing barbell curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1,
+      "forearms": 0.5
+    },
+    "kind": "isolation",
+    "implement": "barbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "ez_bar_curl",
+    "name": "EZ-Bar Curl",
+    "aliases": ["ez curl", "easy bar curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1,
+      "forearms": 0.5
+    },
+    "kind": "isolation",
+    "implement": "ez_bar",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "ez_bar_preacher_curl",
+    "name": "EZ-Bar Preacher Curl",
+    "aliases": ["preacher curl", "scott curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1
+    },
+    "kind": "isolation",
+    "implement": "ez_bar",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "ez_bar_reverse_curl",
+    "name": "EZ-Bar Reverse Curl",
+    "aliases": ["reverse curl", "overhand curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "forearms": 1,
+      "biceps": 0.5
+    },
+    "kind": "isolation",
+    "implement": "ez_bar",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_curl",
+    "name": "Dumbbell Curl",
+    "aliases": ["db curl", "bicep curl", "alternating curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1,
+      "forearms": 0.5
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "hammer_curl",
+    "name": "Dumbbell Hammer Curl",
+    "aliases": ["hammer curl", "neutral grip curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1,
+      "forearms": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "incline_dumbbell_curl",
+    "name": "Incline Dumbbell Curl",
+    "aliases": ["incline curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist", "shoulder"],
+    "timed": false
+  },
+  {
+    "id": "concentration_curl",
+    "name": "Concentration Curl",
+    "aliases": ["seated concentration curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "cable_curl",
+    "name": "Cable Curl",
+    "aliases": ["cable bicep curl", "straight bar cable curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1,
+      "forearms": 0.5
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "cable_bayesian_curl",
+    "name": "Bayesian Cable Curl",
+    "aliases": ["behind the body cable curl", "bayesian curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist", "shoulder"],
+    "timed": false
+  },
+  {
+    "id": "cable_hammer_curl",
+    "name": "Cable Rope Hammer Curl",
+    "aliases": ["rope hammer curl", "rope curl"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1,
+      "forearms": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "machine_preacher_curl",
+    "name": "Machine Preacher Curl",
+    "aliases": ["bicep curl machine", "preacher curl machine"],
+    "pattern": "elbow_flexion",
+    "vector": {
+      "biceps": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "cable_triceps_pushdown",
+    "name": "Cable Triceps Pushdown",
+    "aliases": ["triceps pushdown", "pushdown", "bar pushdown"],
+    "pattern": "elbow_extension",
+    "vector": {
+      "triceps": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "cable_rope_pushdown",
+    "name": "Cable Rope Pushdown",
+    "aliases": ["rope pushdown", "rope triceps extension"],
+    "pattern": "elbow_extension",
+    "vector": {
+      "triceps": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "cable_overhead_triceps_extension",
+    "name": "Cable Overhead Triceps Extension",
+    "aliases": ["overhead rope extension", "cable french press"],
+    "pattern": "elbow_extension",
+    "vector": {
+      "triceps": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "shoulder"],
+    "timed": false
+  },
+  {
+    "id": "cable_triceps_kickback",
+    "name": "Cable Triceps Kickback",
+    "aliases": ["cable kickback triceps"],
+    "pattern": "elbow_extension",
+    "vector": {
+      "triceps": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow"],
+    "timed": false
+  },
+  {
+    "id": "ez_bar_skull_crusher",
+    "name": "EZ-Bar Skull Crusher",
+    "aliases": ["skull crusher", "lying triceps extension", "skullcrusher"],
+    "pattern": "elbow_extension",
+    "vector": {
+      "triceps": 1
+    },
+    "kind": "isolation",
+    "implement": "ez_bar",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist", "shoulder"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_overhead_triceps_extension",
+    "name": "Dumbbell Overhead Triceps Extension",
+    "aliases": ["overhead db extension", "seated french press"],
+    "pattern": "elbow_extension",
+    "vector": {
+      "triceps": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "shoulder"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_triceps_kickback",
+    "name": "Dumbbell Triceps Kickback",
+    "aliases": ["db kickback", "triceps kickback"],
+    "pattern": "elbow_extension",
+    "vector": {
+      "triceps": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["elbow"],
+    "timed": false
+  },
+  {
+    "id": "machine_triceps_extension",
+    "name": "Machine Triceps Extension",
+    "aliases": ["triceps machine", "triceps extension machine"],
+    "pattern": "elbow_extension",
+    "vector": {
+      "triceps": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["elbow", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "barbell_wrist_curl",
+    "name": "Barbell Wrist Curl",
+    "aliases": ["wrist curl"],
+    "pattern": "wrist",
+    "vector": {
+      "forearms": 1
+    },
+    "kind": "isolation",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["wrist"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_wrist_curl",
+    "name": "Dumbbell Wrist Curl",
+    "aliases": ["db wrist curl"],
+    "pattern": "wrist",
+    "vector": {
+      "forearms": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["wrist"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_reverse_wrist_curl",
+    "name": "Dumbbell Reverse Wrist Curl",
+    "aliases": ["wrist extension", "reverse wrist curl"],
+    "pattern": "wrist",
+    "vector": {
+      "forearms": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["wrist"],
+    "timed": false
+  },
+  {
+    "id": "farmers_carry",
+    "name": "Dumbbell Farmer's Carry",
+    "aliases": ["farmers walk", "farmer carry"],
+    "pattern": "carry",
+    "vector": {
+      "forearms": 1,
+      "upper_back": 0.5,
+      "abs": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.3,
+    "rep_range": {
+      "strength": [20, 40],
+      "hypertrophy": [30, 60]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["wrist", "shoulder", "lower_back", "hip"],
+    "timed": true
+  },
+  {
+    "id": "trap_bar_carry",
+    "name": "Trap Bar Carry",
+    "aliases": ["hex bar carry", "trap bar farmers walk"],
+    "pattern": "carry",
+    "vector": {
+      "forearms": 1,
+      "upper_back": 0.5,
+      "abs": 0.5
+    },
+    "kind": "compound",
+    "implement": "trap_bar",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.4,
+    "rep_range": {
+      "strength": [20, 40],
+      "hypertrophy": [30, 60]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["wrist", "shoulder", "lower_back", "hip"],
+    "timed": true
+  },
+  {
+    "id": "kettlebell_suitcase_carry",
+    "name": "Kettlebell Suitcase Carry",
+    "aliases": ["suitcase carry", "single arm carry"],
+    "pattern": "carry",
+    "vector": {
+      "forearms": 1,
+      "abs": 0.5,
+      "upper_back": 0.5
+    },
+    "kind": "compound",
+    "implement": "kettlebell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.1,
+    "rep_range": {
+      "strength": [20, 40],
+      "hypertrophy": [30, 60]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["wrist", "shoulder", "lower_back"],
+    "timed": true
+  },
+  {
+    "id": "barbell_back_squat",
+    "name": "Barbell Back Squat",
+    "aliases": ["back squat", "squat", "high bar squat", "low bar squat"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.7,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [6, 10]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "lower_back", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "barbell_front_squat",
+    "name": "Barbell Front Squat",
+    "aliases": ["front squat"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 0.5,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.6,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [6, 10]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "lower_back", "ankle", "wrist", "upper_back"],
+    "timed": false
+  },
+  {
+    "id": "smith_squat",
+    "name": "Smith Machine Squat",
+    "aliases": ["smith squat"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "smith",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [5, 8],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "hack_squat",
+    "name": "Hack Squat",
+    "aliases": ["hack squat machine", "machine hack squat"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 0.5,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [5, 8],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "pendulum_squat",
+    "name": "Pendulum Squat",
+    "aliases": ["pendulum"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 0.5,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip"],
+    "timed": false
+  },
+  {
+    "id": "belt_squat",
+    "name": "Belt Squat",
+    "aliases": ["belt squat machine", "hip belt squat"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip"],
+    "timed": false
+  },
+  {
+    "id": "leg_press",
+    "name": "Leg Press",
+    "aliases": ["45 degree leg press", "plate loaded leg press", "sled press"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 0.5,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "seated_leg_press",
+    "name": "Seated Leg Press",
+    "aliases": ["horizontal leg press", "selectorized leg press"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 0.5,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "single_leg_press",
+    "name": "Single-Leg Leg Press",
+    "aliases": ["one leg press", "unilateral leg press"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 0.5,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.3,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip"],
+    "timed": false
+  },
+  {
+    "id": "goblet_squat",
+    "name": "Dumbbell Goblet Squat",
+    "aliases": ["goblet squat", "db goblet squat"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 0.5,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.3,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "kettlebell_goblet_squat",
+    "name": "Kettlebell Goblet Squat",
+    "aliases": ["kb goblet squat"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 0.5,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "kettlebell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.3,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "barbell_reverse_lunge",
+    "name": "Barbell Reverse Lunge",
+    "aliases": ["barbell lunge"],
+    "pattern": "lunge",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [5, 8],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "ankle", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_walking_lunge",
+    "name": "Dumbbell Walking Lunge",
+    "aliases": ["walking lunge", "db lunge"],
+    "pattern": "lunge",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_reverse_lunge",
+    "name": "Dumbbell Reverse Lunge",
+    "aliases": ["reverse lunge"],
+    "pattern": "lunge",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_bulgarian_split_squat",
+    "name": "Dumbbell Bulgarian Split Squat",
+    "aliases": ["bulgarian split squat", "bss", "rear foot elevated split squat"],
+    "pattern": "lunge",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "bodyweight_bulgarian_split_squat",
+    "name": "Bodyweight Bulgarian Split Squat",
+    "aliases": ["bw bulgarian split squat"],
+    "pattern": "lunge",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": ["bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "smith_split_squat",
+    "name": "Smith Machine Split Squat",
+    "aliases": ["smith lunge", "smith split squat"],
+    "pattern": "lunge",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "smith",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_step_up",
+    "name": "Dumbbell Step-Up",
+    "aliases": ["step up", "box step up"],
+    "pattern": "lunge",
+    "vector": {
+      "quads": 1,
+      "glutes": 1
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_lateral_lunge",
+    "name": "Dumbbell Lateral Lunge",
+    "aliases": ["side lunge", "cossack lunge"],
+    "pattern": "lunge",
+    "vector": {
+      "quads": 1,
+      "adductors": 1,
+      "glutes": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.3,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "bodyweight_lunge",
+    "name": "Bodyweight Lunge",
+    "aliases": ["lunge", "forward lunge"],
+    "pattern": "lunge",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": [],
+    "fatigue_cost": 1.1,
+    "rep_range": {
+      "strength": [10, 15],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "barbell_deadlift",
+    "name": "Barbell Deadlift",
+    "aliases": ["deadlift", "conventional deadlift", "dl"],
+    "pattern": "hinge",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 1,
+      "adductors": 0.5,
+      "quads": 0.5,
+      "upper_back": 0.5,
+      "forearms": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.8,
+    "rep_range": {
+      "strength": [3, 5],
+      "hypertrophy": [5, 8]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["lower_back", "hip", "knee", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "sumo_deadlift",
+    "name": "Sumo Deadlift",
+    "aliases": ["sumo dl", "wide stance deadlift"],
+    "pattern": "hinge",
+    "vector": {
+      "glutes": 1,
+      "adductors": 1,
+      "hamstrings": 0.5,
+      "quads": 0.5,
+      "upper_back": 0.5,
+      "forearms": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.8,
+    "rep_range": {
+      "strength": [3, 5],
+      "hypertrophy": [5, 8]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["lower_back", "hip", "knee", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "trap_bar_deadlift",
+    "name": "Trap Bar Deadlift",
+    "aliases": ["hex bar deadlift", "trap bar dl"],
+    "pattern": "hinge",
+    "vector": {
+      "quads": 1,
+      "glutes": 1,
+      "hamstrings": 0.5,
+      "adductors": 0.5,
+      "upper_back": 0.5,
+      "forearms": 0.5
+    },
+    "kind": "compound",
+    "implement": "trap_bar",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.7,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [6, 10]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["lower_back", "hip", "knee", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "barbell_romanian_deadlift",
+    "name": "Barbell Romanian Deadlift",
+    "aliases": ["rdl", "romanian deadlift", "bb rdl"],
+    "pattern": "hinge",
+    "vector": {
+      "hamstrings": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.6,
+    "rep_range": {
+      "strength": [5, 8],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["lower_back", "hip", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_romanian_deadlift",
+    "name": "Dumbbell Romanian Deadlift",
+    "aliases": ["db rdl", "dumbbell rdl"],
+    "pattern": "hinge",
+    "vector": {
+      "hamstrings": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["lower_back", "hip", "wrist"],
+    "timed": false
+  },
+  {
+    "id": "single_leg_romanian_deadlift",
+    "name": "Single-Leg Dumbbell Romanian Deadlift",
+    "aliases": ["single leg rdl", "sl rdl"],
+    "pattern": "hinge",
+    "vector": {
+      "hamstrings": 1,
+      "glutes": 1
+    },
+    "kind": "compound",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": false,
+    "joints": ["lower_back", "hip", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "good_morning",
+    "name": "Barbell Good Morning",
+    "aliases": ["good morning", "good mornings"],
+    "pattern": "hinge",
+    "vector": {
+      "hamstrings": 1,
+      "glutes": 1,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.6,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["lower_back", "hip", "knee"],
+    "timed": false
+  },
+  {
+    "id": "kettlebell_swing",
+    "name": "Kettlebell Swing",
+    "aliases": ["kb swing", "russian swing"],
+    "pattern": "hinge",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 1,
+      "forearms": 0.5
+    },
+    "kind": "compound",
+    "implement": "kettlebell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.3,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["lower_back", "hip", "shoulder"],
+    "timed": false
+  },
+  {
+    "id": "cable_pull_through",
+    "name": "Cable Pull-Through",
+    "aliases": ["pull through", "cable hip hinge"],
+    "pattern": "hinge",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 0.5
+    },
+    "kind": "compound",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 1.1,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "barbell_hip_thrust",
+    "name": "Barbell Hip Thrust",
+    "aliases": ["hip thrust", "glute thrust", "bb hip thrust"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights", "bench_rack"],
+    "fatigue_cost": 1.3,
+    "rep_range": {
+      "strength": [5, 8],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "machine_hip_thrust",
+    "name": "Machine Hip Thrust",
+    "aliases": ["hip thrust machine", "glute drive", "plate loaded hip thrust"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "smith_hip_thrust",
+    "name": "Smith Machine Hip Thrust",
+    "aliases": ["smith glute bridge", "smith hip thrust"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 0.5
+    },
+    "kind": "compound",
+    "implement": "smith",
+    "equipment_types": ["plate_loaded", "bench_rack"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "glute_bridge",
+    "name": "Glute Bridge",
+    "aliases": ["bodyweight glute bridge", "floor bridge"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": [],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [10, 15],
+      "hypertrophy": [12, 25]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "single_leg_hip_thrust",
+    "name": "Single-Leg Hip Thrust",
+    "aliases": ["single leg glute bridge", "sl hip thrust"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": ["bench_rack"],
+    "fatigue_cost": 0.9,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "back_extension_45",
+    "name": "45-Degree Back Extension",
+    "aliases": ["back extension", "hyperextension", "roman chair back extension"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 1
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": ["bodyweight_station"],
+    "fatigue_cost": 1,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["lower_back", "hip"],
+    "timed": false
+  },
+  {
+    "id": "machine_back_extension",
+    "name": "Machine Back Extension",
+    "aliases": ["back extension machine", "lower back machine"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 0.5
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.9,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["lower_back", "hip"],
+    "timed": false
+  },
+  {
+    "id": "cable_glute_kickback",
+    "name": "Cable Glute Kickback",
+    "aliases": ["cable kickback", "glute kickback"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "glute_kickback_machine",
+    "name": "Machine Glute Kickback",
+    "aliases": ["glute machine", "kickback machine", "rear kick machine"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "lying_leg_curl",
+    "name": "Lying Leg Curl",
+    "aliases": ["prone leg curl", "leg curl", "hamstring curl"],
+    "pattern": "knee_flexion",
+    "vector": {
+      "hamstrings": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee"],
+    "timed": false
+  },
+  {
+    "id": "seated_leg_curl",
+    "name": "Seated Leg Curl",
+    "aliases": ["seated hamstring curl"],
+    "pattern": "knee_flexion",
+    "vector": {
+      "hamstrings": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee"],
+    "timed": false
+  },
+  {
+    "id": "standing_leg_curl",
+    "name": "Standing Single-Leg Curl",
+    "aliases": ["standing leg curl", "single leg curl"],
+    "pattern": "knee_flexion",
+    "vector": {
+      "hamstrings": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee"],
+    "timed": false
+  },
+  {
+    "id": "nordic_hamstring_curl",
+    "name": "Nordic Hamstring Curl",
+    "aliases": ["nordic curl", "nordics"],
+    "pattern": "knee_flexion",
+    "vector": {
+      "hamstrings": 1
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": ["bench_rack"],
+    "fatigue_cost": 1,
+    "rep_range": {
+      "strength": [3, 6],
+      "hypertrophy": [5, 10]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee"],
+    "timed": false
+  },
+  {
+    "id": "glute_ham_raise",
+    "name": "Glute-Ham Raise",
+    "aliases": ["ghr", "glute ham raise"],
+    "pattern": "knee_flexion",
+    "vector": {
+      "hamstrings": 1,
+      "glutes": 0.5
+    },
+    "kind": "compound",
+    "implement": "bodyweight",
+    "equipment_types": ["bodyweight_station"],
+    "fatigue_cost": 1.1,
+    "rep_range": {
+      "strength": [4, 8],
+      "hypertrophy": [6, 12]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee", "hip"],
+    "timed": false
+  },
+  {
+    "id": "leg_extension",
+    "name": "Leg Extension",
+    "aliases": ["quad extension", "leg ext", "knee extension"],
+    "pattern": "knee_extension",
+    "vector": {
+      "quads": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee"],
+    "timed": false
+  },
+  {
+    "id": "sissy_squat",
+    "name": "Sissy Squat",
+    "aliases": ["bodyweight sissy squat"],
+    "pattern": "knee_extension",
+    "vector": {
+      "quads": 1
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": [],
+    "fatigue_cost": 0.8,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["knee", "ankle"],
+    "timed": false
+  },
+  {
+    "id": "hip_abduction_machine",
+    "name": "Hip Abduction Machine",
+    "aliases": ["abductor machine", "outer thigh machine", "hip abductor"],
+    "pattern": "hip_abduction",
+    "vector": {
+      "abductors": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "cable_hip_abduction",
+    "name": "Cable Hip Abduction",
+    "aliases": ["standing cable abduction", "cable side leg raise"],
+    "pattern": "hip_abduction",
+    "vector": {
+      "abductors": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "side_lying_leg_raise",
+    "name": "Side-Lying Leg Raise",
+    "aliases": ["side lying hip abduction", "lying abduction"],
+    "pattern": "hip_abduction",
+    "vector": {
+      "abductors": 1
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": [],
+    "fatigue_cost": 0.5,
+    "rep_range": {
+      "strength": [12, 15],
+      "hypertrophy": [15, 25]
+    },
+    "loading": "bodyweight",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "hip_adduction_machine",
+    "name": "Hip Adduction Machine",
+    "aliases": ["adductor machine", "inner thigh machine", "hip adductor"],
+    "pattern": "hip_adduction",
+    "vector": {
+      "adductors": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "cable_hip_adduction",
+    "name": "Cable Hip Adduction",
+    "aliases": ["standing cable adduction"],
+    "pattern": "hip_adduction",
+    "vector": {
+      "adductors": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip"],
+    "timed": false
+  },
+  {
+    "id": "copenhagen_plank",
+    "name": "Copenhagen Plank",
+    "aliases": ["copenhagen adductor plank", "copenhagen"],
+    "pattern": "hip_adduction",
+    "vector": {
+      "adductors": 1,
+      "abs": 0.5
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": ["bench_rack"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [15, 30],
+      "hypertrophy": [20, 40]
+    },
+    "loading": "bodyweight",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip", "knee"],
+    "timed": true
+  },
+  {
+    "id": "standing_calf_raise_machine",
+    "name": "Standing Calf Raise Machine",
+    "aliases": ["standing calf raise", "calf raise machine"],
+    "pattern": "calf_raise",
+    "vector": {
+      "calves": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["ankle"],
+    "timed": false
+  },
+  {
+    "id": "seated_calf_raise",
+    "name": "Seated Calf Raise",
+    "aliases": ["seated calf machine", "soleus raise"],
+    "pattern": "calf_raise",
+    "vector": {
+      "calves": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["ankle", "knee"],
+    "timed": false
+  },
+  {
+    "id": "leg_press_calf_raise",
+    "name": "Leg Press Calf Raise",
+    "aliases": ["calf press", "leg press calf press"],
+    "pattern": "calf_raise",
+    "vector": {
+      "calves": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["ankle"],
+    "timed": false
+  },
+  {
+    "id": "smith_calf_raise",
+    "name": "Smith Machine Calf Raise",
+    "aliases": ["smith calf raise"],
+    "pattern": "calf_raise",
+    "vector": {
+      "calves": 1
+    },
+    "kind": "isolation",
+    "implement": "smith",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["ankle"],
+    "timed": false
+  },
+  {
+    "id": "dumbbell_single_leg_calf_raise",
+    "name": "Single-Leg Dumbbell Calf Raise",
+    "aliases": ["single leg calf raise", "db calf raise"],
+    "pattern": "calf_raise",
+    "vector": {
+      "calves": 1
+    },
+    "kind": "isolation",
+    "implement": "dumbbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": true,
+    "calibration_safe": true,
+    "joints": ["ankle"],
+    "timed": false
+  },
+  {
+    "id": "cable_crunch",
+    "name": "Cable Crunch",
+    "aliases": ["kneeling cable crunch", "rope crunch"],
+    "pattern": "core_flexion",
+    "vector": {
+      "abs": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["lower_back"],
+    "timed": false
+  },
+  {
+    "id": "machine_crunch",
+    "name": "Ab Crunch Machine",
+    "aliases": ["ab machine", "crunch machine", "abdominal crunch"],
+    "pattern": "core_flexion",
+    "vector": {
+      "abs": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["selectorized"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["lower_back"],
+    "timed": false
+  },
+  {
+    "id": "hanging_leg_raise",
+    "name": "Hanging Leg Raise",
+    "aliases": ["hanging knee raise", "toes to bar"],
+    "pattern": "core_flexion",
+    "vector": {
+      "abs": 1
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": ["bodyweight_station"],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [6, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "captains_chair_leg_raise",
+    "name": "Captain's Chair Leg Raise",
+    "aliases": ["captains chair", "vertical knee raise", "roman chair leg raise"],
+    "pattern": "core_flexion",
+    "vector": {
+      "abs": 1
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": ["bodyweight_station"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "crunch",
+    "name": "Crunch",
+    "aliases": ["floor crunch", "sit up crunch"],
+    "pattern": "core_flexion",
+    "vector": {
+      "abs": 1
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": [],
+    "fatigue_cost": 0.5,
+    "rep_range": {
+      "strength": [12, 20],
+      "hypertrophy": [15, 30]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["lower_back", "neck"],
+    "timed": false
+  },
+  {
+    "id": "decline_sit_up",
+    "name": "Decline Sit-Up",
+    "aliases": ["decline crunch", "decline bench sit up"],
+    "pattern": "core_flexion",
+    "vector": {
+      "abs": 1
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": ["bench_rack"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 15],
+      "hypertrophy": [12, 20]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["lower_back", "hip"],
+    "timed": false
+  },
+  {
+    "id": "plank",
+    "name": "Plank",
+    "aliases": ["front plank", "forearm plank"],
+    "pattern": "core_anti_extension",
+    "vector": {
+      "abs": 1
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": [],
+    "fatigue_cost": 0.5,
+    "rep_range": {
+      "strength": [20, 40],
+      "hypertrophy": [30, 60]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["shoulder", "lower_back"],
+    "timed": true
+  },
+  {
+    "id": "ab_wheel_rollout",
+    "name": "Ab Wheel Rollout",
+    "aliases": ["ab roller", "rollout", "ab wheel"],
+    "pattern": "core_anti_extension",
+    "vector": {
+      "abs": 1,
+      "lats": 0.5
+    },
+    "kind": "isolation",
+    "implement": "bodyweight",
+    "equipment_types": [],
+    "fatigue_cost": 0.7,
+    "rep_range": {
+      "strength": [5, 10],
+      "hypertrophy": [8, 15]
+    },
+    "loading": "bodyweight",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["shoulder", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "cable_woodchop",
+    "name": "Cable Woodchop",
+    "aliases": ["woodchopper", "cable wood chop"],
+    "pattern": "core_rotation",
+    "vector": {
+      "abs": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.6,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["lower_back", "shoulder", "hip"],
+    "timed": false
+  },
+  {
+    "id": "pallof_press",
+    "name": "Pallof Press",
+    "aliases": ["cable anti rotation press", "pallof"],
+    "pattern": "core_rotation",
+    "vector": {
+      "abs": 1
+    },
+    "kind": "isolation",
+    "implement": "cable",
+    "equipment_types": ["cable_station"],
+    "fatigue_cost": 0.5,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 15]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["lower_back", "shoulder"],
+    "timed": false
+  },
+  {
+    "id": "landmine_row",
+    "name": "Landmine Row",
+    "aliases": ["meadows row", "single arm landmine row"],
+    "pattern": "horizontal_pull",
+    "vector": {
+      "lats": 1,
+      "upper_back": 1,
+      "biceps": 0.5,
+      "rear_delt": 0.5
+    },
+    "kind": "compound",
+    "implement": "barbell",
+    "equipment_types": ["free_weights"],
+    "fatigue_cost": 1.2,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": true,
+    "per_hand": false,
+    "calibration_safe": false,
+    "joints": ["lower_back", "shoulder", "elbow"],
+    "timed": false
+  },
+  {
+    "id": "v_squat",
+    "name": "V-Squat Machine",
+    "aliases": ["v squat", "power squat machine"],
+    "pattern": "squat",
+    "vector": {
+      "quads": 1,
+      "glutes": 0.5,
+      "adductors": 0.5
+    },
+    "kind": "compound",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 1.5,
+    "rep_range": {
+      "strength": [6, 10],
+      "hypertrophy": [8, 12]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["knee", "hip", "lower_back"],
+    "timed": false
+  },
+  {
+    "id": "reverse_hyperextension",
+    "name": "Reverse Hyperextension",
+    "aliases": ["reverse hyper"],
+    "pattern": "hip_extension",
+    "vector": {
+      "glutes": 1,
+      "hamstrings": 1
+    },
+    "kind": "isolation",
+    "implement": "machine",
+    "equipment_types": ["plate_loaded"],
+    "fatigue_cost": 0.9,
+    "rep_range": {
+      "strength": [8, 12],
+      "hypertrophy": [10, 20]
+    },
+    "loading": "external",
+    "unilateral": false,
+    "per_hand": false,
+    "calibration_safe": true,
+    "joints": ["lower_back", "hip"],
+    "timed": false
+  }
+]
