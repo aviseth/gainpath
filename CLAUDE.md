@@ -1,0 +1,20 @@
+@AGENTS.md
+
+# Liftwise
+
+Read PLAN.md first; PROMPT.md is the product brief, EVIDENCE.md the scientific source of truth
+(it wins any conflict), ALGORITHMS.md the engine spec.
+
+- Package manager: pnpm. Checks before pushing: `pnpm lint && pnpm typecheck && pnpm test`,
+  plus `pnpm test:e2e` for UI changes (in cloud containers set
+  `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/opt/pw-browsers/chromium`).
+- Local-first: UI reads and writes IndexedDB through `src/data/repo.ts` only; never write tables
+  directly (repos stamp `updated_at`, mark rows dirty and notify sync).
+- `src/data/schema.ts` (Zod), the Dexie stores in `src/data/db.ts` and
+  `supabase/migrations/` must stay in step. Index changes need a new `db.version(n)`; schema
+  changes need a new migration file, never an edit to an applied one.
+- Engine code (`src/engine/`, milestone 3+) is pure TypeScript: no I/O, no React. Cite rule IDs
+  (e.g. `VOL-2`) in comments and tests. Rules graded H are marked `// HEURISTIC`, with
+  constants in `src/engine/config.ts`.
+- The AI layer may only cite studies listed in EVIDENCE.md and never invents numbers.
+- Ask before adding dependencies that aren't clearly standard.

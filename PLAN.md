@@ -233,6 +233,7 @@ Each ends with `pnpm lint && pnpm typecheck && pnpm test` (+ Playwright where UI
 
 1. **Foundation:** Next.js + Tailwind scaffold, Dexie schema + repos, Supabase migrations + RLS, auth (Google + magic link, persistent session), sync engine + status indicator, export/import.
 2. **Gyms & catalog:** seed JSON (~150 exercises, keyword dictionary ~120 entries, brands, load ratios, equipment templates), gym/equipment CRUD, custom machine flow (< 1 min), custom exercises with required muscle mapping, prefs (exclude/broken/favourite).
+   **Gym from photos (owner's request):** the owner sends photos of every machine; Claude identifies each one during development (brand, model/number where a label is legible, type, stack range and increments, linked exercises), flags anything it can't read for confirmation, and commits it as a gym manifest (`src/seed/gyms/<gym>.json`) with stable ids. The app merges the manifest on startup through the same last-write-wins path as import, so it appears automatically, and later in-app edits win over it.
 3. **Engine + tests:** all modules in §3 with unit tests per ALGORITHMS section, including the full swap test list.
 4. **Logging + active session:** set logging with per-machine steppers, RPE/RIR, rest timer + vibration, in-session adjustments, swap sheet, skip, free-text parser, Wake Lock.
 5. **Check-in + Today:** manual check-in, readiness, session generation (deterministic) with "why does today look like this?", deload prompts, calibration sets; AI chat/weekly review behind opt-in.

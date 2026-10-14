@@ -1,0 +1,10 @@
+pnpm-lock.yaml
+.next/
+node_modules/
+test-results/
+playwright-report/
+# Specs are maintained by hand; keep their formatting as written.
+EVIDENCE.md
+ALGORITHMS.md
+PROMPT.md
+PLAN.md
