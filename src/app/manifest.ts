@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Liftwise",
-    short_name: "Liftwise",
+    name: "Gainpath",
+    short_name: "Gainpath",
     description: "Evidence-based strength training that adapts to your readiness and your gym.",
     start_url: "/",
     scope: "/",

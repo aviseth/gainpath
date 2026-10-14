@@ -138,7 +138,7 @@ export function checkStop(message: { stop_reason: string | null }): void {
  * The shared system preamble. Kept byte-identical across calls so the prompt
  * cache can reuse it.
  */
-export const BASE_SYSTEM = `You are the optional AI helper inside Liftwise, an evidence-based strength training app.
+export const BASE_SYSTEM = `You are the optional AI helper inside Gainpath, an evidence-based strength training app.
 Hard rules:
 - Never invent numbers (loads, sets, reps, percentages, volumes). Numbers come only from the user's own words or from the app's engine via tools or the data you are given.
 - Only cite studies listed in the app's EVIDENCE.md. Prefer citing the app's rule IDs (e.g. VOL-1, PROG-2, REC-1). Call rules graded H "rules of thumb", not findings.

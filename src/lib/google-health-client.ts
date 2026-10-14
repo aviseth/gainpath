@@ -1,6 +1,6 @@
 "use client";
 
-import { getDB, type LiftwiseDB } from "@/data/db";
+import { getDB, type GainpathDB } from "@/data/db";
 import { storeWearableDays, syncRange, type WearableDay } from "@/data/wearables";
 import { getSupabase } from "./supabase";
 
@@ -52,7 +52,7 @@ export async function completeGoogleHealth(code: string, state: string): Promise
   await syncGoogleHealth();
 }
 
-export async function syncGoogleHealth(db: LiftwiseDB = getDB()): Promise<number> {
+export async function syncGoogleHealth(db: GainpathDB = getDB()): Promise<number> {
   const { days } = await call<{ days: WearableDay[] }>("sync", {
     method: "POST",
     body: syncRange(SYNC_DAYS),
@@ -62,13 +62,13 @@ export async function syncGoogleHealth(db: LiftwiseDB = getDB()): Promise<number
   return changed;
 }
 
-export async function disconnectGoogleHealth(db: LiftwiseDB = getDB()): Promise<void> {
+export async function disconnectGoogleHealth(db: GainpathDB = getDB()): Promise<void> {
   await call("disconnect", { method: "POST" });
   await db.meta.delete(LAST_SYNC_KEY);
 }
 
 /** Daily background sync on app start, when connected. Never throws. */
-export async function maybeAutoSyncGoogleHealth(db: LiftwiseDB = getDB()): Promise<void> {
+export async function maybeAutoSyncGoogleHealth(db: GainpathDB = getDB()): Promise<void> {
   try {
     const last = (await db.meta.get(LAST_SYNC_KEY))?.value as number | undefined;
     if (last && Date.now() - last < AUTO_SYNC_EVERY_MS) return;

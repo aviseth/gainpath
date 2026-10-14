@@ -23,7 +23,7 @@ test("check-in, generated session, logging, swapping and finishing", async ({ pa
   await page.getByRole("button", { name: "Why does today look like this?" }).click();
   await expect(page.getByRole("dialog")).toContainText(/VOL-|READY-|PROG-/);
   await page.getByRole("button", { name: "Close" }).click();
-  await expect(page.getByRole("button", { name: "Ask Liftwise" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Ask Gainpath" })).toHaveCount(0);
 
   await page.getByRole("link", { name: "Start session" }).click();
   const first = page.locator("article").first();

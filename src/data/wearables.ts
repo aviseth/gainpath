@@ -1,5 +1,5 @@
 import { localDate } from "./actions";
-import type { LiftwiseDB } from "./db";
+import type { GainpathDB } from "./db";
 import { repo } from "./repo";
 
 export interface WearableDay {
@@ -11,7 +11,7 @@ export interface WearableDay {
 
 /** Upserts one wearable_daily row per (date, source); unchanged days are left alone. */
 export async function storeWearableDays(
-  db: LiftwiseDB,
+  db: GainpathDB,
   source: "google_health" | "ingest",
   days: readonly WearableDay[],
 ): Promise<number> {

@@ -1,5 +1,5 @@
 import type { GymManifest } from "@/seed/gyms/manifest";
-import type { LiftwiseDB } from "./db";
+import type { GainpathDB } from "./db";
 import { mergeRecords } from "./merge";
 import { getOwnerId, notifyLocalWrite } from "./repo";
 import { getProfile, saveProfile } from "./actions";
@@ -69,7 +69,7 @@ export function manifestRecords(manifest: GymManifest, ownerId: string) {
 const metaKey = (m: GymManifest) => `manifest:${m.gym.key}`;
 
 export async function applyGymManifests(
-  db: LiftwiseDB,
+  db: GainpathDB,
   manifests: readonly GymManifest[],
 ): Promise<number> {
   let applied = 0;

@@ -16,7 +16,7 @@ export interface MetaRow {
 
 type SyncedTables = { [T in TableName]: EntityTable<Stored<T>, "id"> };
 
-export type LiftwiseDB = Dexie & SyncedTables & { meta: EntityTable<MetaRow, "key"> };
+export type GainpathDB = Dexie & SyncedTables & { meta: EntityTable<MetaRow, "key"> };
 
 const BASE = "id, user_id, updated_at, dirty";
 
@@ -41,21 +41,21 @@ export const STORES: Record<TableName | "meta", string> = {
   meta: "key",
 };
 
-export function createDB(name = "liftwise"): LiftwiseDB {
-  const db = new Dexie(name) as LiftwiseDB;
+export function createDB(name = "gainpath"): GainpathDB {
+  const db = new Dexie(name) as GainpathDB;
   db.version(1).stores(STORES);
   return db;
 }
 
-let instance: LiftwiseDB | null = null;
+let instance: GainpathDB | null = null;
 
 /** The app-wide database. Created lazily so server rendering never touches IndexedDB. */
-export function getDB(): LiftwiseDB {
+export function getDB(): GainpathDB {
   instance ??= createDB();
   return instance;
 }
 
 /** Test hook: swap the singleton (e.g. for a fresh fake-indexeddb database). */
-export function setDB(db: LiftwiseDB | null): void {
+export function setDB(db: GainpathDB | null): void {
   instance = db;
 }

@@ -1,4 +1,4 @@
-Build a web app (installable PWA) called "Liftwise": an AI-driven strength training app similar to Fitbod. It generates and adapts workouts from daily readiness, in-session performance, and the exact machines available in my gym. Use free tiers for everything except the LLM API.
+Build a web app (installable PWA) called "Gainpath": an AI-driven strength training app similar to Fitbod. It generates and adapts workouts from daily readiness, in-session performance, and the exact machines available in my gym. Use free tiers for everything except the LLM API.
 
 It is a single-user app for now (me), but build it so adding users later is not a rewrite.
 
@@ -130,7 +130,7 @@ The LLM is used only where ALGORITHMS.md §18 allows, and only on explicit user 
 - free-text logs the parser can't handle
 - free-text constraints the keyword matcher can't map
 - a weekly narrative review, cached per week
-- an optional "Ask Liftwise" chat
+- an optional "Ask Gainpath" chat
 
 Rules for every call:
 - The LLM never invents numbers. It calls engine functions as tools:

@@ -3,7 +3,7 @@ import { chatCallCounts, chatRequest, type ChatResult } from "@/lib/ai-schemas";
 import { aiRoute, BASE_SYSTEM, checkStop, MODELS } from "@/server/ai";
 
 /**
- * "Ask Liftwise" chat. The engine and the user's data live on the device, so
+ * "Ask Gainpath" chat. The engine and the user's data live on the device, so
  * the tools run there: this route makes one model call and returns the
  * content; the client executes any tool_use blocks locally and calls again
  * with the results. System prompt and tools never change between calls, and
@@ -63,7 +63,7 @@ const SYSTEM: Anthropic.TextBlockParam[] = [
   { type: "text", text: BASE_SYSTEM },
   {
     type: "text",
-    text: `You are answering questions in the app's "Ask Liftwise" chat.
+    text: `You are answering questions in the app's "Ask Gainpath" chat.
 Use the tools to get any numbers about the user's training; quote them as returned. If a tool can't answer, say what you don't know.
 The app plans sessions itself; you explain it and can exclude equipment for today when asked. You can't edit plans, loads or history.`,
     cache_control: { type: "ephemeral" },

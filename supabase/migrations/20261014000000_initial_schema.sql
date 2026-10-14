@@ -1,4 +1,4 @@
--- Liftwise initial schema (PLAN.md §2.3).
+-- Gainpath initial schema (PLAN.md §2.3).
 --
 -- Mirrors src/data/schema.ts. The browser's IndexedDB is the primary store;
 -- these tables are a per-user backup that sync reconciles with

@@ -7,13 +7,13 @@ import { findSubstitutes } from "@/engine/swap";
 import { weeklyDone, weeklyTargets } from "@/engine/volume";
 import type { MuscleMap } from "@/engine/fatigue";
 import { localDate } from "./actions";
-import type { LiftwiseDB } from "./db";
+import type { GainpathDB } from "./db";
 import { repo } from "./repo";
 import { sessionLogs, todaysSession } from "./sessions";
 import { loadTrainingContext, planInputFrom, readLive } from "./training";
 
 /**
- * The "Ask Liftwise" chat tools (PROMPT "AI layer"). They run on the device
+ * The "Ask Gainpath" chat tools (PROMPT "AI layer"). They run on the device
  * against the local database and the deterministic engine, so every number
  * the model quotes comes from here. Inputs are validated with Zod first.
  */
@@ -21,7 +21,7 @@ import { loadTrainingContext, planInputFrom, readLive } from "./training";
 const round = (n: number, dp = 1) => Math.round(n * 10 ** dp) / 10 ** dp;
 
 export async function runChatTool(
-  db: LiftwiseDB,
+  db: GainpathDB,
   name: string,
   rawInput: unknown,
 ): Promise<{ content: string; isError?: boolean; summary: string }> {

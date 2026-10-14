@@ -1,4 +1,4 @@
-import type { LiftwiseDB } from "@/data/db";
+import type { GainpathDB } from "@/data/db";
 import { mergeRecords } from "@/data/merge";
 import { getOwnerId, LOCAL_OWNER, setOwnerId } from "@/data/repo";
 import {
@@ -41,7 +41,7 @@ export interface SyncResult {
  * sign-in they are re-owned and marked dirty so they upload. Rows owned by a
  * different account are never claimed.
  */
-export async function claimOwnership(db: LiftwiseDB, userId: string): Promise<void> {
+export async function claimOwnership(db: GainpathDB, userId: string): Promise<void> {
   const owner = await getOwnerId(db);
   if (owner === userId) return;
   if (owner !== LOCAL_OWNER) throw new OwnershipConflictError(owner, userId);
@@ -57,7 +57,7 @@ export async function claimOwnership(db: LiftwiseDB, userId: string): Promise<vo
   });
 }
 
-async function pushTable(db: LiftwiseDB, remote: SyncRemote, table: TableName): Promise<number> {
+async function pushTable(db: GainpathDB, remote: SyncRemote, table: TableName): Promise<number> {
   const store = db.table<Stored<TableName>, string>(table);
   let pushed = 0;
   // Each pass re-reads the queue, so rows edited mid-push are picked up again.
@@ -88,7 +88,7 @@ function rewind(cursor: PullCursor): PullCursor {
 }
 
 async function pullTable(
-  db: LiftwiseDB,
+  db: GainpathDB,
   remote: SyncRemote,
   table: TableName,
 ): Promise<{ pulled: number; invalid: number }> {
@@ -126,7 +126,7 @@ function compareCursor(a: PullCursor, b: PullCursor): number {
 }
 
 export async function syncOnce(
-  db: LiftwiseDB,
+  db: GainpathDB,
   remote: SyncRemote,
   userId: string,
 ): Promise<SyncResult> {
@@ -142,7 +142,7 @@ export async function syncOnce(
   return result;
 }
 
-export async function countPending(db: LiftwiseDB): Promise<number> {
+export async function countPending(db: GainpathDB): Promise<number> {
   let total = 0;
   for (const table of TABLE_NAMES) total += await db.table(table).where("dirty").equals(1).count();
   return total;

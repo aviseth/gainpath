@@ -1,4 +1,4 @@
-# Liftwise — Implementation Plan
+# Gainpath — Implementation Plan
 
 Status: **draft, awaiting approval** (PROMPT.md, Process step 1). No application code is written until this is approved.
 
@@ -88,7 +88,7 @@ All synced records share: `id` (uuid v7, generated client-side), `user_id`, `cre
 | `integrations` | provider, status, scopes — **tokens are stored server-side only**, in a Supabase table without client read access |
 
 ### 2.2 Dexie (local)
-- One Dexie DB `liftwise` with the tables above, indexed on `[user_id+updated_at]`, `dirty`, and per-table lookup keys (e.g. `set_logs: [exercise_id+equipment_id+ts]`, `equipment: gym_id`).
+- One Dexie DB `gainpath` with the tables above, indexed on `[user_id+updated_at]`, `dirty`, and per-table lookup keys (e.g. `set_logs: [exercise_id+equipment_id+ts]`, `equipment: gym_id`).
 - The `dirty` index is the push queue (no separate outbox table). Extra local-only stores: `meta` (device owner, per-table pull cursors, last sync time), `similarity_cache` (per gym: equipment-hash → cosine matrix, ALGORITHMS §12).
 - Seed JSON is bundled; custom exercises are merged over it in a single `getExerciseCatalog(userId)` selector.
 

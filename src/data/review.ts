@@ -2,7 +2,7 @@ import { MUSCLES } from "@/data/schema";
 import { e1rmSeries, mondayOf, weeklyVolume } from "@/engine/progress";
 import { computeReadiness } from "@/engine/readiness";
 import { weeklyTargets } from "@/engine/volume";
-import type { LiftwiseDB } from "./db";
+import type { GainpathDB } from "./db";
 import type { TrainingContext } from "./training";
 
 /**
@@ -22,7 +22,7 @@ export function lastWeekStart(now: number): number {
   return mondayOf(mondayOf(now) - DAY);
 }
 
-export async function buildWeeklySummary(db: LiftwiseDB, ctx: TrainingContext, start: number) {
+export async function buildWeeklySummary(db: GainpathDB, ctx: TrainingContext, start: number) {
   const end = start + 7 * DAY;
   const sets = (await db.set_logs.toArray()).filter((s) => s.deleted_at === null && s.ts < end);
   const week = weeklyVolume(sets, ctx.catalog, end - 1, 1)[0];

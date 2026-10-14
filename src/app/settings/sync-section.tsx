@@ -18,7 +18,7 @@ export function SyncSection() {
       <Section title="Sync" description={`Last synced: ${last}. ${pending}`}>
         {status.state === "error" && (
           <Notice tone="error">
-            {`Sync failed: ${status.error}\nYour data is safe on this device. Liftwise will keep retrying.`}
+            {`Sync failed: ${status.error}\nYour data is safe on this device. Gainpath will keep retrying.`}
           </Notice>
         )}
         {status.state === "offline" && (

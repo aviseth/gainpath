@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
 const backup = {
-  format: "liftwise-backup",
+  format: "gainpath-backup",
   schema_version: 1,
   exported_at: Date.parse("2026-10-14T12:00:00Z"),
   owner_id: "local",
@@ -44,7 +44,7 @@ test("imports a backup, exports it back, and re-imports idempotently", async ({ 
   const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: "Export JSON" }).click();
   const download = await downloadPromise;
-  expect(download.suggestedFilename()).toMatch(/^liftwise-backup-\d{4}-\d{2}-\d{2}\.json$/);
+  expect(download.suggestedFilename()).toMatch(/^gainpath-backup-\d{4}-\d{2}-\d{2}\.json$/);
   const exported = JSON.parse(await readFile((await download.path())!, "utf8"));
   expect(exported.tables.gyms).toHaveLength(1);
   expect(exported.tables.gyms[0].name).toBe("E2E gym");

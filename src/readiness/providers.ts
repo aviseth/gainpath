@@ -1,4 +1,4 @@
-import type { LiftwiseDB } from "@/data/db";
+import type { GainpathDB } from "@/data/db";
 import type { Muscle } from "@/data/schema";
 import type { ReadinessInput } from "@/engine/readiness";
 
@@ -22,7 +22,7 @@ export interface ReadinessProvider {
   id: "manual" | "google_health" | "samsung_health";
   label: string;
   /** Data for one local date (YYYY-MM-DD); missing fields are simply absent. */
-  getDaily(db: LiftwiseDB, date: string): Promise<DailyReadiness>;
+  getDaily(db: GainpathDB, date: string): Promise<DailyReadiness>;
 }
 
 export const manualCheckinProvider: ReadinessProvider = {
@@ -91,7 +91,7 @@ function shiftDate(date: string, days: number): string {
  * fallback, and HRV / resting HR against the previous 14 days (READY-2).
  */
 export async function gatherReadiness(
-  db: LiftwiseDB,
+  db: GainpathDB,
   date: string,
   baselineDays = 14,
 ): Promise<{

@@ -1,6 +1,6 @@
 @AGENTS.md
 
-# Liftwise
+# Gainpath
 
 Read PLAN.md first; PROMPT.md is the product brief, EVIDENCE.md the scientific source of truth
 (it wins any conflict), ALGORITHMS.md the engine spec.

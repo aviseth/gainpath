@@ -11,7 +11,7 @@ import { getSupabase } from "./supabase";
  * server), and every call is an explicit user action.
  */
 
-const OPT_IN_KEY = "liftwise.ai";
+const OPT_IN_KEY = "gainpath.ai";
 
 export interface AiStatus {
   /** Opted in on this device, configured on the server and signed in. */

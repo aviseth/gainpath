@@ -23,7 +23,7 @@ describe("export / import", () => {
   it("exports every table, including tombstones, without local-only fields", async () => {
     const { db, gone } = await seeded();
     const backup = await exportBackup(db);
-    expect(backup.format).toBe("liftwise-backup");
+    expect(backup.format).toBe("gainpath-backup");
     expect(backup.tables.gyms).toHaveLength(2);
     expect(backup.tables.gyms?.find((g) => g.id === gone.id)?.deleted_at).not.toBeNull();
     expect(backup.tables.checkins).toHaveLength(1);
@@ -70,7 +70,7 @@ describe("export / import", () => {
     const db = freshDB();
     await expect(importBackup(db, "not json")).rejects.toBeInstanceOf(BackupError);
     await expect(importBackup(db, JSON.stringify({ hello: 1 }))).rejects.toThrow(
-      /Not a Liftwise backup/,
+      /Not a Gainpath backup/,
     );
     const base = await exportBackup(db);
     await expect(

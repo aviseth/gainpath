@@ -8,7 +8,7 @@ import { HealthSection } from "./health-section";
 import { SyncSection } from "./sync-section";
 import { TrainingSection } from "./training-section";
 
-export const metadata: Metadata = { title: "Settings · Liftwise" };
+export const metadata: Metadata = { title: "Settings · Gainpath" };
 
 export default function SettingsPage() {
   return (

@@ -22,7 +22,7 @@ import {
 import type { SwapOption } from "@/engine/swap";
 import type { RationaleEntry } from "@/engine/types";
 import { localDate } from "./actions";
-import type { LiftwiseDB } from "./db";
+import type { GainpathDB } from "./db";
 import { repo } from "./repo";
 import type { RecordOf } from "./schema";
 import {
@@ -41,7 +41,7 @@ const DAY = 24 * 3600_000;
 export type SessionRow = RecordOf<"sessions">;
 
 export async function todaysSession(
-  db: LiftwiseDB,
+  db: GainpathDB,
   date = localDate(),
 ): Promise<SessionRow | undefined> {
   const rows = (await db.sessions.where("date").equals(date).toArray()).filter(
@@ -52,7 +52,7 @@ export async function todaysSession(
 
 /** Build today's session from the current context and store it (replacing an unstarted plan). */
 export async function generateSession(
-  db: LiftwiseDB,
+  db: GainpathDB,
   now = Date.now(),
 ): Promise<SessionRow | null> {
   await maybeTuneMesocycle(db, now);
@@ -79,7 +79,7 @@ export async function generateSession(
 }
 
 async function saveLive(
-  db: LiftwiseDB,
+  db: GainpathDB,
   session: SessionRow,
   live: LiveSession,
   extra: Partial<SessionRow> = {},
@@ -91,7 +91,7 @@ async function saveLive(
   });
 }
 
-export async function startSession(db: LiftwiseDB, session: SessionRow): Promise<SessionRow> {
+export async function startSession(db: GainpathDB, session: SessionRow): Promise<SessionRow> {
   const live = readLive(session)!;
   return saveLive(
     db,
@@ -101,7 +101,7 @@ export async function startSession(db: LiftwiseDB, session: SessionRow): Promise
   );
 }
 
-export async function sessionLogs(db: LiftwiseDB, sessionId: string) {
+export async function sessionLogs(db: GainpathDB, sessionId: string) {
   return (await db.set_logs.where("session_id").equals(sessionId).toArray())
     .filter((s) => s.deleted_at === null)
     .sort((a, b) => a.ts - b.ts);
@@ -121,7 +121,7 @@ export interface LoggedSet {
  * AMRAP calibration set, also update the user's RIR calibration (§10).
  */
 export async function logSet(
-  db: LiftwiseDB,
+  db: GainpathDB,
   session: SessionRow,
   exerciseId: string,
   set: LoggedSet,
@@ -220,7 +220,7 @@ export async function logSet(
 }
 
 export async function undoSet(
-  db: LiftwiseDB,
+  db: GainpathDB,
   session: SessionRow,
   setId: string,
 ): Promise<SessionRow> {
@@ -242,7 +242,7 @@ export async function undoSet(
 }
 
 async function updateE1rmEstimate(
-  db: LiftwiseDB,
+  db: GainpathDB,
   exerciseId: string,
   equipmentId: string,
   calibrationOffset: number,
@@ -279,7 +279,7 @@ async function updateE1rmEstimate(
 }
 
 export async function setPredictedRir(
-  db: LiftwiseDB,
+  db: GainpathDB,
   session: SessionRow,
   exerciseId: string,
   predictedRir: number,
@@ -294,7 +294,7 @@ export async function setPredictedRir(
 }
 
 export async function updateExerciseWeight(
-  db: LiftwiseDB,
+  db: GainpathDB,
   session: SessionRow,
   exerciseId: string,
   weightKg: number,
@@ -321,7 +321,7 @@ export type SwapReason = "busy" | "broken" | "feel" | "dislike" | "pain";
 
 /** Record the swap reason's side effects (PROMPT.md "Swaps"), returning what changed. */
 export async function applySwapReason(
-  db: LiftwiseDB,
+  db: GainpathDB,
   params: {
     reason: SwapReason;
     exerciseId: string;
@@ -387,7 +387,7 @@ export async function applySwapReason(
 
 /** Accept a swap option (§12): replace the exercise, log the swap, rebalance if needed. */
 export async function acceptSwap(
-  db: LiftwiseDB,
+  db: GainpathDB,
   session: SessionRow,
   removedId: string,
   reason: SwapReason | "free_text",
@@ -428,7 +428,7 @@ export async function acceptSwap(
 
 /** Skip without replacing (§12): volume carries to later sessions; rebalance today if needed. */
 export async function skip(
-  db: LiftwiseDB,
+  db: GainpathDB,
   session: SessionRow,
   exerciseId: string,
   reason: SwapReason | "skip" = "skip",
@@ -482,7 +482,7 @@ export async function skip(
 
 /** Pain (EVIDENCE §10 rule 6): drop every planned exercise loading that region today. */
 export async function removeForPain(
-  db: LiftwiseDB,
+  db: GainpathDB,
   session: SessionRow,
   region: string,
 ): Promise<SessionRow> {
@@ -505,7 +505,7 @@ export async function removeForPain(
 }
 
 export async function addExercise(
-  db: LiftwiseDB,
+  db: GainpathDB,
   session: SessionRow,
   exerciseId: string,
   sets = 3,
@@ -521,7 +521,7 @@ export async function addExercise(
   });
 }
 
-export async function finishSession(db: LiftwiseDB, session: SessionRow): Promise<SessionRow> {
+export async function finishSession(db: GainpathDB, session: SessionRow): Promise<SessionRow> {
   const live = readLive(session)!;
   const logs = await sessionLogs(db, session.id);
   const ctx = await loadTrainingContext(db);
@@ -537,17 +537,17 @@ export async function finishSession(db: LiftwiseDB, session: SessionRow): Promis
 }
 
 /** Accept a suggested deload week (DELOAD-2: lighter, not a week off). */
-export async function startDeloadWeek(db: LiftwiseDB, now = Date.now()): Promise<void> {
+export async function startDeloadWeek(db: GainpathDB, now = Date.now()): Promise<void> {
   await db.meta.put({ key: META_DELOAD_UNTIL, value: now + 7 * DAY });
   await db.meta.put({ key: META_DELOAD_LAST, value: now });
 }
 
-export async function endDeloadWeek(db: LiftwiseDB): Promise<void> {
+export async function endDeloadWeek(db: GainpathDB): Promise<void> {
   await db.meta.delete(META_DELOAD_UNTIL);
 }
 
 /** Mesocycle auto-tuning (§11): every N weeks, nudge each muscle's weekly target. */
-export async function maybeTuneMesocycle(db: LiftwiseDB, now = Date.now()): Promise<void> {
+export async function maybeTuneMesocycle(db: GainpathDB, now = Date.now()): Promise<void> {
   const ctx = await loadTrainingContext(db, now);
   if (!ctx) return;
   const mesos = repo("mesocycles", db);

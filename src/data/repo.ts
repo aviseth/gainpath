@@ -1,5 +1,5 @@
 import { uuidv7 } from "uuidv7";
-import { getDB, type LiftwiseDB } from "./db";
+import { getDB, type GainpathDB } from "./db";
 import {
   tableSchemas,
   type BaseRecord,
@@ -13,12 +13,12 @@ export const LOCAL_OWNER = "local";
 
 const OWNER_KEY = "owner_id";
 
-export async function getOwnerId(db: LiftwiseDB = getDB()): Promise<string> {
+export async function getOwnerId(db: GainpathDB = getDB()): Promise<string> {
   const row = await db.meta.get(OWNER_KEY);
   return typeof row?.value === "string" ? row.value : LOCAL_OWNER;
 }
 
-export async function setOwnerId(ownerId: string, db: LiftwiseDB = getDB()): Promise<void> {
+export async function setOwnerId(ownerId: string, db: GainpathDB = getDB()): Promise<void> {
   await db.meta.put({ key: OWNER_KEY, value: ownerId });
 }
 
@@ -53,7 +53,7 @@ function strip<T extends TableName>(row: Stored<T>): RecordOf<T> {
 }
 
 /** Typed CRUD over one synced table. Reads hide soft-deleted rows. */
-export function repo<T extends TableName>(table: T, db: LiftwiseDB = getDB()) {
+export function repo<T extends TableName>(table: T, db: GainpathDB = getDB()) {
   const store = () => db.table<Stored<T>, string>(table);
   const validate = (record: unknown) => tableSchemas[table].parse(record) as RecordOf<T>;
 

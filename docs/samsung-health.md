@@ -1,9 +1,9 @@
 # Samsung Health
 
-Samsung Health has **no web API**, so Liftwise can't read it directly. On Android, Samsung
+Samsung Health has **no web API**, so Gainpath can't read it directly. On Android, Samsung
 Health can share data with **Health Connect**, which only native Android apps can read.
 
-What exists in Liftwise today:
+What exists in Gainpath today:
 
 - A stub `ReadinessProvider` (`src/readiness/providers.ts`, `samsungHealthStub`) that returns no
   data, so the provider list is complete.

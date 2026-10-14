@@ -39,7 +39,7 @@ export function CheckGymScreen() {
       </Link>
       <h1 className="text-2xl font-bold">Check {ctx.gym?.name ?? "my gym"}</h1>
       <p className="text-sm text-zinc-400">
-        What your registered, working equipment can train. This only reports gaps; Liftwise never
+        What your registered, working equipment can train. This only reports gaps; Gainpath never
         programs equipment you haven&apos;t registered.
       </p>
 

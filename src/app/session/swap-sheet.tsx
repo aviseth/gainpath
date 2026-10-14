@@ -272,7 +272,7 @@ export function SwapSheet({
         <>
           <Notice>
             Removed today&apos;s exercises that load that area. If the pain persists, see a doctor
-            or physiotherapist. Liftwise can&apos;t diagnose it.
+            or physiotherapist. Gainpath can&apos;t diagnose it.
           </Notice>
           <Button variant="primary" onClick={() => onClose()}>
             Back to session

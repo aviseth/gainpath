@@ -1,4 +1,4 @@
-# Liftwise — Evidence Base for the Training Engine
+# Gainpath — Evidence Base for the Training Engine
 
 This file is the scientific source of truth for every rule in the engine and every claim the AI makes.
 Each rule is tagged with an evidence grade:

@@ -21,7 +21,7 @@ import { gatherReadiness } from "@/readiness/providers";
 import { buildCatalog, LOAD_RATIOS } from "@/seed/catalog";
 import type { BodyRegion } from "@/seed/schema";
 import { localDate } from "./actions";
-import type { LiftwiseDB } from "./db";
+import type { GainpathDB } from "./db";
 import { repo } from "./repo";
 import type { Profile, RecordOf } from "./schema";
 
@@ -93,7 +93,7 @@ export function readLive(session: RecordOf<"sessions">): LiveSession | null {
 }
 
 export async function loadTrainingContext(
-  db: LiftwiseDB,
+  db: GainpathDB,
   now = Date.now(),
 ): Promise<TrainingContext | null> {
   const profile = alive(await db.profiles.toArray()).sort((a, b) => a.created_at - b.created_at)[0];
@@ -315,7 +315,7 @@ export function planInputFrom(ctx: TrainingContext): PlanInput {
 }
 
 /** Persist the plan's anchors (§8): one row per region. */
-export async function saveAnchors(db: LiftwiseDB, anchors: readonly AnchorState[]): Promise<void> {
+export async function saveAnchors(db: GainpathDB, anchors: readonly AnchorState[]): Promise<void> {
   const anchorsRepo = repo("anchors", db);
   const rows = await anchorsRepo.list();
   for (const row of rows) {

@@ -4,10 +4,10 @@ import { AppShell } from "@/components/app-shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Liftwise",
+  title: "Gainpath",
   description: "Evidence-based strength training that adapts to your readiness and your gym.",
-  applicationName: "Liftwise",
-  appleWebApp: { capable: true, title: "Liftwise", statusBarStyle: "black-translucent" },
+  applicationName: "Gainpath",
+  appleWebApp: { capable: true, title: "Gainpath", statusBarStyle: "black-translucent" },
   icons: { apple: "/icons/apple-touch-icon.png" },
 };
 

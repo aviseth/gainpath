@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { AskLiftwise } from "@/components/ask-liftwise";
+import { AskGainpath } from "@/components/ask-gainpath";
 import { ExerciseSummary } from "@/components/exercise-summary";
 import { Badge } from "@/components/forms";
 import { Button, Notice, Section } from "@/components/ui";
@@ -222,10 +222,10 @@ export function TodayScreen() {
         </Section>
       )}
 
-      {ai?.enabled && <Button onClick={() => setAsking(true)}>Ask Liftwise</Button>}
+      {ai?.enabled && <Button onClick={() => setAsking(true)}>Ask Gainpath</Button>}
 
       {why && live && <WhySheet live={live} catalog={ctx.catalog} onClose={() => setWhy(false)} />}
-      {asking && <AskLiftwise onClose={() => setAsking(false)} />}
+      {asking && <AskGainpath onClose={() => setAsking(false)} />}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import type { LiftwiseDB } from "./db";
+import type { GainpathDB } from "./db";
 import type { RecordOf, Stored, TableName } from "./schema";
 
 export interface MergeResult {
@@ -16,7 +16,7 @@ export interface MergeResult {
  * - `source: "import"`: applied rows are marked dirty so they get pushed.
  */
 export async function mergeRecords<T extends TableName>(
-  db: LiftwiseDB,
+  db: GainpathDB,
   table: T,
   records: RecordOf<T>[],
   source: "remote" | "import",

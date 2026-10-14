@@ -72,7 +72,7 @@ export default function OnboardingPage() {
 
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-2xl font-bold">Welcome to Liftwise</h1>
+      <h1 className="text-2xl font-bold">Welcome to Gainpath</h1>
       {step === "goal" && (
         <>
           <Field label="Main goal">

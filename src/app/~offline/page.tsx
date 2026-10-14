@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Offline · Liftwise" };
+export const metadata: Metadata = { title: "Offline · Gainpath" };
 
 /** Shown only for a page that was never opened online. Everything else works offline. */
 export default function OfflinePage() {

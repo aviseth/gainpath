@@ -14,10 +14,10 @@ const MAX_ROUNDS = 6;
 type Line = { kind: "user" | "assistant" | "tool"; text: string };
 
 /**
- * "Ask Liftwise": an explicit, opt-in chat. The history is kept exactly as the
+ * "Ask Gainpath": an explicit, opt-in chat. The history is kept exactly as the
  * API returned it (thinking blocks included) and sent back unchanged.
  */
-export function AskLiftwise({ onClose }: { onClose: () => void }) {
+export function AskGainpath({ onClose }: { onClose: () => void }) {
   const db = getDB();
   const [history, setHistory] = useState<ChatMessage[]>([]);
   const [lines, setLines] = useState<Line[]>([]);
@@ -71,7 +71,7 @@ export function AskLiftwise({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <Sheet title="Ask Liftwise" onClose={onClose}>
+    <Sheet title="Ask Gainpath" onClose={onClose}>
       <p className="text-xs text-zinc-500">
         AI answers using your own data via the app&apos;s engine. Each question counts toward
         today&apos;s AI limit.

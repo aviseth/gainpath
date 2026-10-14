@@ -1,5 +1,5 @@
 import type { BodyRegion, EquipmentTemplate } from "@/seed/schema";
-import { getDB, type LiftwiseDB } from "./db";
+import { getDB, type GainpathDB } from "./db";
 import { repo, type NewRecord, type RecordPatch } from "./repo";
 import type { Equipment, Gym, Profile, RecordOf } from "./schema";
 
@@ -16,14 +16,14 @@ export const DEFAULT_PROFILE: NewRecord<"profiles"> = {
   current_gym_id: null,
 };
 
-export async function getProfile(db: LiftwiseDB = getDB()): Promise<Profile | undefined> {
+export async function getProfile(db: GainpathDB = getDB()): Promise<Profile | undefined> {
   const profiles = await repo("profiles", db).list();
   return profiles.sort((a, b) => a.created_at - b.created_at)[0];
 }
 
 export async function saveProfile(
   patch: RecordPatch<"profiles">,
-  db: LiftwiseDB = getDB(),
+  db: GainpathDB = getDB(),
 ): Promise<Profile> {
   const existing = await getProfile(db);
   return existing
@@ -31,7 +31,7 @@ export async function saveProfile(
     : repo("profiles", db).create({ ...DEFAULT_PROFILE, ...patch });
 }
 
-export async function createGym(name: string, db: LiftwiseDB = getDB()): Promise<Gym> {
+export async function createGym(name: string, db: GainpathDB = getDB()): Promise<Gym> {
   const gyms = await repo("gyms", db).list();
   const gym = await repo("gyms", db).create({ name: name.trim(), is_default: gyms.length === 0 });
   const profile = await getProfile(db);
@@ -39,7 +39,7 @@ export async function createGym(name: string, db: LiftwiseDB = getDB()): Promise
   return gym;
 }
 
-export async function setDefaultGym(gymId: string, db: LiftwiseDB = getDB()): Promise<void> {
+export async function setDefaultGym(gymId: string, db: GainpathDB = getDB()): Promise<void> {
   for (const gym of await repo("gyms", db).list()) {
     const isDefault = gym.id === gymId;
     if (gym.is_default !== isDefault)
@@ -47,7 +47,7 @@ export async function setDefaultGym(gymId: string, db: LiftwiseDB = getDB()): Pr
   }
 }
 
-export async function switchGym(gymId: string, db: LiftwiseDB = getDB()): Promise<void> {
+export async function switchGym(gymId: string, db: GainpathDB = getDB()): Promise<void> {
   await saveProfile({ current_gym_id: gymId }, db);
 }
 
@@ -61,7 +61,7 @@ export async function addEquipment(
   gymId: string,
   fields: EquipmentFields,
   exerciseIds: readonly string[],
-  db: LiftwiseDB = getDB(),
+  db: GainpathDB = getDB(),
 ): Promise<Equipment> {
   const equipment = await repo("equipment", db).create({
     ...fields,
@@ -92,7 +92,7 @@ export function templateFields(t: EquipmentTemplate): EquipmentFields {
 export async function addFromTemplate(
   gymId: string,
   template: EquipmentTemplate,
-  db: LiftwiseDB = getDB(),
+  db: GainpathDB = getDB(),
 ): Promise<Equipment> {
   return addEquipment(gymId, templateFields(template), template.exercise_ids, db);
 }
@@ -100,7 +100,7 @@ export async function addFromTemplate(
 export async function updateEquipment(
   id: string,
   patch: RecordPatch<"equipment">,
-  db: LiftwiseDB = getDB(),
+  db: GainpathDB = getDB(),
 ): Promise<Equipment> {
   return repo("equipment", db).update(id, patch);
 }
@@ -110,7 +110,7 @@ export async function setEquipmentStatus(
   id: string,
   status: Equipment["status"],
   reason: string | null = null,
-  db: LiftwiseDB = getDB(),
+  db: GainpathDB = getDB(),
 ): Promise<Equipment> {
   return repo("equipment", db).update(id, {
     status,
@@ -119,7 +119,7 @@ export async function setEquipmentStatus(
   });
 }
 
-export async function removeEquipment(id: string, db: LiftwiseDB = getDB()): Promise<void> {
+export async function removeEquipment(id: string, db: GainpathDB = getDB()): Promise<void> {
   await setLinkedExercises(id, [], db);
   await repo("equipment", db).remove(id);
 }
@@ -128,7 +128,7 @@ export async function removeEquipment(id: string, db: LiftwiseDB = getDB()): Pro
 export async function setLinkedExercises(
   equipmentId: string,
   exerciseIds: readonly string[],
-  db: LiftwiseDB = getDB(),
+  db: GainpathDB = getDB(),
 ): Promise<void> {
   const links = repo("equipment_exercises", db);
   const current = (
@@ -146,7 +146,7 @@ export async function setLinkedExercises(
 
 type Target = { exerciseId: string } | { equipmentId: string };
 
-async function findPref(target: Target, kind: "exclude" | "favourite", db: LiftwiseDB) {
+async function findPref(target: Target, kind: "exclude" | "favourite", db: GainpathDB) {
   const prefs = await repo("exercise_prefs", db).list();
   return prefs.find(
     (p) =>
@@ -162,7 +162,7 @@ export async function setPreference(
   kind: "exclude" | "favourite",
   on: boolean,
   reason: string | null = null,
-  db: LiftwiseDB = getDB(),
+  db: GainpathDB = getDB(),
 ): Promise<void> {
   const existing = await findPref(target, kind, db);
   if (on && !existing) {
@@ -181,7 +181,7 @@ export async function setPreference(
 
 export async function createCustomExercise(
   data: NewRecord<"exercises">,
-  db: LiftwiseDB = getDB(),
+  db: GainpathDB = getDB(),
 ): Promise<RecordOf<"exercises">> {
   return repo("exercises", db).create(data);
 }
@@ -189,7 +189,7 @@ export async function createCustomExercise(
 /** Today-only exclusions from swaps (busy, didn't feel like it, pain). */
 export async function addTempExclusion(
   data: Omit<NewRecord<"temp_exclusions">, "date"> & { date?: string },
-  db: LiftwiseDB = getDB(),
+  db: GainpathDB = getDB(),
 ): Promise<void> {
   await repo("temp_exclusions", db).create({ ...data, date: data.date ?? localDate() });
 }

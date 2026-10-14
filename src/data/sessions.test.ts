@@ -4,7 +4,7 @@ import { setsRemaining } from "@/engine/session";
 import { EQUIPMENT_TEMPLATES } from "@/seed/catalog";
 import { freshDB } from "@/test/fixtures";
 import { addFromTemplate, createGym, saveProfile } from "./actions";
-import type { LiftwiseDB } from "./db";
+import type { GainpathDB } from "./db";
 import { repo } from "./repo";
 import {
   acceptSwap,
@@ -21,7 +21,7 @@ import {
 } from "./sessions";
 import { loadTrainingContext } from "./training";
 
-async function setup(): Promise<LiftwiseDB> {
+async function setup(): Promise<GainpathDB> {
   const db = freshDB();
   const gym = await createGym("Test", db);
   for (const id of [

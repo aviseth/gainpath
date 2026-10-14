@@ -1,4 +1,4 @@
-# Liftwise
+# Gainpath
 
 A strength-training app that builds each session from your readiness, the volume you've done
 this week and the machines in your gym, then adjusts set by set from the RPE you log.

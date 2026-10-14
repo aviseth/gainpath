@@ -9,7 +9,7 @@ export function DeviceSection() {
 
   async function onReset() {
     const ok = window.confirm(
-      "Delete all Liftwise data on this device? Anything not synced or exported will be lost.",
+      "Delete all Gainpath data on this device? Anything not synced or exported will be lost.",
     );
     if (!ok) return;
     setBusy(true);

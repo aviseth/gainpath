@@ -1,4 +1,4 @@
-# Liftwise — Deterministic Algorithms Spec
+# Gainpath — Deterministic Algorithms Spec
 
 Goal: **zero LLM calls in a normal training day.** Everything below runs locally in the browser as pure TypeScript. Each algorithm cites the EVIDENCE.md rule it implements. All constants marked (H) are heuristics: put them in `src/engine/config.ts`, make them editable in Settings → Advanced, and unit-test them.
 
@@ -308,6 +308,6 @@ Return a `confidence` (all fields parsed + exercise match ≥ 0.75 → high). Hi
 | Free-text log the parser can't handle | User taps "Ask AI" | Rare |
 | Free-text constraint ("all cables are taken") | Only if keyword matcher (§13 dictionary on equipment names/types) finds nothing | Rare |
 | Weekly narrative review | User opens it; cached per week | ≤ 1/week |
-| "Ask Liftwise" chat | Explicit | Daily limit |
+| "Ask Gainpath" chat | Explicit | Daily limit |
 
 Everything else — session generation, swaps, load prescription, adjustments, readiness, deloads, explanations — is deterministic and must work fully offline with the API key unset.

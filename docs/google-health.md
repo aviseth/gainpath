@@ -30,7 +30,7 @@ user.
    add the two scopes above.
 3. **Clients → Create client**: type _Web application_. Authorized redirect URIs:
    - `http://localhost:3000/settings/google-health`
-   - `https://liftwise.<your-subdomain>.workers.dev/settings/google-health`
+   - `https://gainpath.<your-subdomain>.workers.dev/settings/google-health`
 4. Set the server environment variables (Cloudflare → your Worker → Settings → Variables and Secrets, or
    `.env.local`):
    ```

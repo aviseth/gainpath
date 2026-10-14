@@ -1,10 +1,10 @@
 import { uuidv7 } from "uuidv7";
-import { createDB, type LiftwiseDB } from "@/data/db";
+import { createDB, type GainpathDB } from "@/data/db";
 import type { RecordOf, TableName } from "@/data/schema";
 import type { PullCursor, PullPage, SyncRemote } from "@/sync/remote";
 
 /** A fresh, isolated IndexedDB (fake-indexeddb) per test. */
-export function freshDB(): LiftwiseDB {
+export function freshDB(): GainpathDB {
   return createDB(`test-${uuidv7()}`);
 }
 
