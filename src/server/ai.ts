@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import { authenticateUser, RouteError } from "./auth";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import { z } from "zod";
 
@@ -21,16 +22,6 @@ export const MODELS = {
 /** Server-side ceiling. The user's own `aiDailyLimit` setting can only lower it. */
 const SERVER_DAILY_LIMIT = Number(process.env.AI_DAILY_LIMIT ?? 20);
 
-export class AiRouteError extends Error {
-  constructor(
-    readonly status: number,
-    readonly code: string,
-    message: string,
-  ) {
-    super(message);
-  }
-}
-
 let anthropic: Anthropic | null | undefined;
 
 export function getAnthropic(): Anthropic | null {
@@ -49,20 +40,7 @@ export function aiConfigured(): boolean {
 
 /** A Supabase client acting as the caller, so RLS and auth.uid() apply. */
 export async function authenticate(request: Request): Promise<SupabaseClient> {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !key)
-    throw new AiRouteError(503, "not_configured", "Cloud features aren't configured.");
-  const token = request.headers.get("authorization")?.match(/^Bearer (.+)$/)?.[1];
-  if (!token) throw new AiRouteError(401, "signed_out", "Sign in to use AI features.");
-  const client = createClient(url, key, {
-    auth: { persistSession: false, autoRefreshToken: false },
-    global: { headers: { Authorization: `Bearer ${token}` } },
-  });
-  const { data, error } = await client.auth.getUser(token);
-  if (error || !data.user)
-    throw new AiRouteError(401, "signed_out", "Your session expired. Sign in again.");
-  return client;
+  return (await authenticateUser(request)).client;
 }
 
 export function dailyLimit(requested: unknown): number {
@@ -76,8 +54,8 @@ export function dailyLimit(requested: unknown): number {
 /** Consumes one call. Throws 429 when today's limit is reached. */
 export async function consume(client: SupabaseClient, limit: number): Promise<number> {
   const { data, error } = await client.rpc("ai_consume", { p_limit: limit });
-  if (error) throw new AiRouteError(500, "usage_failed", "Couldn't check today's AI limit.");
-  if (data === -1) throw new AiRouteError(429, "limit", `Today's AI limit (${limit}) is used up.`);
+  if (error) throw new RouteError(500, "usage_failed", "Couldn't check today's AI limit.");
+  if (data === -1) throw new RouteError(429, "limit", `Today's AI limit (${limit}) is used up.`);
   return data as number;
 }
 
@@ -103,13 +81,12 @@ export function aiRoute<S extends z.ZodType, R>(
     try {
       const anthropicClient = getAnthropic();
       if (!anthropicClient || !aiConfigured()) {
-        throw new AiRouteError(503, "not_configured", "AI isn't configured for this deployment.");
+        throw new RouteError(503, "not_configured", "AI isn't configured for this deployment.");
       }
       const client = await authenticate(request);
       const json: unknown = await request.json().catch(() => null);
       const parsed = bodySchema.safeParse(json);
-      if (!parsed.success)
-        throw new AiRouteError(400, "bad_request", z.prettifyError(parsed.error));
+      if (!parsed.success) throw new RouteError(400, "bad_request", z.prettifyError(parsed.error));
       const limit = dailyLimit((json as { limit?: unknown } | null)?.limit);
       const used = counts(parsed.data) ? await consume(client, limit) : await usedToday(client);
       const result = await handler({ body: parsed.data, client, anthropic: anthropicClient, used });
@@ -121,7 +98,7 @@ export function aiRoute<S extends z.ZodType, R>(
 }
 
 export function errorResponse(error: unknown): Response {
-  if (error instanceof AiRouteError) {
+  if (error instanceof RouteError) {
     return Response.json(
       { ok: false, code: error.code, message: error.message },
       { status: error.status },
@@ -150,10 +127,10 @@ export function errorResponse(error: unknown): Response {
 /** Rejects refusals and truncation before anything reads the content. */
 export function checkStop(message: { stop_reason: string | null }): void {
   if (message.stop_reason === "refusal") {
-    throw new AiRouteError(422, "refused", "The AI declined to answer that.");
+    throw new RouteError(422, "refused", "The AI declined to answer that.");
   }
   if (message.stop_reason === "max_tokens") {
-    throw new AiRouteError(502, "truncated", "The AI's answer was cut off.");
+    throw new RouteError(502, "truncated", "The AI's answer was cut off.");
   }
 }
 
@@ -210,11 +187,7 @@ export async function structuredCall<S extends z.ZodType>(
   });
   checkStop(response);
   if (response.parsed_output == null) {
-    throw new AiRouteError(
-      502,
-      "invalid_output",
-      "The AI returned something the app couldn't read.",
-    );
+    throw new RouteError(502, "invalid_output", "The AI returned something the app couldn't read.");
   }
   return response.parsed_output as z.infer<S>;
 }

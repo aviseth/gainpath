@@ -4,6 +4,7 @@ import { AdvancedSection } from "./advanced-section";
 import { AiSection } from "./ai-section";
 import { BackupSection } from "./backup-section";
 import { DeviceSection } from "./device-section";
+import { HealthSection } from "./health-section";
 import { SyncSection } from "./sync-section";
 import { TrainingSection } from "./training-section";
 
@@ -16,6 +17,7 @@ export default function SettingsPage() {
       <TrainingSection />
       <AccountSection />
       <SyncSection />
+      <HealthSection />
       <AiSection />
       <BackupSection />
       <AdvancedSection />

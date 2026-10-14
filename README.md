@@ -97,6 +97,13 @@ needs sign-in, and is only called when you tap "Ask AI" / "Ask Liftwise", or whe
 Models: Claude Haiku for parsing, constraints and chat; Claude Sonnet for the weekly review and
 machine photos. Prompts are cached, and the model only narrates numbers the engine computed.
 
+## Health data (optional)
+
+- **Google Health** (Fitbit / Pixel Watch): HRV, resting heart rate and sleep, behind
+  `GOOGLE_HEALTH_ENABLED=1`. Setup, including the Restricted-scope testing mode: [docs/google-health.md](docs/google-health.md).
+- **Samsung Health** has no web API. An authenticated `POST /api/ingest/readiness` endpoint is
+  ready for a future Health Connect companion: [docs/samsung-health.md](docs/samsung-health.md).
+
 ## Deploying to Vercel (Hobby)
 
 1. Import the GitHub repo in Vercel (framework: Next.js, package manager: pnpm, auto-detected).
