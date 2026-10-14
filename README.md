@@ -5,13 +5,30 @@ readiness, your in-session performance and the exact machines registered at your
 training rule comes from [EVIDENCE.md](EVIDENCE.md); the algorithms are specified in
 [ALGORITHMS.md](ALGORITHMS.md); architecture and milestones are in [PLAN.md](PLAN.md).
 
-**Status:** milestone 1 of 9: local database, sign-in, cloud sync, JSON export/import.
+**Status:** all 9 milestones built: gyms and machines, the deterministic training engine, live
+sessions and swaps, readiness check-ins, progress charts, opt-in AI, Google Health and an
+installable offline PWA.
+
+## What it does
+
+- **Today:** a 10-second check-in sets readiness (READY-1..3); the engine builds today's session
+  from weekly volume targets, recovery and the machines that are actually free. "Why does today
+  look like this?" explains every choice with rule IDs. No AI involved.
+- **Session:** big steppers, RPE taps, warm-ups, rest timer, calibration AMRAPs, in-session load
+  adjustment (PROG-2), one-line text logging ("3x8 @ 60"), and swaps by reason (busy, broken,
+  pain…) with match percentages.
+- **Gym:** register machines from templates, by name (keyword dictionary), or from a photo with
+  AI; "Check my gym" lists gaps. Committed gym manifests in `src/seed/gyms/` load automatically.
+- **Progress:** e1RM per exercise × machine, weekly volume vs target, recovery map, and an
+  optional AI weekly review.
 
 ## Stack
 
 - Next.js (App Router, TypeScript) + Tailwind, deployed on Vercel Hobby
 - IndexedDB via Dexie as the primary store, so the app works offline in the gym
 - Supabase (free tier) for sign-in (Google, email magic link / code) and cloud backup
+- Anthropic API (optional, server-side, opt-in) and Google Health API (optional, feature flag)
+- Serwist service worker: installable, works offline after the first visit
 - Vitest (unit) and Playwright (end-to-end)
 
 Everything runs without Supabase configured: the app stays local-only and you back up with
@@ -113,8 +130,24 @@ machine photos. Prompts are cached, and the model only narrates numbers the engi
 
 Vercel Hobby is for non-commercial use, which fits a personal app.
 
-## Coming in later milestones
+## Install on your phone
 
-Gym and equipment registration (including identifying machines from photos), the training
-engine, active sessions and swaps, readiness check-ins, AI assists (Anthropic, opt-in), Google
-Health integration and PWA install/offline caching. Each milestone documents any new setup here.
+Open the deployed URL once while online, then:
+
+- **Android (Chrome):** menu → **Install app** (or "Add to Home screen").
+- **iPhone (Safari):** Share → **Add to Home Screen**.
+
+After that first visit the whole app, your gym and your history work offline in the gym; writes
+sync when you're back online. `pnpm build` runs `next build` and then `serwist build`, which
+writes `public/sw.js` (git-ignored). The service worker is off in `pnpm dev`.
+
+## Environment variables
+
+| Variable                                                                            | Where           | Needed for                       |
+| ----------------------------------------------------------------------------------- | --------------- | -------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`                  | client + server | Sign-in, sync, AI, Google Health |
+| `ANTHROPIC_API_KEY`                                                                 | server only     | AI assist                        |
+| `AI_DAILY_LIMIT` (default 20)                                                       | server only     | AI cap per account per day       |
+| `GOOGLE_HEALTH_ENABLED=1`, `GOOGLE_HEALTH_CLIENT_ID`, `GOOGLE_HEALTH_CLIENT_SECRET` | server only     | Google Health                    |
+
+All are optional: with none set the app runs fully local.

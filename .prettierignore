@@ -8,3 +8,7 @@ EVIDENCE.md
 ALGORITHMS.md
 PROMPT.md
 PLAN.md
+
+# Generated service worker
+public/sw*
+public/swe-worker*

@@ -1,7 +1,10 @@
+import { connection } from "next/server";
 import { aiConfigured, authenticate, dailyLimit, errorResponse, usedToday } from "@/server/ai";
 
 /** Whether AI is available to this user, and today's usage (settings counter). */
 export async function GET(request: Request): Promise<Response> {
+  // Per request: reads env and the caller's token (never prerender).
+  await connection();
   if (!aiConfigured())
     return Response.json({ ok: true, enabled: false, reason: "not_configured", used: 0, limit: 0 });
   try {

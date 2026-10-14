@@ -1,8 +1,11 @@
+import { connection } from "next/server";
 import { authenticateUser, routeErrorResponse, RouteError } from "@/server/auth";
 import { googleHealthConfig } from "@/server/google-health";
 
 /** Feature flag + connection state for Settings. */
 export async function GET(request: Request): Promise<Response> {
+  // Per request: reads env and the caller's token (never prerender).
+  await connection();
   if (!googleHealthConfig()) return Response.json({ ok: true, available: false, connected: false });
   try {
     const { client } = await authenticateUser(request);

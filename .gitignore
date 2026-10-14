@@ -51,3 +51,7 @@ next-env.d.ts
 # supabase cli local state
 /supabase/.temp/
 /supabase/.branches/
+
+# Serwist (built by `serwist build`)
+/public/sw*
+/public/swe-worker*
