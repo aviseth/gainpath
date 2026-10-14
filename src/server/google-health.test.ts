@@ -14,7 +14,9 @@ describe("google health", () => {
     expect(verifyState(state, "user-2", "secret", 2000)).toBe(false);
     expect(verifyState(state, "user-1", "other", 2000)).toBe(false);
     expect(verifyState(state, "user-1", "secret", 1000 + 11 * 60_000)).toBe(false);
-    expect(verifyState(state.replace(/.$/, "x"), "user-1", "secret", 2000)).toBe(false);
+    // Change the last signature character to a different one (never a no-op).
+    const tampered = state.slice(0, -1) + (state.endsWith("A") ? "B" : "A");
+    expect(verifyState(tampered, "user-1", "secret", 2000)).toBe(false);
   });
 
   it("requests offline access with read-only scopes", () => {
