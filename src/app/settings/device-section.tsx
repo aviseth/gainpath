@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Section } from "@/components/ui";
+import { Button, Notice, Section } from "@/components/ui";
 import { getDB } from "@/data/db";
 
 export function DeviceSection() {
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function onReset() {
     const ok = window.confirm(
@@ -13,8 +14,17 @@ export function DeviceSection() {
     );
     if (!ok) return;
     setBusy(true);
-    await getDB().delete();
-    window.location.reload();
+    setError(null);
+    try {
+      await getDB().delete();
+      window.location.reload();
+    } catch (e) {
+      // Usually another tab holding the database open.
+      setBusy(false);
+      setError(
+        `Couldn't reset: ${e instanceof Error ? e.message : String(e)}. Close other tabs and try again.`,
+      );
+    }
   }
 
   return (
@@ -25,6 +35,7 @@ export function DeviceSection() {
       <Button variant="danger" disabled={busy} onClick={onReset}>
         Reset this device
       </Button>
+      {error && <Notice tone="error">{error}</Notice>}
     </Section>
   );
 }
