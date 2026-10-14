@@ -1,4 +1,4 @@
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient, type User } from "@supabase/supabase-js";
 
 /** Error with an HTTP status and a code the client can switch on. */
 export class RouteError extends Error {
@@ -17,7 +17,7 @@ export class RouteError extends Error {
  */
 export async function authenticateUser(
   request: Request,
-): Promise<{ client: SupabaseClient; userId: string }> {
+): Promise<{ client: SupabaseClient; userId: string; user: User }> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!url || !key)
@@ -31,7 +31,7 @@ export async function authenticateUser(
   const { data, error } = await client.auth.getUser(token);
   if (error || !data.user)
     throw new RouteError(401, "signed_out", "Your session expired. Sign in again.");
-  return { client, userId: data.user.id };
+  return { client, userId: data.user.id, user: data.user };
 }
 
 export function routeErrorResponse(error: unknown): Response {

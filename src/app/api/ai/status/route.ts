@@ -12,8 +12,9 @@ export async function GET(request: Request): Promise<Response> {
     const limit = dailyLimit(Number(new URL(request.url).searchParams.get("limit") ?? NaN));
     return Response.json({ ok: true, enabled: true, used: await usedToday(client), limit });
   } catch (error) {
-    if (error instanceof Error && "code" in error && error.code === "signed_out") {
-      return Response.json({ ok: true, enabled: false, reason: "signed_out", used: 0, limit: 0 });
+    const code = error instanceof Error && "code" in error ? error.code : null;
+    if (code === "signed_out" || code === "not_included") {
+      return Response.json({ ok: true, enabled: false, reason: code, used: 0, limit: 0 });
     }
     return errorResponse(error);
   }

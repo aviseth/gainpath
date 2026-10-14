@@ -6,6 +6,7 @@ import { setAiOptIn, useAiStatus } from "@/lib/ai-client";
 const REASONS: Record<string, string> = {
   signed_out: "Sign in to use AI. The daily limit is kept per account.",
   not_configured: "AI isn't configured on this deployment (no API key).",
+  not_included: "Your plan doesn't include AI. Everything else works the same.",
   offline: "Can't reach the server right now.",
 };
 

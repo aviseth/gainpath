@@ -17,7 +17,7 @@ export interface AiStatus {
   /** Opted in on this device, configured on the server and signed in. */
   enabled: boolean;
   optedIn: boolean;
-  reason?: "opted_out" | "not_configured" | "signed_out" | "offline";
+  reason?: "opted_out" | "not_configured" | "signed_out" | "not_included" | "offline";
   used: number;
   limit: number;
 }
