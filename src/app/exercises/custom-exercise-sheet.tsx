@@ -12,17 +12,9 @@ import {
   type MovementPattern,
   type Muscle,
 } from "@/data/schema";
+import { customFatigueCost } from "@/engine/machine-proposal";
 import { muscleLabel } from "@/engine/vector";
 import { capitalize, EQUIPMENT_TYPE_SHORT, humanize } from "@/lib/labels";
-
-const LOWER: ReadonlySet<Muscle> = new Set([
-  "quads",
-  "hamstrings",
-  "glutes",
-  "adductors",
-  "abductors",
-  "calves",
-]);
 
 /** A custom exercise needs a muscle mapping: swaps and volume counting depend on it (VOL-2). */
 export function CustomExerciseSheet({
@@ -60,14 +52,13 @@ export function CustomExerciseSheet({
     if (!Object.values(weights).includes(1))
       return setError("Pick at least one prime mover (tap a muscle once).");
     if (!low || !high || low > high) return setError("Check the rep range.");
-    const lower = Object.keys(weights).some((m) => LOWER.has(m as Muscle));
     const exercise = await createCustomExercise({
       name: name.trim(),
       pattern,
       vector: weights,
       kind,
       equipment_types: [type],
-      fatigue_cost: kind === "isolation" ? 0.8 : lower ? 1.5 : 1.2,
+      fatigue_cost: customFatigueCost(kind, weights),
       rep_range: {
         strength: [Math.max(1, low - 4), Math.max(1, high - 4)],
         hypertrophy: [low, high],
