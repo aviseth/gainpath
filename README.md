@@ -24,7 +24,7 @@ installable offline PWA.
 
 ## Stack
 
-- Next.js (App Router, TypeScript) + Tailwind, deployed on Vercel Hobby
+- Next.js (App Router, TypeScript) + Tailwind, deployed on Cloudflare Workers (free)
 - IndexedDB via Dexie as the primary store, so the app works offline in the gym
 - Supabase (free tier) for sign-in (Google, email magic link / code) and cloud backup
 - Anthropic API (optional, server-side, opt-in) and Google Health API (optional, feature flag)
@@ -68,10 +68,10 @@ If Playwright's bundled Chromium isn't installed, point it at another one:
    pnpm dlx supabase link --project-ref <your-project-ref>
    pnpm dlx supabase db push
    ```
-3. **URL configuration** (Authentication → URL Configuration): set **Site URL** to your Vercel
+3. **URL configuration** (Authentication → URL Configuration): set **Site URL** to your deployed
    URL and add these **Redirect URLs**:
    - `http://localhost:3000/auth/callback`
-   - `https://<your-app>.vercel.app/auth/callback`
+   - `https://liftwise.<your-subdomain>.workers.dev/auth/callback`
 4. **Email sign-in** (Authentication → Sign In / Providers → Email): enabled by default. To let
    the installed app sign in with a code (a magic link can open in the system browser instead of
    the app), edit Authentication → Emails → **Magic Link** and add the code to the template, e.g.
@@ -121,14 +121,23 @@ machine photos. Prompts are cached, and the model only narrates numbers the engi
 - **Samsung Health** has no web API. An authenticated `POST /api/ingest/readiness` endpoint is
   ready for a future Health Connect companion: [docs/samsung-health.md](docs/samsung-health.md).
 
-## Deploying to Vercel (Hobby)
+## Deploying (Cloudflare Workers, free)
 
-1. Import the GitHub repo in Vercel (framework: Next.js, package manager: pnpm, auto-detected).
-2. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (and, for AI,
-   `ANTHROPIC_API_KEY`) under Project Settings → Environment Variables.
-3. Deploy, then add the production URL to Supabase's redirect URLs (step 3 above).
+The app runs on Cloudflare Workers through the OpenNext adapter. The free plan allows about
+100,000 requests a day, and static files (the app shell, icons, the service worker) don't count.
 
-Vercel Hobby is for non-commercial use, which fits a personal app.
+1. Create a free account at [dash.cloudflare.com](https://dash.cloudflare.com/).
+2. **Workers & Pages → Create → Import a repository**, pick `liftwise`, and set:
+   - Build command: `pnpm exec opennextjs-cloudflare build`
+   - Deploy command: `pnpm exec opennextjs-cloudflare deploy`
+3. Under the Worker's **Settings → Variables and Secrets**, add the variables from the table
+   below (as build variables too for the two `NEXT_PUBLIC_*` ones, since they're inlined at
+   build time).
+4. Deploy, then add `https://liftwise.<your-subdomain>.workers.dev/auth/callback` to Supabase's
+   redirect URLs (step 3 above).
+
+From your own machine instead: `pnpm dlx wrangler login` once, then `pnpm deploy:cf`. Test the
+Worker build locally with `pnpm preview:cf`.
 
 ## Install on your phone
 

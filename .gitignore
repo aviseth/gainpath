@@ -55,3 +55,8 @@ next-env.d.ts
 # Serwist (built by `serwist build`)
 /public/sw*
 /public/swe-worker*
+
+# Cloudflare (OpenNext / wrangler)
+/.open-next/
+/.wrangler/
+/.dev.vars*

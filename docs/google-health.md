@@ -30,8 +30,8 @@ user.
    add the two scopes above.
 3. **Clients → Create client**: type _Web application_. Authorized redirect URIs:
    - `http://localhost:3000/settings/google-health`
-   - `https://<your-app>.vercel.app/settings/google-health`
-4. Set the server environment variables (Vercel → Project Settings → Environment Variables, or
+   - `https://liftwise.<your-subdomain>.workers.dev/settings/google-health`
+4. Set the server environment variables (Cloudflare → your Worker → Settings → Variables and Secrets, or
    `.env.local`):
    ```
    GOOGLE_HEALTH_ENABLED=1
