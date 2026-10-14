@@ -137,7 +137,10 @@ Free hosting: Cloudflare Workers for the app, Supabase for sign-in and sync.
 | --------------------------------------------------------------------------------- | ------------------------------ |
 | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`                | Sign-in and sync               |
 | `ANTHROPIC_API_KEY`, `AI_DAILY_LIMIT` (default 20)                                | AI features, opt-in per device |
+| `AI_MODEL_FAST`, `AI_MODEL_DEEP`                                                  | Model overrides                |
 | `GOOGLE_HEALTH_ENABLED`, `GOOGLE_HEALTH_CLIENT_ID`, `GOOGLE_HEALTH_CLIENT_SECRET` | Google Health sync             |
+
+Running one copy for friends who pay for an account: [hosted, invite-only](docs/hosted.md).
 
 More detail: [Google Health](docs/google-health.md), [Samsung Health](docs/samsung-health.md),
 [architecture and sync](PLAN.md).

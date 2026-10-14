@@ -3,7 +3,14 @@
 import { useState, type FormEvent } from "react";
 import { Button, inputClass, Notice, Section } from "@/components/ui";
 import { useSyncStatus } from "@/hooks/use-sync-status";
-import { sendMagicLink, signInWithGoogle, signOut, verifyEmailCode } from "@/lib/auth";
+import {
+  ACCESS_URL,
+  INVITE_ONLY,
+  sendMagicLink,
+  signInWithGoogle,
+  signOut,
+  verifyEmailCode,
+} from "@/lib/auth";
 
 const message = (error: unknown) => (error instanceof Error ? error.message : String(error));
 
@@ -66,8 +73,28 @@ export function AccountSection() {
   return (
     <Section
       title="Account"
-      description="Sign in to back up and sync your training across devices. Everything works without an account too."
+      description={
+        INVITE_ONLY
+          ? "Accounts on this server are invite-only and include AI features. Everything else works without one."
+          : "Sign in to back up and sync your training across devices. Everything works without an account too."
+      }
     >
+      {INVITE_ONLY && (
+        <p className="text-sm text-zinc-400">
+          {ACCESS_URL && (
+            <>
+              <a className="underline underline-offset-2" href={ACCESS_URL}>
+                Get an account
+              </a>
+              , or{" "}
+            </>
+          )}
+          <a className="underline underline-offset-2" href="https://github.com/aviseth/gainpath">
+            {ACCESS_URL ? "host" : "Host"} your own copy for free
+          </a>
+          .
+        </p>
+      )}
       <Button variant="primary" disabled={busy} onClick={() => attempt(signInWithGoogle)}>
         Continue with Google
       </Button>

@@ -16,7 +16,8 @@
     "preview:cf": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy:cf": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "demo:data": "vitest run --config scripts/demo/vitest.config.mts",
-    "screenshots": "node scripts/demo/screenshots.mjs"
+    "screenshots": "node scripts/demo/screenshots.mjs",
+    "users": "node --env-file-if-exists=.env.local scripts/admin/users.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.134.0",

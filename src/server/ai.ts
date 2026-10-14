@@ -14,10 +14,10 @@ import { z } from "zod";
 
 export const MODELS = {
   /** Parsing, constraints, swaps, in-session changes and chat. */
-  fast: "claude-haiku-5-5",
-  /** Weekly review and vision. */
-  deep: "claude-sonnet-5-5",
-} as const;
+  fast: process.env.AI_MODEL_FAST || "claude-haiku-5-5",
+  /** Weekly review and vision. A hosted deployment can set this to Haiku to cut cost. */
+  deep: process.env.AI_MODEL_DEEP || "claude-sonnet-5-5",
+};
 
 /** Server-side ceiling. The user's own `aiDailyLimit` setting can only lower it. */
 const SERVER_DAILY_LIMIT = Number(process.env.AI_DAILY_LIMIT ?? 20);
@@ -178,7 +178,7 @@ export async function structuredCall<S extends z.ZodType>(
     model: opts.model,
     max_tokens: opts.maxTokens ?? 4000,
     // Haiku can skip thinking for simple extraction; Sonnet 5.5 can't disable it.
-    ...(opts.model === MODELS.fast && opts.effort === "low"
+    ...(opts.model.includes("haiku") && opts.effort === "low"
       ? { thinking: { type: "disabled" as const } }
       : {}),
     system,

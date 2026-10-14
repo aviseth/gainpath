@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { Notice } from "@/components/ui";
+import { friendlyAuthError } from "@/lib/auth";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase";
 
 const TIMEOUT_MESSAGE =
@@ -30,7 +31,8 @@ export default function AuthCallbackPage() {
   const [timedOut, setTimedOut] = useState(false);
 
   const params = new URLSearchParams(search);
-  const urlError = params.get("error_description") ?? params.get("error");
+  const rawError = params.get("error_description") ?? params.get("error");
+  const urlError = rawError ? friendlyAuthError(rawError) : null;
   const error =
     urlError ??
     (!isSupabaseConfigured() ? "Cloud sync isn't configured for this deployment." : null) ??
