@@ -14,7 +14,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preview:cf": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy:cf": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "deploy:cf": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "demo:data": "vitest run --config scripts/demo/vitest.config.mts",
+    "screenshots": "node scripts/demo/screenshots.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.134.0",
