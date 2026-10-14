@@ -42,6 +42,10 @@ export default function AuthCallbackPage() {
     const { data } = client.auth.onAuthStateChange((_event, session) => {
       if (session) router.replace("/settings");
     });
+    // The code may already have been exchanged before this listener existed.
+    void client.auth.getSession().then(({ data: { session } }) => {
+      if (session) router.replace("/settings");
+    });
     const timeout = setTimeout(() => setTimedOut(true), 15_000);
     return () => {
       data.subscription.unsubscribe();
