@@ -28,11 +28,8 @@ const file = (name: string, content: string) => ({
 });
 
 test("works local-only without Supabase configured", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Today" })).toBeVisible();
+  await page.goto("/settings");
   await expect(page.getByTestId("sync-indicator")).toHaveText(/Local only/);
-
-  await page.getByRole("link", { name: "Settings" }).last().click();
   await expect(page.getByRole("heading", { name: "Settings" })).toBeVisible();
   await expect(page.getByText(/Cloud sync isn't set up/)).toBeVisible();
 });

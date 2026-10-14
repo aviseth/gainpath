@@ -53,6 +53,7 @@ class SyncManager {
   private rerun = false;
   private failures = 0;
   private timer: ReturnType<typeof setTimeout> | null = null;
+  private refreshTimer: ReturnType<typeof setTimeout> | null = null;
   private cleanup: Array<() => void> = [];
 
   subscribe = (listener: () => void) => {
@@ -73,7 +74,9 @@ class SyncManager {
     void this.refreshLocalStatus();
     this.cleanup.push(
       onLocalWrite(() => {
-        void this.refreshLocalStatus();
+        // Bursts of writes (e.g. adding a gym's equipment) refresh the badge once.
+        if (this.refreshTimer) clearTimeout(this.refreshTimer);
+        this.refreshTimer = setTimeout(() => void this.refreshLocalStatus(), 300);
         this.schedule(DEBOUNCE_MS);
       }),
     );

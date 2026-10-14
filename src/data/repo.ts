@@ -83,6 +83,42 @@ export function repo<T extends TableName>(table: T, db: LiftwiseDB = getDB()) {
       return record;
     },
 
+    /** Create several records in one transaction with a single change notification. */
+    async createMany(items: readonly NewRecord<T>[]): Promise<RecordOf<T>[]> {
+      if (items.length === 0) return [];
+      const owner = await getOwnerId(db);
+      const now = nextTimestamp();
+      const records = items.map((data) =>
+        validate({
+          ...data,
+          id: data.id ?? uuidv7(),
+          user_id: owner,
+          created_at: now,
+          updated_at: now,
+          deleted_at: null,
+        }),
+      );
+      await store().bulkAdd(records.map((r) => ({ ...r, dirty: 1 }) as Stored<T>));
+      notify(table);
+      return records;
+    },
+
+    /** Soft-delete several records in one transaction. */
+    async removeMany(ids: readonly string[]): Promise<void> {
+      if (ids.length === 0) return;
+      await db.transaction("rw", store(), async () => {
+        const rows = await store().bulkGet([...ids]);
+        const tombstones = rows
+          .filter((r): r is Stored<T> => !!r && r.deleted_at === null)
+          .map((r) => {
+            const now = nextTimestamp(r.updated_at);
+            return { ...r, deleted_at: now, updated_at: now, dirty: 1 } as Stored<T>;
+          });
+        await store().bulkPut(tombstones);
+      });
+      notify(table);
+    },
+
     async update(id: string, patch: RecordPatch<T>): Promise<RecordOf<T>> {
       const record = await db.transaction("rw", store(), async () => {
         const existing = await store().get(id);

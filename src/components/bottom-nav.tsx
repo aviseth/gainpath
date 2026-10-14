@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// Grows with each milestone (My gym, Exercises, Progress).
 const items = [
   { href: "/", label: "Today" },
+  { href: "/gym", label: "Gym" },
+  { href: "/exercises", label: "Exercises" },
   { href: "/settings", label: "Settings" },
 ];
 
