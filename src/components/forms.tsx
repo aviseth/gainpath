@@ -1,10 +1,22 @@
 "use client";
 
-import { useEffect, useId, useRef, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useId, useRef, type ReactNode } from "react";
 import { inputClass } from "./ui";
 
 /** Form and layout primitives: big tap targets, labelled inputs, dark theme. */
 
+/** Id of the control a <Field> labels; inputs inside a Field adopt it. */
+const FieldContext = createContext<string | undefined>(undefined);
+function useFieldId(id: string | undefined): string | undefined {
+  const fieldId = useContext(FieldContext);
+  return id ?? fieldId;
+}
+
+/**
+ * A labelled control. The label points at the input by id instead of wrapping
+ * it, so wrapping a button group (Segmented) doesn't make the label name, or
+ * click, its first button. Groups carry their own aria-label.
+ */
 export function Field({
   label,
   hint,
@@ -14,20 +26,22 @@ export function Field({
   hint?: string;
   children: ReactNode;
 }) {
-  // The hint stays outside <label> so it doesn't become part of the input's accessible name.
+  const id = useId();
+  // The hint isn't part of the label so it doesn't become part of the input's accessible name.
   return (
     <div className="flex flex-col gap-1.5 text-sm">
-      <label className="flex flex-col gap-1.5">
-        <span className="font-medium text-zinc-300">{label}</span>
-        {children}
+      <label htmlFor={id} className="font-medium text-zinc-300">
+        {label}
       </label>
+      <FieldContext.Provider value={id}>{children}</FieldContext.Provider>
       {hint && <span className="text-xs text-zinc-500">{hint}</span>}
     </div>
   );
 }
 
 export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
-  return <input {...props} className={`${inputClass} ${props.className ?? ""}`} />;
+  const id = useFieldId(props.id);
+  return <input {...props} id={id} className={`${inputClass} ${props.className ?? ""}`} />;
 }
 
 export function NumberInput({
@@ -41,9 +55,11 @@ export function NumberInput({
   value: number | null;
   onChange: (value: number | null) => void;
 }) {
+  const id = useFieldId(rest.id);
   return (
     <input
       {...rest}
+      id={id}
       type="number"
       inputMode="decimal"
       step={step}
@@ -66,9 +82,11 @@ export function Select<T extends string>({
   onChange: (value: T) => void;
   options: ReadonlyArray<{ value: T; label: string }>;
 }) {
+  const id = useFieldId(rest.id);
   return (
     <select
       {...rest}
+      id={id}
       value={value}
       onChange={(e) => onChange(e.target.value as T)}
       className={`${inputClass} appearance-none`}

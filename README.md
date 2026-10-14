@@ -43,9 +43,9 @@ If Playwright's bundled Chromium isn't installed, point it at another one:
    the publishable key (Project Settings → API Keys) into `.env.local` as
    `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. A legacy `anon` key also
    works. Both values are safe in the browser; Row Level Security protects the data.
-2. **Apply the schema.** Either paste
-   [`supabase/migrations/20261014000000_initial_schema.sql`](supabase/migrations/20261014000000_initial_schema.sql)
-   into the dashboard's SQL Editor and run it, or with the Supabase CLI:
+2. **Apply the schema.** Either paste each file in
+   [`supabase/migrations/`](supabase/migrations) into the dashboard's SQL Editor, oldest first, and
+   run it, or with the Supabase CLI:
    ```bash
    pnpm dlx supabase init        # once; keeps the existing migrations folder
    pnpm dlx supabase link --project-ref <your-project-ref>
@@ -81,11 +81,27 @@ signing in is attached to your account on first sign-in; data belonging to a _di
 account is never uploaded. Sync pauses and Settings explains how to export and reset. Details
 are in [PLAN.md §2](PLAN.md).
 
+## AI assist (optional)
+
+Training never needs AI: session generation, swaps, loads, readiness, deloads and the "why"
+explanations are deterministic and work offline. AI is opt-in per device (Settings → AI assist),
+needs sign-in, and is only called when you tap "Ask AI" / "Ask Liftwise", or when a free-text
+"X is taken" can't be matched to your equipment by keywords.
+
+1. Create an API key at [console.anthropic.com](https://console.anthropic.com/) and set
+   `ANTHROPIC_API_KEY` (server-only; never prefix it with `NEXT_PUBLIC_`).
+2. Optional: `AI_DAILY_LIMIT` (default 20) caps calls per account per UTC day. It's enforced in
+   Postgres by `ai_consume()` (migration `20261014010000_ai_usage.sql`); the in-app setting can
+   only lower it. A chat question counts once, including up to 4 tool round trips.
+
+Models: Claude Haiku for parsing, constraints and chat; Claude Sonnet for the weekly review and
+machine photos. Prompts are cached, and the model only narrates numbers the engine computed.
+
 ## Deploying to Vercel (Hobby)
 
 1. Import the GitHub repo in Vercel (framework: Next.js, package manager: pnpm, auto-detected).
-2. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` under Project
-   Settings → Environment Variables.
+2. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (and, for AI,
+   `ANTHROPIC_API_KEY`) under Project Settings → Environment Variables.
 3. Deploy, then add the production URL to Supabase's redirect URLs (step 3 above).
 
 Vercel Hobby is for non-commercial use, which fits a personal app.

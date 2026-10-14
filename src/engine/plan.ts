@@ -249,7 +249,7 @@ export function buildSessionPlan(input: PlanInput): SessionPlan {
   };
 }
 
-function planExercise(
+export function planExercise(
   candidate: Candidate,
   sets: number,
   index: number,

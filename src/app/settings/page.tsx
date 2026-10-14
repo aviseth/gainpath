@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { AccountSection } from "./account-section";
+import { AdvancedSection } from "./advanced-section";
+import { AiSection } from "./ai-section";
 import { BackupSection } from "./backup-section";
 import { DeviceSection } from "./device-section";
 import { SyncSection } from "./sync-section";
@@ -14,7 +16,9 @@ export default function SettingsPage() {
       <TrainingSection />
       <AccountSection />
       <SyncSection />
+      <AiSection />
       <BackupSection />
+      <AdvancedSection />
       <DeviceSection />
     </div>
   );

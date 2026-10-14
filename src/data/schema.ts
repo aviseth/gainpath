@@ -141,7 +141,9 @@ export const tableSchemas = {
   exercise_prefs: baseRecordSchema.extend({
     exercise_id: z.string().nullable(),
     equipment_id: z.string().nullable(),
-    kind: z.enum(["exclude", "favourite"]),
+    kind: z.enum(["exclude", "favourite", "deprioritise"]),
+    // For "deprioritise": the busy time slot as "weekday:bucket" (ALGORITHMS §12).
+    // For "exclude": the user's optional reason.
     reason: z.string().nullable(),
   }),
   temp_exclusions: baseRecordSchema.extend({
