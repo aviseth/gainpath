@@ -89,21 +89,21 @@ All synced records share: `id` (uuid v7, generated client-side), `user_id`, `cre
 
 ### 2.2 Dexie (local)
 - One Dexie DB `liftwise` with the tables above, indexed on `[user_id+updated_at]`, `dirty`, and per-table lookup keys (e.g. `set_logs: [exercise_id+equipment_id+ts]`, `equipment: gym_id`).
-- Extra local-only stores: `outbox` (pending mutations), `sync_meta` (last pulled `updated_at` per table), `similarity_cache` (per gym: equipment-hash → cosine matrix, ALGORITHMS §12).
+- The `dirty` index is the push queue (no separate outbox table). Extra local-only stores: `meta` (device owner, per-table pull cursors, last sync time), `similarity_cache` (per gym: equipment-hash → cosine matrix, ALGORITHMS §12).
 - Seed JSON is bundled; custom exercises are merged over it in a single `getExerciseCatalog(userId)` selector.
 
 ### 2.3 Supabase (remote)
 - Same tables in `public`, `user_id uuid references auth.users not null default auth.uid()`.
 - **RLS on every table:** `using (user_id = auth.uid()) with check (user_id = auth.uid())` for select/insert/update; no hard delete policy (soft deletes only).
-- `updated_at` trigger is **not** used for LWW (client clock decides); a separate `server_updated_at default now()` column + index drives pull cursors so clock skew can't skip rows.
+- `updated_at` trigger is **not** used for LWW (client clock decides); a separate `server_updated_at` column, set by a trigger to the server clock on **every insert and accepted update**, + index on `(user_id, server_updated_at, id)` drives pull cursors so clock skew can't skip rows.
 - Storage bucket `equipment-photos`, path `{user_id}/{equipment_id}.jpg`, RLS on `storage.objects` by path prefix. Photos are compressed client-side (~200 KB) to stay within the 1 GB free tier.
 
 ### 2.4 Sync strategy
-1. Every local write goes through a repo method: sets `updated_at = now()`, `dirty = 1`, appends to `outbox`.
-2. Push loop (on startup, on `online`, every 30 s when visible, and after writes with 2 s debounce): upsert dirty rows in batches via `supabase.from(t).upsert(rows)` guarded by an RPC `upsert_lww(table, rows)` that only overwrites when `incoming.updated_at > existing.updated_at`. Clear `dirty` on success.
-3. Pull loop: `select * where server_updated_at > cursor order by server_updated_at limit 500`; apply locally only if remote `updated_at` > local `updated_at` (LWW); tombstones (`deleted_at`) propagate.
+1. Every local write goes through a repo method: sets `updated_at = max(now(), previous + 1)` and `dirty = 1`.
+2. Push loop (on startup, on `online`, every 30 s when visible, and after writes with 2 s debounce): send dirty rows in batches to an RPC `sync_push(table, rows)` that inserts, or overwrites only when `incoming.updated_at > existing.updated_at`. On success, clear `dirty` only for rows whose local `updated_at` still equals the pushed one; a row edited mid-push stays dirty and goes in the next push.
+3. Pull loop: keyset pagination on `(server_updated_at, id)`, 500 rows per page, starting a few seconds before the last cursor to cover transactions that committed out of order; apply locally only if remote `updated_at` > local `updated_at` (LWW); tombstones (`deleted_at`) propagate.
 4. Failures: exponential backoff (2 s → 5 min cap), app unaffected. Header indicator: ✓ synced / ↻ syncing / ⚠ offline-or-error with last-sync time.
-5. First sign-in on a fresh device: full pull before showing Today. Signed-out use is allowed; on first sign-in local rows are re-owned to the auth user id and pushed.
+5. First sign-in on a fresh device: full pull before showing Today. Signed-out use is allowed; on first sign-in, rows owned by the signed-out placeholder (`local`) are re-owned to the auth user id and pushed. Rows already owned by a different account are never claimed: sync stays off and Settings offers export, then reset, before that account can sync on this device.
 6. Export/Import JSON: dumps all user tables + schema version; import merges with the same LWW rule (so it is idempotent).
 
 ---
@@ -167,9 +167,11 @@ function findSubstitutes(ctx, removed: PlannedExercise, reason): SwapResult {
   }).filter(o => withinSessionCaps(ctx.session.minus(removed), o.v))  // VOL-4
     .sort(byScoreThenId)
 
+  // singles are sorted by adjusted score, so take the best raw similarity separately
+  const bestSingleSim = Math.max(0, ...singles.map(o => o.sim))
   let options = singles
   // 4. Combos only if no single is good enough (threshold from config, default 0.85)
-  if (!singles.length || singles[0].sim < cfg.swapSingleThreshold) {
+  if (bestSingleSim < cfg.swapSingleThreshold) {
     const K = topBy(pool, e => cos(target, e.vector), 15)
     const combos = []
     for (a, b of pairs(K)) for (sa, sb of splits(S))                  // sa,sb ≥1, sa+sb ∈ {S, S+1}
@@ -177,7 +179,7 @@ function findSubstitutes(ctx, removed: PlannedExercise, reason): SwapResult {
       if (!withinSessionCaps(ctx.session.minus(removed), v)) continue
       const sim = cos(target, v)
       const err = sqDist(target, v) + 0.5 * Σ_m max(0, v[m] - target[m])
-      if (sim > (singles[0]?.sim ?? 0) + 0.05) combos.push({kind:'combo', items:[{a,sa},{b,sb}], sim, err,
+      if (sim > bestSingleSim + 0.05) combos.push({kind:'combo', items:[{a,sa},{b,sb}], sim, err,
                                                             fatigue: a.fatigueCost*sa + b.fatigueCost*sb})
     combos.sort(bySimDesc, thenErrAsc, thenFatigueAsc, thenIds)
     options = mergeRanked(singles, combos)

@@ -39,7 +39,7 @@ The engine must reference rule IDs (e.g. `VOL-1`) in code comments and in the `r
 **VOL-3 (A, with caveat).** Frequency clearly improves strength (with diminishing returns), even after accounting for volume. For hypertrophy, once volume is equated, frequency effects are small/uncertain (Pelland et al. 2026).
 → Strength goal: spread main-lift practice over ≥2–3 exposures/week. Hypertrophy goal: frequency is mainly a tool to distribute volume (avoid piling too many sets in one session — see VOL-4). Minimum 2×/week per muscle group per PHIL-1.
 
-**VOL-4 (B — preprint, not yet peer reviewed).** Per-session volume appears to plateau: a Pelland et al. preprint on SportRxiv estimates diminishing returns around ~11 fractional sets per muscle per session for hypertrophy and far fewer direct sets for strength.
+**VOL-4 (B — preprint, not yet peer reviewed).** Per-session volume appears to plateau: a Remmert et al. preprint on SportRxiv estimates diminishing returns around ~11 fractional sets per muscle per session for hypertrophy and far fewer direct sets for strength.
 → Cap per-muscle volume per session (default ~10 fractional sets; configurable). Re-check when peer-reviewed version appears.
 
 **VOL-5 (H).** Starting weekly volume targets per muscle: novice ~8–10 fractional sets, intermediate ~10–14, advanced ~12–20. These are heuristics consistent with VOL-1's diminishing returns, not values taken directly from a paper. Adjust per user via performance trends.
@@ -127,10 +127,10 @@ The engine must reference rule IDs (e.g. `VOL-1`) in code comments and in the `r
 
 ## References
 
-1. Phillips SM, et al. (2026). American College of Sports Medicine Position Stand. Resistance Training Prescription for Muscle Function, Hypertrophy, and Physical Performance in Healthy Adults: An Overview of Reviews. *Medicine & Science in Sports & Exercise*.
+1. Currier BS, D'Souza AC, Fiatarone Singh MA, et al. (2026). American College of Sports Medicine Position Stand. Resistance Training Prescription for Muscle Function, Hypertrophy, and Physical Performance in Healthy Adults: An Overview of Reviews. *Medicine & Science in Sports & Exercise*.
 2. Currier BS, Mcleod JC, Banfield L, et al. (2023). Resistance training prescription for muscle strength and hypertrophy in healthy adults: a systematic review and Bayesian network meta-analysis. *Br J Sports Med* 57(18):1211–1220. doi:10.1136/bjsports-2023-106807
 3. Pelland JC, et al. (2026). The resistance training dose response: meta-regressions exploring the effects of weekly volume and frequency on muscle hypertrophy and strength gains. *Sports Medicine*. (Preprint: SportRxiv 460)
-4. Pelland JC, et al. Meta-regressions of the effect of per-session volume on hypertrophy and strength. SportRxiv preprint 537 — **not peer reviewed**.
+4. Remmert JF, Pelland JC, Robinson ZP, Hinson SR, Zourdos MC. Is there too much of a good thing? Meta-regressions of the effect of per-session volume on hypertrophy and strength. SportRxiv preprint 537 — **not peer reviewed**.
 5. Robinson ZP, Pelland JC, Remmert JF, Refalo MC, Jukic I, Steele J, Zourdos MC. (2024). Exploring the dose–response relationship between estimated resistance training proximity to failure, strength gain, and muscle hypertrophy: a series of meta-regressions. *Sports Medicine* 54(9):2209–2231.
 6. Morán-Navarro R, Pérez CE, Mora-Rodríguez R, et al. (2017). Time course of recovery following resistance training leading or not to failure. *Eur J Appl Physiol* 117(12):2387–2399. doi:10.1007/s00421-017-3725-7
 7. Zourdos MC, Klemp A, Dolan C, et al. (2016). Novel resistance training–specific rating of perceived exertion scale measuring repetitions in reserve. *J Strength Cond Res* 30(1):267–275. doi:10.1519/JSC.0000000000001049

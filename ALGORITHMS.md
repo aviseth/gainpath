@@ -77,7 +77,7 @@ Never rest < 90 s except "time-saver" mode, which states the trade-off (REST-1).
 score = 70
 score += (sleepQuality - 3) * 6       // check-in 1–5
 score += (energy - 3) * 6
-if sleepHours known and sleepHours < 6: score -= 10          // READY-1
+if sleepHours known and sleepHours <= 6: score -= 10         // READY-1 (≤6 h)
 if hrv known with ≥7 days baseline:
    z = (hrv - mean14) / sd14 ; score += clamp(z, -2, 2) * 4  // READY-2 soft only
 if restingHR known: z = (rhr - mean14)/sd14 ; score -= clamp(z, -2, 2) * 3
@@ -95,6 +95,7 @@ Soreness per muscle (0–3) feeds the fatigue model directly (§5), not this sco
 
 ```
 effortFactor(rpe) = rpe >= 10 ? 1.5 : rpe >= 9 ? 1.2 : rpe >= 8 ? 1.0 : 0.7
+effortFactor(null) = 1.0      // (H) no RPE logged: assume a typical working set (RPE 8)
 halfLifeH(m) = m in {quads, hamstrings, glutes, lats, chest, upper_back} ? 36 : 24
 
 F_m(now) = Σ over non-warmup sets i:
@@ -133,12 +134,13 @@ Split selection (H): ≤3 sessions/week → full body; 4 → upper/lower; 5–6 
 ```
 setBudget = floor(sessionMinutes * 60 / avgSetCycleSeconds)   // avgSetCycle = 40 s work + planned rest
 candidates = exercises where all equipmentTypes satisfied by ACTIVE, NOT-EXCLUDED,
-             NOT-TEMP-EXCLUDED equipment at current gym
+             NOT-TEMP-EXCLUDED equipment at current gym,
+             minus anything loading a pain-flagged region (EVIDENCE §10 rule 6)
 session = []
 
-while setBudget > 0 and any sessionNeed_m > 0.5:
+while setBudget ≥ 2 and any sessionNeed_m > 0.5:
    for each candidate e not in session:
-      sets_e = clamp(round(max_m(sessionNeed_m / e.vector[m]) ), 2, 4)   // over m with vector>0
+      sets_e = clamp(round(max_m(sessionNeed_m / e.vector[m]) ), 2, min(4, setBudget))   // over m with vector>0
       coverage = Σ_m min(e.vector[m] * sets_e, sessionNeed_m) * (recovery_m/100)
       overshoot = Σ_m max(0, e.vector[m]*sets_e - sessionNeed_m) + cap violations * 10
       score = coverage
@@ -198,7 +200,8 @@ Apply only to sets with ≤12 reps (accuracy drops beyond, EFF-3).
 ```
 plateau(exercise) = e1RM slope over last 4 exposures ≤ 0 (linear regression) AND ≥ 3 weeks
 deloadTrigger = (≥ 2 anchors in plateau) OR (readiness < 50 on ≥ 4 of last 7 check-ins)
-                OR (weeksSinceDeload ≥ 8)                       // (H)
+                OR user request                                 // reactive (DELOAD-2) (H)
+deloadReminder = weeksSinceDeload ≥ 8 AND NOT deloadTrigger     // (H) advisory only: mention it, never schedule it
 deloadWeek: volume × 0.6, target RIR ≥ 3, loads unchanged, same exercises (DELOAD-2: no cessation)
 
 after each 4–6 week mesocycle, per muscle (H):
@@ -209,7 +212,8 @@ after each 4–6 week mesocycle, per muscle (H):
 ## 12. Swap engine (single + combo)
 
 ```
-target = removed.vector * remainingSets
+S      = remainingSets                       // sets of the removed exercise not yet done
+target = removed.vector * S
 pool   = candidates (§7 filters) minus exercises already in session
         minus anything loading a pain-flagged region
 
@@ -269,7 +273,7 @@ Each rule ID maps to a sentence template with variables, e.g.
 ```ts
 const templates = {
   'REST-1':   'Rest {rest}s — longer than 60–90 s helps preserve your working sets.',
-  'READY-1':  'Volume trimmed {pct}% because you slept under 6 hours.',
+  'READY-1':  'Volume trimmed {pct}% because you slept 6 hours or less.',
   'READY-2':  'HRV is below your usual range, so today is slightly lighter (soft signal only).',
   'PROG-1':   'You hit {reps} reps at RPE {rpe} last time, so load goes up to {load} kg.',
   'SWAP':     '{match}% muscle match for {original}. {diff}',
