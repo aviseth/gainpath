@@ -8,6 +8,7 @@ import {
   INVITE_ONLY,
   sendMagicLink,
   signInWithGoogle,
+  signInWithPassword,
   signOut,
   verifyEmailCode,
 } from "@/lib/auth";
@@ -18,6 +19,9 @@ export function AccountSection() {
   const status = useSyncStatus();
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
+  const [password, setPassword] = useState("");
+  // Invite-only servers can hand out passwords (`pnpm users password`) instead of emailing codes.
+  const [usePassword, setUsePassword] = useState(false);
   const [sentTo, setSentTo] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -63,6 +67,11 @@ export function AccountSection() {
       await sendMagicLink(email.trim());
       setSentTo(email.trim());
     });
+  };
+
+  const onPassword = (e: FormEvent) => {
+    e.preventDefault();
+    void attempt(() => signInWithPassword(email.trim(), password));
   };
 
   const onVerify = (e: FormEvent) => {
@@ -124,6 +133,39 @@ export function AccountSection() {
             Use a different email
           </button>
         </form>
+      ) : usePassword ? (
+        <form onSubmit={onPassword} className="flex flex-col gap-3">
+          <input
+            className={inputClass}
+            type="email"
+            autoComplete="username"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            aria-label="Email"
+            required
+          />
+          <input
+            className={inputClass}
+            type="password"
+            autoComplete="current-password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            aria-label="Password"
+            required
+          />
+          <Button type="submit" disabled={busy || !email.includes("@") || password.length === 0}>
+            Sign in
+          </Button>
+          <button
+            type="button"
+            className="min-h-10 text-sm text-zinc-400"
+            onClick={() => setUsePassword(false)}
+          >
+            Email me a sign-in link instead
+          </button>
+        </form>
       ) : (
         <form onSubmit={onSend} className="flex flex-col gap-3">
           <input
@@ -139,6 +181,15 @@ export function AccountSection() {
           <Button type="submit" disabled={busy || !email.includes("@")}>
             Email me a sign-in link
           </Button>
+          {INVITE_ONLY && (
+            <button
+              type="button"
+              className="min-h-10 text-sm text-zinc-400"
+              onClick={() => setUsePassword(true)}
+            >
+              Sign in with a password instead
+            </button>
+          )}
         </form>
       )}
       {error && <Notice tone="error">{error}</Notice>}
