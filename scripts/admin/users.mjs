@@ -2,7 +2,10 @@
 /**
  * Account admin for an invite-only deployment (see docs/hosted.md).
  *
- *   pnpm users add <email> [--ai]       create an account; they sign in with a code
+ *   pnpm users add <email> [--ai] [--password]
+ *                                create an account; they sign in with a code, or
+ *                                with the printed password if --password is given
+ *   pnpm users password <email>  set a new password and print it (also resets one)
  *   pnpm users plan <email> ai|basic    whether AI is included (with AI_REQUIRES_PLAN=true)
  *   pnpm users list              every account, with plan, status and last sign-in
  *   pnpm users disable <email>   block sign-in, keep their data (e.g. lapsed payment)
@@ -13,10 +16,11 @@
  * API keys → secret). The secret key bypasses row-level security: keep it on
  * your machine, never in the app's environment.
  */
+import { randomInt } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 
 const [command, email, ...rest] = process.argv.slice(2);
-const COMMANDS = ["add", "list", "plan", "disable", "enable", "remove"];
+const COMMANDS = ["add", "list", "plan", "password", "disable", "enable", "remove"];
 const PLANS = { ai: true, basic: false };
 if (
   !COMMANDS.includes(command) ||
@@ -24,7 +28,7 @@ if (
   (command === "plan" && !Object.hasOwn(PLANS, rest[0] ?? ""))
 ) {
   console.error(
-    "Usage: pnpm users add <email> [--ai] | plan <email> ai|basic | list | disable|enable|remove <email>",
+    "Usage: pnpm users add <email> [--ai] [--password] | password <email> | plan <email> ai|basic | list | disable|enable|remove <email>",
   );
   process.exit(1);
 }
@@ -38,6 +42,14 @@ if (!url || !secret) {
 const admin = createClient(url, secret, {
   auth: { persistSession: false, autoRefreshToken: false },
 }).auth.admin;
+
+/** Easy to read out or type on a phone: no 0/o, 1/l/i. About 59 bits. */
+function newPassword() {
+  const alphabet = "abcdefghjkmnpqrstuvwxyz23456789";
+  const group = () =>
+    Array.from({ length: 4 }, () => alphabet[randomInt(alphabet.length)]).join("");
+  return [group(), group(), group()].join("-");
+}
 
 async function allUsers() {
   const users = [];
@@ -61,14 +73,18 @@ const isDisabled = (u) => Boolean(u.banned_until && new Date(u.banned_until) > n
 const commands = {
   async add(email) {
     const ai = rest.includes("--ai");
+    const password = rest.includes("--password") ? newPassword() : undefined;
     const { error } = await admin.createUser({
       email: email.trim(),
       email_confirm: true,
       app_metadata: { ai },
+      ...(password && { password }),
     });
     if (error) throw error;
     const plan = ai ? "AI" : "basic";
     console.log(`Added ${email} on the ${plan} plan. They sign in from Settings with their email.`);
+    if (password)
+      console.log(`Password: ${password}  (shown once; \`pnpm users password\` resets it)`);
   },
   async plan(email) {
     const user = await find(email);
@@ -78,6 +94,13 @@ const commands = {
     });
     if (error) throw error;
     console.log(`${email} is now on the ${ai ? "AI" : "basic"} plan.`);
+  },
+  async password(email) {
+    const user = await find(email);
+    const password = newPassword();
+    const { error } = await admin.updateUserById(user.id, { password });
+    if (error) throw error;
+    console.log(`New password for ${email}: ${password}`);
   },
   async list() {
     const users = await allUsers();

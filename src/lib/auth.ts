@@ -1,6 +1,9 @@
 import { getSupabase } from "./supabase";
 
-/** Sign-in helpers (Supabase Auth: Google OAuth + email magic link / one-time code). */
+/**
+ * Sign-in helpers (Supabase Auth: Google OAuth, email magic link / one-time code,
+ * and on invite-only deployments a password the admin sets with `pnpm users`).
+ */
 
 function requireClient() {
   const client = getSupabase();
@@ -17,11 +20,13 @@ function requireClient() {
 export const INVITE_ONLY = process.env.NEXT_PUBLIC_INVITE_ONLY === "true";
 export const ACCESS_URL = process.env.NEXT_PUBLIC_ACCESS_URL || null;
 
-/** Supabase's "signups disabled" errors, reworded for someone without an account. */
+/** Supabase's sign-in errors, reworded for someone without an account or a password. */
 export function friendlyAuthError(message: string): string {
-  return /signups? not allowed|user not found/i.test(message)
-    ? "There's no account for that email on this server. Accounts here are invite-only."
-    : message;
+  if (/signups? not allowed|user not found/i.test(message))
+    return "There's no account for that email on this server. Accounts here are invite-only.";
+  if (/invalid login credentials/i.test(message))
+    return "That email and password don't match. Ask whoever runs this server for a new password.";
+  return message;
 }
 
 const callbackUrl = () => `${window.location.origin}/auth/callback`;
@@ -50,6 +55,12 @@ export async function sendMagicLink(email: string): Promise<void> {
 export async function verifyEmailCode(email: string, token: string): Promise<void> {
   const { error } = await requireClient().auth.verifyOtp({ email, token, type: "email" });
   if (error) throw error;
+}
+
+/** Password sign-in; passwords exist only for accounts given one with `pnpm users`. */
+export async function signInWithPassword(email: string, password: string): Promise<void> {
+  const { error } = await requireClient().auth.signInWithPassword({ email, password });
+  if (error) throw new Error(friendlyAuthError(error.message));
 }
 
 export async function signOut(): Promise<void> {
