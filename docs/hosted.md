@@ -40,7 +40,7 @@ security, so never add it to the deployed app's variables.
 ```sh
 pnpm users add you@example.com --ai     # your own account, AI included
 pnpm users add friend@example.com       # basic plan, no AI
-pnpm users add friend@example.com --password  # prints a password to pass on
+pnpm users add other@example.com --password   # prints a password to pass on
 pnpm users password friend@example.com  # set or reset a password, printed once
 pnpm users plan friend@example.com ai   # upgrade (or `basic` to downgrade)
 pnpm users list

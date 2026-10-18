@@ -43,12 +43,20 @@ const admin = createClient(url, secret, {
   auth: { persistSession: false, autoRefreshToken: false },
 }).auth.admin;
 
-/** Easy to read out or type on a phone: no 0/o, 1/l/i. About 59 bits. */
+/**
+ * Easy to read out or type on a phone (no 0/o, 1/l/i), about 55 bits. Always
+ * starts with a capital and has a lowercase letter, a digit and "-", so it
+ * passes Supabase's strictest built-in password requirement.
+ */
 function newPassword() {
   const alphabet = "abcdefghjkmnpqrstuvwxyz23456789";
   const group = () =>
     Array.from({ length: 4 }, () => alphabet[randomInt(alphabet.length)]).join("");
-  return [group(), group(), group()].join("-");
+  for (;;) {
+    const p = [group(), group(), group()].join("-");
+    if (/^[a-z]/.test(p) && /[a-z]/.test(p.slice(1)) && /\d/.test(p))
+      return p[0].toUpperCase() + p.slice(1);
+  }
 }
 
 async function allUsers() {
