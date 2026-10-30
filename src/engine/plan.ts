@@ -7,7 +7,7 @@ import type { Config } from "./config";
 import { currentE1rm } from "./e1rm";
 import { estimateStart, type KnownE1rm, type LoadRatio } from "./estimate";
 import { recoveryState, type MuscleMap } from "./fatigue";
-import { prescribe } from "./load";
+import { minLoad, prescribe } from "./load";
 import { nextExposure } from "./progression";
 import type { Readiness } from "./readiness";
 import { targetsFor, type Role } from "./targets";
@@ -282,11 +282,11 @@ export function planExercise(
   if (exercise.timed) {
     weightKg =
       lastSets[0]?.weight_kg ??
-      (exercise.loading === "external" && equipment ? equipment.min_kg : null);
+      (exercise.loading === "external" && equipment ? minLoad(equipment) : null);
     targetReps = lastSets[0] ? Math.min(t.repRange[1], lastSets[0].reps + 5) : t.repRange[0];
   } else if (exercise.loading !== "external" || !equipment) {
     // Bodyweight / assisted: progress reps; any added or assisting load carries over.
-    weightKg = lastSets[0]?.weight_kg ?? (equipment ? equipment.min_kg : null);
+    weightKg = lastSets[0]?.weight_kg ?? (equipment ? minLoad(equipment) : null);
     targetReps = lastSets[0] ? Math.min(t.repRange[1], lastSets[0].reps + 1) : t.repRange[0];
   } else if (lastSets.length > 0 && input.isDeload) {
     // DELOAD-2: same loads, fewer sets, more in reserve.

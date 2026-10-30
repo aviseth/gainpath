@@ -59,6 +59,7 @@ describe("repo", () => {
         max_kg: 100,
         increment_kg: 0, // must be positive
         micro_increment_kg: null,
+        weights_kg: null,
         photo_path: null,
         notes: null,
         status: "active",

@@ -18,6 +18,7 @@ const manifest: GymManifest = {
       max_kg: 100,
       increment_kg: 5,
       micro_increment_kg: null,
+      weights_kg: null,
       notes: null,
       exercise_ids: ["machine_chest_press", "machine_incline_chest_press"],
       photos: ["IMG_0001.jpg"],

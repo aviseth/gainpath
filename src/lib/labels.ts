@@ -47,3 +47,19 @@ export function formatKg(kg: number | null | undefined): string {
 export function formatDate(ts: number): string {
   return new Date(ts).toLocaleDateString(undefined, { day: "numeric", month: "short" });
 }
+
+/** e1RM change as text and tone; |Δ| < 0.5% reads as no change. */
+export function changeDisplay(change: number): { text: string; tone: "up" | "down" | "flat" } {
+  const pct = change * 100;
+  if (!Number.isFinite(pct) || Math.abs(pct) < 0.5) return { text: "±0%", tone: "flat" };
+  return pct > 0
+    ? { text: `+${pct.toFixed(1)}%`, tone: "up" }
+    : { text: `${pct.toFixed(1)}%`, tone: "down" };
+}
+
+/** Tone for an engine recovery value, which is 0–100 (ALGORITHMS §5, REC-1). */
+export function recoveryTone(r: number): "ok" | "partial" | "low" {
+  if (r >= 85) return "ok";
+  if (r >= 60) return "partial";
+  return "low";
+}

@@ -21,7 +21,7 @@ import { e1rmSeries, isBodyweight, weeklyVolume } from "@/engine/progress";
 import { muscleLabel } from "@/engine/vector";
 import { weeklyTargets } from "@/engine/volume";
 import { useTrainingContext } from "@/hooks/use-training";
-import { formatDate, formatKg } from "@/lib/labels";
+import { changeDisplay, formatDate, formatKg, recoveryTone } from "@/lib/labels";
 import { WeeklyReview } from "./weekly-review";
 
 const AXIS = { stroke: "#5a5d61", fontSize: 11 };
@@ -93,10 +93,7 @@ export function ProgressScreen() {
                 {formatKg(Math.round(current.latest * 10) / 10)}
               </span>{" "}
               {current.points.length > 1 && (
-                <span className={current.change >= 0 ? "text-lime-400" : "text-amber-300"}>
-                  {current.change >= 0 ? "+" : ""}
-                  {(current.change * 100).toFixed(1)}% since {formatDate(current.points[0].ts)}
-                </span>
+                <ChangeText change={current.change} since={current.points[0].ts} />
               )}
             </p>
             <div className="h-56" data-testid="e1rm-chart">
@@ -179,24 +176,35 @@ export function ProgressScreen() {
   );
 }
 
+function ChangeText({ change, since }: { change: number; since: number }) {
+  const { text, tone } = changeDisplay(change);
+  return (
+    <span className={CHANGE_CLASS[tone]}>
+      {text} since {formatDate(since)}
+    </span>
+  );
+}
+
+const CHANGE_CLASS = { up: "text-lime-400", down: "text-red-400", flat: "text-zinc-500" };
+const RECOVERY_CLASS = {
+  ok: "border-zinc-800 text-zinc-300",
+  partial: "border-amber-400/40 bg-amber-400/10 text-amber-200",
+  low: "border-red-500/40 bg-red-500/5 text-red-300",
+};
+
 function RecoveryMap({ recovery }: { recovery: Record<Muscle, number> }) {
   return (
     <ul className="grid grid-cols-2 gap-2" aria-label="Recovery by muscle">
       {MUSCLES.map((m) => {
-        const r = Math.max(0, Math.min(1, recovery[m] ?? 1));
-        const tone =
-          r >= 0.85
-            ? "bg-zinc-900 text-zinc-100"
-            : r >= 0.6
-              ? "bg-amber-400/20 text-amber-100"
-              : "bg-red-500/15 text-red-200";
+        // Engine recovery is 0–100 (100 = fully recovered).
+        const r = Math.round(Math.max(0, Math.min(100, recovery[m] ?? 100)));
         return (
           <li
             key={m}
-            className={`flex min-h-11 items-center justify-between rounded-lg px-3 text-sm ${tone}`}
+            className={`flex min-h-11 items-center justify-between rounded-lg border px-3 text-sm ${RECOVERY_CLASS[recoveryTone(r)]}`}
           >
             <span>{muscleLabel(m)}</span>
-            <span className="tabular-nums">{Math.round(r * 100)}%</span>
+            <span className="tabular-nums">{r}%</span>
           </li>
         );
       })}

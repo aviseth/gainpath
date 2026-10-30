@@ -57,6 +57,65 @@ describe("export / import", () => {
     expect((await repo("gyms", db).get(kept.id))?.name).toBe("Edited after export");
   });
 
+  it("imports equipment from older backups without weights_kg as null", async () => {
+    const db = freshDB();
+    const gym = await repo("gyms", db).create(gymInput("Main"));
+    await repo("equipment", db).create({
+      gym_id: gym.id,
+      name: "Dumbbells",
+      type: "free_weights",
+      brand: null,
+      model: null,
+      min_kg: 2,
+      max_kg: 40,
+      increment_kg: 2,
+      micro_increment_kg: null,
+      weights_kg: [2, 4, 6],
+      photo_path: null,
+      notes: null,
+      status: "active",
+      broken_since: null,
+      status_reason: null,
+    });
+    const backup = await exportBackup(db);
+    expect(backup.tables.equipment?.[0].weights_kg).toEqual([2, 4, 6]);
+    const { weights_kg: _w, ...old } = backup.tables.equipment![0];
+    backup.tables.equipment = [old as never];
+    const target = freshDB();
+    await importBackup(target, JSON.stringify(backup));
+    expect((await repo("equipment", target).list())[0].weights_kg).toBeNull();
+  });
+
+  it("rejects equipment weight lists that aren't ascending positive numbers", async () => {
+    const db = freshDB();
+    const backup = await exportBackup(db);
+    const row = {
+      id: "eq-1",
+      user_id: "u",
+      created_at: 1,
+      updated_at: 1,
+      deleted_at: null,
+      gym_id: "g",
+      name: "Dumbbells",
+      type: "free_weights",
+      brand: null,
+      model: null,
+      min_kg: 2,
+      max_kg: 40,
+      increment_kg: 2,
+      micro_increment_kg: null,
+      photo_path: null,
+      notes: null,
+      status: "active",
+      broken_since: null,
+      status_reason: null,
+    };
+    for (const weights_kg of [[4, 2], [0, 2], []]) {
+      backup.tables.equipment = [{ ...row, weights_kg } as never];
+      await expect(importBackup(freshDB(), JSON.stringify(backup))).rejects.toThrow(/equipment/);
+    }
+  });
+
   it("rejects the whole file if any row is invalid", async () => {
     const { db } = await seeded();
     const backup = await exportBackup(db);

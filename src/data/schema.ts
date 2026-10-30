@@ -45,6 +45,14 @@ export const EQUIPMENT_TYPES = [
   "bench_rack",
   "bodyweight_station",
 ] as const;
+/** A strictly ascending list of positive weights in kg. */
+export const weightsKgSchema = z
+  .array(z.number().positive())
+  .min(1)
+  .refine((w) => w.every((x, i) => i === 0 || x > w[i - 1]), {
+    message: "weights must be listed in ascending order without repeats",
+  });
+
 export const equipmentTypeSchema = z.enum(EQUIPMENT_TYPES);
 export type EquipmentType = z.infer<typeof equipmentTypeSchema>;
 
@@ -116,6 +124,12 @@ export const tableSchemas = {
     max_kg: z.number().nonnegative(),
     increment_kg: z.number().positive(),
     micro_increment_kg: z.number().positive().nullable(),
+    /**
+     * Exact settable weights (e.g. a dumbbell rack), ascending. When set, loads
+     * round to these instead of min + k·increment (ALGORITHMS §2). Older rows
+     * and backups without the field read as null.
+     */
+    weights_kg: weightsKgSchema.nullable().default(null),
     photo_path: z.string().nullable(),
     notes: z.string().nullable(),
     status: z.enum(["active", "broken", "archived"]),

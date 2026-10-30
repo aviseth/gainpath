@@ -13,7 +13,8 @@ import {
 import type { Equipment } from "@/data/schema";
 import type { GymContext } from "@/hooks/use-data";
 import { formatDate } from "@/lib/labels";
-import { EquipmentForm, validateDraft, type EquipmentDraft } from "./equipment-form";
+import { formatWeights } from "@/lib/weights";
+import { EquipmentForm, draftFields, validateDraft, type EquipmentDraft } from "./equipment-form";
 import { MachineAssist, useCachedDictionary } from "./machine-assist";
 
 export function EquipmentSheet({
@@ -39,6 +40,7 @@ export function EquipmentSheet({
     micro_increment_kg: equipment.micro_increment_kg,
     notes: equipment.notes,
     exerciseIds: new Set(linked),
+    weightsText: formatWeights(equipment.weights_kg),
   });
   const [reason, setReason] = useState(equipment.status_reason ?? "");
   const excludePref = ctx.prefs.find(
@@ -53,9 +55,8 @@ export function EquipmentSheet({
   async function save() {
     const problem = validateDraft(draft);
     if (problem) return setError(problem);
-    const { exerciseIds, ...fields } = draft;
-    await updateEquipment(equipment.id, { ...fields, name: fields.name.trim() });
-    await setLinkedExercises(equipment.id, [...exerciseIds]);
+    await updateEquipment(equipment.id, draftFields(draft));
+    await setLinkedExercises(equipment.id, [...draft.exerciseIds]);
     onClose();
   }
 

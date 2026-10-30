@@ -1,11 +1,9 @@
 import type { Config } from "./config";
 import { adjustedRir, epley } from "./e1rm";
-import { roundToEquipment, stepUp, targetLoad } from "./load";
-import type { Equipment, RationaleEntry, SetLog } from "./types";
+import { roundToEquipment, stepUp, targetLoad, type LoadRange } from "./load";
+import type { RationaleEntry, SetLog } from "./types";
 
 /** Double progression and in-session adjustment (ALGORITHMS §9; PROG-1, PROG-2, EFF-2). */
-
-type LoadRange = Pick<Equipment, "min_kg" | "max_kg" | "increment_kg" | "micro_increment_kg">;
 
 /** HEURISTIC: when one equipment step exceeds the +5% cap, require this many reps past the top first. */
 export const OVERFLOW_REPS = 2;

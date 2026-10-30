@@ -43,6 +43,10 @@ each machine and committed here.
 }
 ```
 
+Optional `weights_kg` lists the exact weights a rack has (e.g. dumbbells:
+`[2, 4, 6, 8, 10, 12.5]`, ascending). When present, loads round down to those
+weights instead of `min_kg + k·increment_kg`.
+
 `version` is a millisecond timestamp. Bump it whenever the file changes: ids
 are derived from `gym.key` and each equipment `key`, and under last-write-wins
 a newer manifest updates the records, while any edit the owner made in the app

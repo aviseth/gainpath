@@ -22,6 +22,28 @@ describe("double progression (ALGORITHMS §9; PROG-1, PROG-2)", () => {
     expect(r.rationale[0].rule).toBe("PROG-1");
   });
 
+  it("one equipment step is the next listed weight on a dumbbell rack (§9)", () => {
+    const dumbbells = eq("free_weights", {
+      min_kg: 2,
+      max_kg: 40,
+      increment_kg: 2,
+      weights_kg: [10, 12.5, 15, 17.5, 20, 22.5, 25],
+    });
+    const r = nextExposure({
+      ...base,
+      equipment: dumbbells,
+      lastSets: sets(20, [12, 12, 12], 8, NOW),
+    });
+    // +2.5 kg is over the +5% cap, so the rack's next weight waits for rep overflow (PROG-2).
+    expect(r.weightKg).toBe(20);
+    const overflow = nextExposure({
+      ...base,
+      equipment: dumbbells,
+      lastSets: sets(20, [14, 14, 14], 8, NOW),
+    });
+    expect(overflow.weightKg).toBe(22.5);
+  });
+
   it("doesn't increase when the top reps came too close to failure", () => {
     const r = nextExposure({ ...base, lastSets: sets(60, [12, 12, 12], 10, NOW) });
     expect(r.weightKg).toBe(60);

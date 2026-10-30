@@ -10,10 +10,20 @@ import { DEFAULT_CONFIG } from "@/engine/config";
 import { matchMachine, proposeExercises, type DictionaryEntry } from "@/engine/registry";
 import type { Exercise } from "@/engine/types";
 import { EQUIPMENT_TYPE_SHORT } from "@/lib/labels";
+import { parseWeights } from "@/lib/weights";
 import { BRANDS, KEYWORDS } from "@/seed/catalog";
 
-export interface EquipmentDraft extends EquipmentFields {
+export interface EquipmentDraft extends Omit<EquipmentFields, "weights_kg"> {
   exerciseIds: Set<string>;
+  /** Raw "Exact weights" input; parsed into `weights_kg` on save. */
+  weightsText: string;
+}
+
+/** The fields to store for a valid draft (call validateDraft first). */
+export function draftFields(d: EquipmentDraft): EquipmentFields {
+  const { exerciseIds: _ids, weightsText, ...fields } = d;
+  const parsed = parseWeights(weightsText);
+  return { ...fields, name: fields.name.trim(), weights_kg: parsed.ok ? parsed.weights : null };
 }
 
 export function emptyDraft(): EquipmentDraft {
@@ -28,6 +38,7 @@ export function emptyDraft(): EquipmentDraft {
     micro_increment_kg: null,
     notes: null,
     exerciseIds: new Set(),
+    weightsText: "",
   };
 }
 
@@ -35,6 +46,8 @@ export function validateDraft(d: EquipmentDraft): string | null {
   if (!d.name.trim()) return "Give the machine a name.";
   if (!(d.increment_kg > 0)) return "Increment must be more than 0 kg.";
   if (d.max_kg < d.min_kg) return "Max load must be at least the min load.";
+  const weights = parseWeights(d.weightsText);
+  if (!weights.ok) return weights.error;
   if (d.exerciseIds.size === 0) return "Link at least one exercise so it can be programmed.";
   return null;
 }
@@ -159,6 +172,20 @@ export function EquipmentForm({
             onChange={(v) => set("micro_increment_kg", v && v > 0 ? v : null)}
           />
         </Field>
+      </div>
+      <Field
+        label="Exact weights (optional)"
+        hint="For dumbbells or kettlebells: the weights the rack actually has, e.g. 2, 4, 6, 8. Loads round down to these."
+      >
+        <TextInput
+          value={draft.weightsText}
+          onChange={(e) => set("weightsText", e.target.value)}
+          inputMode="decimal"
+          autoComplete="off"
+          placeholder="e.g. 2, 4, 6, 8"
+        />
+      </Field>
+      <div className="grid grid-cols-2 gap-3">
         <Field label="Brand">
           <TextInput
             value={draft.brand ?? ""}

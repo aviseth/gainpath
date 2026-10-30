@@ -1,5 +1,5 @@
 import type { Config } from "./config";
-import { availableLoads } from "./load";
+import { availableLoads, type LoadRange } from "./load";
 import { cosine } from "./vector";
 import type { Equipment, Exercise } from "./types";
 
@@ -44,10 +44,7 @@ function ratioBetween(from: Exercise, to: Exercise, ratios: readonly LoadRatio[]
 
 export function estimateStart(params: {
   exercise: Exercise;
-  equipment: Pick<
-    Equipment,
-    "id" | "min_kg" | "max_kg" | "increment_kg" | "micro_increment_kg"
-  > | null;
+  equipment: (Pick<Equipment, "id"> & LoadRange) | null;
   known: readonly KnownE1rm[];
   catalog: ReadonlyMap<string, Exercise>;
   ratios: readonly LoadRatio[];
