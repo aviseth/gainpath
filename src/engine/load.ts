@@ -26,7 +26,7 @@ export function targetLoad(e1rm: number, targetReps: number, targetRir: number):
 /** The exact weight list, if the equipment has one (ascending, positive). */
 function weightList(eq: LoadRange): number[] | null {
   const list = eq.weights_kg?.filter((w) => Number.isFinite(w) && w > 0);
-  return list && list.length > 0 ? [...new Set(list.map(round2))].sort((a, b) => a - b) : null;
+  return list && list.length > 0 ? [...new Set(list)].sort((a, b) => a - b) : null;
 }
 
 /** Lightest settable load: the first listed weight, else the range minimum. */
@@ -75,7 +75,7 @@ export function roundToEquipment(load: number, eq: LoadRange): number {
 }
 
 /**
- * Next load up (one equipment step, ALGORITHMS §9): the next listed weight when
+ * Next load up (one equipment step, ALGORITHMS §9, PROG-1): the next listed weight when
  * the equipment has a list, or the same load at the machine's max.
  */
 export function stepUp(load: number, eq: LoadRange): number {

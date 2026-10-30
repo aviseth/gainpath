@@ -19,6 +19,16 @@ describe("parseWeights", () => {
     expect(parseWeights("-2").ok).toBe(false);
   });
 
+  it("rejects input with separators but no weights", () => {
+    expect(parseWeights(", ;").ok).toBe(false);
+    expect(parseWeights("kg").ok).toBe(true); // only a unit: same as empty
+  });
+
+  it("keeps weights exactly as typed (no rounding to zero or to cents)", () => {
+    expect(parseWeights("0.004")).toEqual({ ok: true, weights: [0.004] });
+    expect(parseWeights("1.125, 2")).toEqual({ ok: true, weights: [1.125, 2] });
+  });
+
   it("round-trips through formatWeights", () => {
     expect(formatWeights([2, 4, 6.5])).toBe("2, 4, 6.5");
     expect(formatWeights(null)).toBe("");

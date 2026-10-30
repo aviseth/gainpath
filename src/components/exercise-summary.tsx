@@ -48,11 +48,8 @@ export function ExerciseSummary({
         <span className="text-sm text-zinc-300">
           {targetText(e)}
           {e.estimate && (
-            <span
-              className="ml-1.5 text-xs text-zinc-500"
-              title={`No history on this machine yet: starting estimate, ±${e.estimate.uncertaintyPct}%`}
-            >
-              · first time · starting estimate
+            <span className="ml-1.5 text-xs text-zinc-500">
+              · first time · estimate ±{e.estimate.uncertaintyPct}%
             </span>
           )}
         </span>

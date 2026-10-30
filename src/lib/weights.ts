@@ -20,7 +20,10 @@ export function parseWeights(text: string): WeightsParse {
         error: `"${part}" isn't a weight. Use numbers like 2, 4, 6, 8 (decimals with a point: 2.5).`,
       };
     }
-    weights.push(Math.round(n * 100) / 100);
+    weights.push(n);
+  }
+  if (weights.length === 0) {
+    return { ok: false, error: "Add at least one weight, or clear the field for no list." };
   }
   return { ok: true, weights: [...new Set(weights)].sort((a, b) => a - b) };
 }
