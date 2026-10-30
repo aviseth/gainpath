@@ -188,9 +188,11 @@ function EquipmentRow({
           {e.name}
         </span>
         <span className="text-xs text-zinc-500">
-          {e.max_kg > 0
-            ? `${formatKg(e.min_kg)}–${formatKg(e.max_kg)} · +${formatKg(e.increment_kg)}`
-            : "Bodyweight"}{" "}
+          {e.weights_kg?.length
+            ? `${formatKg(e.weights_kg[0])}–${formatKg(e.weights_kg.at(-1)!)} · ${e.weights_kg.length} weights`
+            : e.max_kg > 0
+              ? `${formatKg(e.min_kg)}–${formatKg(e.max_kg)} · +${formatKg(e.increment_kg)}`
+              : "Bodyweight"}{" "}
           · {links} exercise{links === 1 ? "" : "s"}
         </span>
       </span>

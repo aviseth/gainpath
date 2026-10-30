@@ -7,7 +7,13 @@ import { addEquipment, addFromTemplate } from "@/data/actions";
 import type { GymContext } from "@/hooks/use-data";
 import { EQUIPMENT_TYPE_LABELS } from "@/lib/labels";
 import { EQUIPMENT_TEMPLATES } from "@/seed/catalog";
-import { EquipmentForm, emptyDraft, validateDraft, type EquipmentDraft } from "./equipment-form";
+import {
+  EquipmentForm,
+  draftFields,
+  emptyDraft,
+  validateDraft,
+  type EquipmentDraft,
+} from "./equipment-form";
 import { MachineAssist, useCachedDictionary } from "./machine-assist";
 
 /** Add gear quickly: a template (one tap) or a custom machine (under a minute). */
@@ -29,8 +35,7 @@ export function AddEquipmentSheet({
   async function saveCustom() {
     const problem = validateDraft(draft);
     if (problem) return setError(problem);
-    const { exerciseIds, ...fields } = draft;
-    await addEquipment(gymId, { ...fields, name: fields.name.trim() }, [...exerciseIds]);
+    await addEquipment(gymId, draftFields(draft), [...draft.exerciseIds]);
     onClose();
   }
 

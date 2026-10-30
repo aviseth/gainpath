@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { equipmentTypeSchema } from "@/data/schema";
+import { equipmentTypeSchema, weightsKgSchema } from "@/data/schema";
 
 /**
  * Gym manifests: a whole gym's equipment, identified during development from
@@ -18,6 +18,8 @@ export const manifestEquipmentSchema = z.object({
   max_kg: z.number().nonnegative(),
   increment_kg: z.number().positive(),
   micro_increment_kg: z.number().positive().nullable(),
+  /** Optional exact weights (e.g. a dumbbell rack), ascending; overrides the linear range. */
+  weights_kg: weightsKgSchema.nullable().default(null),
   notes: z.string().nullable(),
   exercise_ids: z.array(z.string()),
   /** Source photo file name(s), for traceability. */

@@ -69,10 +69,10 @@ export async function runChatTool(
       return {
         summary: "Checked recovery and weekly volume",
         content: json({
-          note: "recovery: 1 = fully recovered (REC-1, rule of thumb). Volume in fractional sets over the last 7 days vs weekly target (VOL-1, VOL-2).",
+          note: "recovery: 0–100 per muscle, 100 = fully recovered (REC-1, rule of thumb). Volume in fractional sets over the last 7 days vs weekly target (VOL-1, VOL-2).",
           muscles: MUSCLES.map((m) => ({
             muscle: m,
-            recovery: round((ctx.recovery as MuscleMap)[m], 2),
+            recovery: round((ctx.recovery as MuscleMap)[m]),
             sets_last_7_days: round(done[m]),
             weekly_target: round(targets[m]),
           })),

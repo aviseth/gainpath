@@ -1,6 +1,6 @@
 import type { Config } from "./config";
-import { roundToEquipment } from "./load";
-import type { Equipment, Exercise } from "./types";
+import { minLoad, roundToEquipment, type LoadRange } from "./load";
+import type { Exercise } from "./types";
 
 /** Warm-up ramps (ALGORITHMS §14). HEURISTIC throughout. */
 
@@ -17,7 +17,7 @@ const RAMP: ReadonlyArray<[number, number]> = [
 
 export function warmupSets(params: {
   exercise: Exercise;
-  equipment: Pick<Equipment, "min_kg" | "max_kg" | "increment_kg" | "micro_increment_kg"> | null;
+  equipment: LoadRange | null;
   workingKg: number;
   e1rm: number | null;
   /** A compound earlier in the session already warmed up the same muscles. */
@@ -33,7 +33,7 @@ export function warmupSets(params: {
   const sets: WarmupSet[] = [];
   for (const [pct, reps] of ramp) {
     const ideal = workingKg * pct;
-    if (ideal < equipment.min_kg) continue; // skip steps below what the machine can do
+    if (ideal < minLoad(equipment)) continue; // skip steps below what the machine can do
     const weightKg = roundToEquipment(ideal, equipment);
     if (weightKg >= workingKg || sets.some((s) => s.weightKg === weightKg)) continue;
     sets.push({ weightKg, reps });

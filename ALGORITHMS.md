@@ -57,6 +57,8 @@ e1RM(exercise, equipment) =
 targetLoad(e1RM, targetReps, targetRIR) = e1RM / (1 + (targetReps + targetRIR) / 30)
 roundToEquipment(load, eq) = round DOWN to nearest available step:
    eq.minKg + k * eq.incrementKg  (respect micro-plates if set), clamp to [minKg, maxKg]
+   if eq.weightsKg is set (exact list, e.g. a dumbbell rack): round DOWN to the nearest
+   listed weight, clamped to the smallest; "one equipment step" (§9) = next listed weight
 ```
 
 If the rounded load is >7.5% (H) below the ideal, prescribe the step down and add +1 target rep instead of exceeding target RPE.

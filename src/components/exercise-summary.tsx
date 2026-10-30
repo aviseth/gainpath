@@ -39,13 +39,24 @@ export function ExerciseSummary({
         </span>
         {e.isAnchor && <Badge>Anchor</Badge>}
         {e.calibration && <Badge tone="warn">Calibration</Badge>}
-        {e.estimate && <Badge tone="warn">New machine ±{e.estimate.uncertaintyPct}%</Badge>}
         {e.status === "done" && <Badge tone="good">Done</Badge>}
         {e.status === "skipped" && <Badge>Skipped</Badge>}
         {e.status === "swapped_out" && <Badge>Swapped</Badge>}
       </div>
       <span className="text-xs text-zinc-500">{equipmentName(e, equipment)}</span>
-      {!muted && <span className="text-sm text-zinc-300">{targetText(e)}</span>}
+      {!muted && (
+        <span className="text-sm text-zinc-300">
+          {targetText(e)}
+          {e.estimate && (
+            <span
+              className="ml-1.5 text-xs text-zinc-500"
+              title={`No history on this machine yet: starting estimate, ±${e.estimate.uncertaintyPct}%`}
+            >
+              · first time · starting estimate
+            </span>
+          )}
+        </span>
+      )}
     </div>
   );
 }

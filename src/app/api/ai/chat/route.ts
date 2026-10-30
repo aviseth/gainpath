@@ -20,7 +20,7 @@ const TOOLS: Anthropic.Tool[] = [
   {
     name: "get_recovery_state",
     description:
-      "Per-muscle recovery (0-1) and this week's volume against target, from the app's engine.",
+      "Per-muscle recovery (0-100, 100 = fully recovered) and this week's volume against target, from the app's engine.",
     input_schema: { type: "object", properties: {}, additionalProperties: false },
     strict: true,
   },

@@ -39,6 +39,28 @@ describe("warm-ups (ALGORITHMS §14) — HEURISTIC", () => {
     ]);
   });
 
+  it("rounds warm-ups down to listed weights and skips steps below the lightest (§14)", () => {
+    const listed = eq("free_weights", {
+      min_kg: 2,
+      max_kg: 200,
+      increment_kg: 2.5,
+      weights_kg: [20, 30, 50, 70],
+    });
+    const sets = warmupSets({
+      exercise: squat,
+      equipment: listed,
+      workingKg: 100,
+      e1rm: null,
+      muscleAlreadyWarm: false,
+      cfg,
+    });
+    expect(sets).toEqual([
+      { weightKg: 30, reps: 8 }, // 40 → 30
+      { weightKg: 50, reps: 5 }, // 60 → 50
+      { weightKg: 70, reps: 2 }, // 80 → 70
+    ]);
+  });
+
   it("only does the 80% step when the muscles are already warm", () => {
     expect(
       warmupSets({

@@ -85,6 +85,7 @@ export function templateFields(t: EquipmentTemplate): EquipmentFields {
     max_kg: t.max_kg,
     increment_kg: t.increment_kg,
     micro_increment_kg: t.micro_increment_kg,
+    weights_kg: null,
     notes: null,
   };
 }

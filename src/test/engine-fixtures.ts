@@ -53,6 +53,7 @@ export function eq(
     max_kg: 100,
     increment_kg: 5,
     micro_increment_kg: null,
+    weights_kg: null,
     photo_path: null,
     notes: null,
     status: "active",

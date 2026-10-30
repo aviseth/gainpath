@@ -48,6 +48,7 @@ export function manifestRecords(manifest: GymManifest, ownerId: string) {
       max_kg: item.max_kg,
       increment_kg: item.increment_kg,
       micro_increment_kg: item.micro_increment_kg,
+      weights_kg: item.weights_kg,
       photo_path: null,
       notes: [item.notes, needsCheck].filter(Boolean).join(" ") || null,
       status: "active",
