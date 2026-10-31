@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { Badge } from "@/components/forms";
-import { Notice, Section } from "@/components/ui";
+import { BackIcon } from "@/components/icons";
+import { PatternSchematic } from "@/components/schematics";
+import { Notice, Section, linkClass } from "@/components/ui";
 import { MUSCLES, MOVEMENT_PATTERNS } from "@/data/schema";
 import { auditGym } from "@/engine/audit";
 import { availableCandidates } from "@/engine/availability";
@@ -30,15 +32,16 @@ export function CheckGymScreen() {
     });
   }, [ctx]);
 
-  if (!ctx || !audit) return <p className="text-zinc-400">Loading…</p>;
+  if (!ctx || !audit) return <p className="px-1 text-on-surface-variant">Loading…</p>;
 
   return (
     <div className="flex flex-col gap-4">
-      <Link href="/gym" className="text-sm text-zinc-400">
-        ← My gym
+      <Link href="/gym" className={`${linkClass} -ml-1 self-start`}>
+        <BackIcon size={18} className="mr-1" />
+        My gym
       </Link>
-      <h1 className="text-2xl font-bold">Check {ctx.gym?.name ?? "my gym"}</h1>
-      <p className="text-sm text-zinc-400">
+      <h1 className="px-1">Check {ctx.gym?.name ?? "my gym"}</h1>
+      <p className="px-1 text-sm text-on-surface-variant">
         What your registered, working equipment can train. This only reports gaps; Gainpath never
         programs equipment you haven&apos;t registered.
       </p>
@@ -47,7 +50,7 @@ export function CheckGymScreen() {
         {audit.gaps.length === 0 ? (
           <Notice tone="success">Every muscle group and key movement is covered.</Notice>
         ) : (
-          <ul className="flex list-disc flex-col gap-1 pl-5 text-sm text-amber-200">
+          <ul className="flex list-disc flex-col gap-1 pl-5 text-sm text-tertiary">
             {audit.gaps.map((g) => (
               <li key={g}>{g}</li>
             ))}
@@ -76,7 +79,7 @@ export function CheckGymScreen() {
           {MUSCLES.map((m) => (
             <li
               key={m}
-              className="flex items-center justify-between rounded-lg bg-zinc-950 px-3 py-2"
+              className="flex min-h-11 items-center justify-between rounded-xl bg-surface-container-lowest px-3 py-2"
             >
               <span>{capitalize(muscleLabel(m))}</span>
               <Badge
@@ -100,9 +103,14 @@ export function CheckGymScreen() {
           {MOVEMENT_PATTERNS.map((p) => (
             <li
               key={p}
-              className="flex items-center justify-between rounded-lg bg-zinc-950 px-3 py-2"
+              className="flex min-h-11 items-center gap-2 rounded-xl bg-surface-container-lowest py-1.5 pr-3 pl-2"
             >
-              <span>{capitalize(humanize(p))}</span>
+              <PatternSchematic
+                pattern={p}
+                size={26}
+                className="shrink-0 text-on-surface-variant"
+              />
+              <span className="min-w-0 flex-1 truncate">{capitalize(humanize(p))}</span>
               <Badge tone={audit.patterns[p] === 0 ? "neutral" : "good"}>{audit.patterns[p]}</Badge>
             </li>
           ))}

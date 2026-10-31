@@ -37,7 +37,7 @@ export function SyncSection() {
           <Button onClick={() => syncManager.syncNow()}>Sync now</Button>
         )}
         {(status.state === "signed_out" || status.state === "disabled") && (
-          <p className="text-sm text-zinc-400">Sign in to turn on cloud backup.</p>
+          <p className="text-sm text-on-surface-variant">Sign in to turn on cloud backup.</p>
         )}
       </Section>
     </div>

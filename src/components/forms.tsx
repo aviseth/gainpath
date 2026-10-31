@@ -1,9 +1,10 @@
 "use client";
 
 import { createContext, useContext, useEffect, useId, useRef, type ReactNode } from "react";
+import { CheckIcon, CloseIcon } from "./icons";
 import { inputClass } from "./ui";
 
-/** Form and layout primitives: big tap targets, labelled inputs, dark theme. */
+/** Form and layout primitives: big tap targets, labelled inputs (Material 3 inspired). */
 
 /** Id of the control a <Field> labels; inputs inside a Field adopt it. */
 const FieldContext = createContext<string | undefined>(undefined);
@@ -30,11 +31,11 @@ export function Field({
   // The hint isn't part of the label so it doesn't become part of the input's accessible name.
   return (
     <div className="flex flex-col gap-1.5 text-sm">
-      <label htmlFor={id} className="font-medium text-zinc-300">
+      <label htmlFor={id} className="px-1 font-medium text-on-surface-variant">
         {label}
       </label>
       <FieldContext.Provider value={id}>{children}</FieldContext.Provider>
-      {hint && <span className="text-xs text-zinc-500">{hint}</span>}
+      {hint && <span className="px-1 text-xs text-on-surface-variant">{hint}</span>}
     </div>
   );
 }
@@ -89,7 +90,8 @@ export function Select<T extends string>({
       id={id}
       value={value}
       onChange={(e) => onChange(e.target.value as T)}
-      className={`${inputClass} appearance-none`}
+      className={`${inputClass} appearance-none bg-[length:20px] bg-[right_14px_center] bg-no-repeat pr-11`}
+      style={{ backgroundImage: SELECT_ARROW }}
     >
       {options.map((o) => (
         <option key={o.value} value={o.value}>
@@ -100,7 +102,10 @@ export function Select<T extends string>({
   );
 }
 
-/** Pick one of a few options with large buttons. */
+const SELECT_ARROW =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23767680' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E\")";
+
+/** Pick one of a few options: M3 segmented buttons (selected segment is tonal, with a check). */
 export function Segmented<T extends string | number>({
   value,
   onChange,
@@ -116,7 +121,7 @@ export function Segmented<T extends string | number>({
     <div
       role="radiogroup"
       aria-label={label}
-      className="grid grid-flow-col auto-cols-fr divide-x divide-zinc-100 border border-zinc-100"
+      className="grid auto-cols-fr grid-flow-col divide-x divide-outline overflow-hidden rounded-full border border-outline"
     >
       {options.map((o) => {
         const active = o.value === value;
@@ -127,10 +132,13 @@ export function Segmented<T extends string | number>({
             role="radio"
             aria-checked={active}
             onClick={() => onChange(o.value)}
-            className={`min-h-12 px-2 text-sm font-semibold ${
-              active ? "bg-zinc-100 text-zinc-950" : "bg-transparent text-zinc-300"
+            className={`inline-flex min-h-12 items-center justify-center gap-1 px-1.5 text-sm font-semibold transition-colors ${
+              active
+                ? "bg-secondary-container text-on-secondary-container"
+                : "text-on-surface hover:bg-on-surface/8"
             }`}
           >
+            {active && <CheckIcon size={16} className="shrink-0" />}
             {o.label}
           </button>
         );
@@ -153,10 +161,13 @@ export function Chip({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`min-h-10 shrink-0 rounded-sm border px-3 text-sm ${
-        active ? "border-zinc-100 bg-zinc-100 text-zinc-950" : "border-zinc-700 text-zinc-300"
+      className={`inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-chip px-3 text-sm font-medium transition-colors ${
+        active
+          ? "bg-secondary-container text-on-secondary-container"
+          : "border border-outline-variant text-on-surface-variant hover:bg-on-surface/8"
       }`}
     >
+      {active && <CheckIcon size={16} className="-ml-0.5 shrink-0" />}
       {children}
     </button>
   );
@@ -166,18 +177,20 @@ export function Badge({
   tone = "neutral",
   children,
 }: {
-  tone?: "neutral" | "good" | "warn" | "bad";
+  tone?: "neutral" | "good" | "warn" | "bad" | "accent";
   children: ReactNode;
 }) {
+  // Tonal M3 chips, no borders: good = primary, warn/accent = tertiary, bad = error.
   const tones = {
-    neutral: "border-zinc-700 text-zinc-400",
-    good: "border-zinc-100 text-zinc-100",
-    warn: "border-amber-400 text-amber-300",
-    bad: "border-red-500 text-red-300",
+    neutral: "bg-surface-container-highest text-on-surface-variant",
+    good: "bg-primary-container text-on-primary-container",
+    warn: "bg-tertiary-container text-on-tertiary-container",
+    accent: "bg-tertiary-container text-on-tertiary-container",
+    bad: "bg-error-container text-on-error-container",
   };
   return (
     <span
-      className={`rounded-sm border px-1.5 py-px text-xs font-medium uppercase tracking-wide ${tones[tone]}`}
+      className={`inline-flex shrink-0 items-center rounded-chip px-2 py-1 text-xs font-semibold whitespace-nowrap ${tones[tone]}`}
     >
       {children}
     </span>
@@ -215,29 +228,29 @@ export function Sheet({
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
-      className="fixed inset-0 z-30 flex flex-col bg-zinc-950"
+      className="fixed inset-0 z-30 flex flex-col bg-surface"
     >
-      <div className="border-b-2 border-zinc-100 pt-[env(safe-area-inset-top)]">
-        <div className="mx-auto flex max-w-lg items-center justify-between gap-2 px-4 py-2">
-          <h2 id={titleId} className="truncate text-xl">
-            {title}
-          </h2>
+      <div className="bg-surface pt-[env(safe-area-inset-top)]">
+        <div className="mx-auto flex min-h-16 max-w-lg items-center gap-1 px-1">
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="min-h-11 min-w-11 rounded-full text-2xl leading-none text-zinc-400"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-on-surface hover:bg-on-surface/8"
             aria-label="Close"
           >
-            ×
+            <CloseIcon size={24} />
           </button>
+          <h2 id={titleId} className="truncate text-[22px] leading-7 font-normal">
+            {title}
+          </h2>
         </div>
       </div>
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto flex max-w-lg flex-col gap-4 px-4 py-4">{children}</div>
       </div>
       {footer && (
-        <div className="border-t border-zinc-800 pb-[env(safe-area-inset-bottom)]">
+        <div className="bg-surface-container pb-[env(safe-area-inset-bottom)]">
           <div className="mx-auto flex max-w-lg gap-2 px-4 py-3">{footer}</div>
         </div>
       )}
@@ -247,7 +260,7 @@ export function Sheet({
 
 export function EmptyState({ children }: { children: ReactNode }) {
   return (
-    <p className="rounded-2xl border border-dashed border-zinc-700 p-6 text-center text-sm text-zinc-400">
+    <p className="rounded-card bg-surface-container-low px-6 py-8 text-center text-sm text-on-surface-variant">
       {children}
     </p>
   );

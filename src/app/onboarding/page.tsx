@@ -3,9 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Field, Segmented, TextInput } from "@/components/forms";
+import { SegmentedProgress } from "@/components/celebration-card";
+import { EquipmentSchematic } from "@/components/schematics";
 import { Button, Notice } from "@/components/ui";
 import { addFromTemplate, createGym, saveProfile } from "@/data/actions";
-import type { Profile } from "@/data/schema";
+import type { EquipmentType, Profile } from "@/data/schema";
 import { useRecords } from "@/hooks/use-data";
 import { EQUIPMENT_TYPE_LABELS } from "@/lib/labels";
 import { EQUIPMENT_TEMPLATES } from "@/seed/catalog";
@@ -22,6 +24,7 @@ const STARTER = new Set([
 ]);
 
 type Step = "goal" | "schedule" | "gym";
+const STEPS: Step[] = ["goal", "schedule", "gym"];
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -72,7 +75,19 @@ export default function OnboardingPage() {
 
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-2xl font-bold">Welcome to Gainpath</h1>
+      <div className="flex flex-col gap-1 px-1">
+        <h1>Welcome to Gainpath</h1>
+        <p className="text-sm text-on-surface-variant">
+          Step {STEPS.indexOf(step) + 1} of {STEPS.length}:{" "}
+          {step === "goal" ? "your goal" : step === "schedule" ? "your week" : "your gym"}
+        </p>
+        <SegmentedProgress
+          done={STEPS.indexOf(step) + 1}
+          total={STEPS.length}
+          tone="primary"
+          label={`Step ${STEPS.indexOf(step) + 1} of ${STEPS.length}`}
+        />
+      </div>
       {step === "goal" && (
         <>
           <Field label="Main goal">
@@ -99,7 +114,7 @@ export default function OnboardingPage() {
               ]}
             />
           </Field>
-          <Button variant="primary" onClick={() => setStep("schedule")}>
+          <Button variant="primary" size="lg" onClick={() => setStep("schedule")}>
             Next
           </Button>
         </>
@@ -124,8 +139,10 @@ export default function OnboardingPage() {
             />
           </Field>
           <div className="flex gap-2">
-            <Button onClick={() => setStep("goal")}>Back</Button>
-            <Button variant="primary" onClick={() => setStep("gym")}>
+            <Button variant="tonal" size="lg" onClick={() => setStep("goal")}>
+              Back
+            </Button>
+            <Button variant="primary" size="lg" onClick={() => setStep("gym")}>
               Next
             </Button>
           </div>
@@ -155,8 +172,8 @@ export default function OnboardingPage() {
                 <TextInput value={gymName} onChange={(e) => setGymName(e.target.value)} />
               </Field>
               <div>
-                <p className="mb-2 text-sm font-medium text-zinc-300">What&apos;s in your gym?</p>
-                <p className="mb-3 text-xs text-zinc-500">
+                <p className="mb-1 px-1 text-title">What&apos;s in your gym?</p>
+                <p className="mb-3 px-1 text-xs text-on-surface-variant">
                   Starting points only: you can edit every item, add your own machines and set exact
                   weight ranges in My gym.
                 </p>
@@ -164,17 +181,24 @@ export default function OnboardingPage() {
                   const items = EQUIPMENT_TEMPLATES.filter((t) => t.type === type);
                   if (items.length === 0) return null;
                   return (
-                    <div key={type} className="mb-3">
-                      <p className="mb-1 text-xs uppercase tracking-wide text-zinc-500">{label}</p>
-                      <div className="flex flex-col gap-1">
+                    <div key={type} className="mb-3 rounded-card bg-surface-container-low py-2">
+                      <p className="flex items-center gap-3 px-4 pt-2 pb-1 text-title">
+                        <EquipmentSchematic
+                          type={type as EquipmentType}
+                          size={24}
+                          className="text-on-surface-variant"
+                        />
+                        {label}
+                      </p>
+                      <div className="flex flex-col">
                         {items.map((t) => (
                           <label
                             key={t.id}
-                            className="flex min-h-12 items-center gap-3 rounded-xl border border-zinc-800 px-3"
+                            className="flex min-h-12 items-center gap-3 px-4 hover:bg-on-surface/5"
                           >
                             <input
                               type="checkbox"
-                              className="h-5 w-5 accent-lime-400"
+                              className="h-5 w-5 accent-primary"
                               checked={templates.has(t.id)}
                               onChange={() => toggle(t.id)}
                             />
@@ -190,8 +214,10 @@ export default function OnboardingPage() {
           )}
           {error && <Notice tone="error">{error}</Notice>}
           <div className="flex gap-2">
-            <Button onClick={() => setStep("schedule")}>Back</Button>
-            <Button variant="primary" disabled={busy} onClick={finish}>
+            <Button variant="tonal" size="lg" onClick={() => setStep("schedule")}>
+              Back
+            </Button>
+            <Button variant="primary" size="lg" disabled={busy} onClick={finish}>
               Finish
             </Button>
           </div>

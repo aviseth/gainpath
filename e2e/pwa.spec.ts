@@ -15,7 +15,9 @@ test("installable manifest and offline training after the first visit", async ({
   await page.getByRole("button", { name: "Next" }).click();
   await page.getByLabel("Gym name").fill("Garage");
   await page.getByRole("button", { name: "Finish" }).click();
-  await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: /^(Morning|Afternoon|Evening)/ }),
+  ).toBeVisible();
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
   });
@@ -24,7 +26,9 @@ test("installable manifest and offline training after the first visit", async ({
   // Offline: a cold load still opens the app with local data.
   await context.setOffline(true);
   await page.reload();
-  await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: /^(Morning|Afternoon|Evening)/ }),
+  ).toBeVisible();
   await page.goto("/gym");
   await expect(page.getByRole("heading", { name: "My gym" })).toBeVisible();
   await page.goto("/session");

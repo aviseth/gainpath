@@ -8,7 +8,9 @@ test("check-in, generated session, logging, swapping and finishing", async ({ pa
   await page.getByRole("button", { name: "Next" }).click();
   await page.getByLabel("Gym name").fill("Home");
   await page.getByRole("button", { name: "Finish" }).click();
-  await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: /^(Morning|Afternoon|Evening)/ }),
+  ).toBeVisible();
 
   // Daily check-in (manual readiness provider).
   await page
@@ -19,7 +21,7 @@ test("check-in, generated session, logging, swapping and finishing", async ({ pa
   await page.getByRole("button", { name: "Save check-in" }).click();
 
   // A deterministic session is generated with an explanation (no AI involved).
-  await expect(page.getByRole("heading", { name: "Today's session" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Today's path" })).toBeVisible();
   await page.getByRole("button", { name: "Why does today look like this?" }).click();
   await expect(page.getByRole("dialog")).toContainText(/VOL-|READY-|PROG-/);
   await page.getByRole("button", { name: "Close" }).click();
@@ -53,7 +55,9 @@ test("check-in, generated session, logging, swapping and finishing", async ({ pa
 
   page.once("dialog", (d) => void d.accept());
   await page.getByRole("button", { name: "Finish session" }).click();
-  await expect(page.getByRole("heading", { name: "Today", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: /^(Morning|Afternoon|Evening)/ }),
+  ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Done for today" })).toBeVisible();
 
   // Progress shows the logged set's e1RM and this week's volume.

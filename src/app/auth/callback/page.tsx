@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { Notice } from "@/components/ui";
+import { Notice, linkClass } from "@/components/ui";
 import { friendlyAuthError } from "@/lib/auth";
 import { getSupabase, isSupabaseConfigured } from "@/lib/supabase";
 
@@ -57,19 +57,16 @@ export default function AuthCallbackPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Signing in…</h1>
+      <h1 className="px-1">Signing in…</h1>
       {error ? (
         <>
           <Notice tone="error">{error}</Notice>
-          <Link
-            href="/settings"
-            className="text-zinc-100 underline decoration-1 underline-offset-4"
-          >
+          <Link href="/settings" className={linkClass}>
             Back to settings
           </Link>
         </>
       ) : (
-        <p className="text-zinc-400">One moment.</p>
+        <p className="text-on-surface-variant">One moment.</p>
       )}
     </div>
   );

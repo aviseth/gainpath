@@ -108,12 +108,12 @@ export function EquipmentForm({
       </Field>
 
       {showSuggestion && suggestion && (
-        <div className="border-l-2 border-zinc-100 bg-zinc-900 p-3 text-sm">
-          <p className="text-lime-200">
+        <div className="rounded-[20px] bg-secondary-container p-4 text-sm text-on-secondary-container">
+          <p>
             Looks like a {EQUIPMENT_TYPE_SHORT[suggestion.type].toLowerCase()} machine for:{" "}
             {suggestion.exerciseIds.map((id) => catalog.get(id)?.name ?? id).join(", ")}.
           </p>
-          <div className="mt-2 flex gap-2">
+          <div className="mt-3 flex gap-2">
             <Button
               variant="primary"
               onClick={() =>
@@ -126,7 +126,9 @@ export function EquipmentForm({
             >
               Use this
             </Button>
-            <Button onClick={() => setDismissed(suggestionKey)}>Not it</Button>
+            <Button variant="text" onClick={() => setDismissed(suggestionKey)}>
+              Not it
+            </Button>
           </div>
         </div>
       )}
@@ -207,7 +209,9 @@ export function EquipmentForm({
       </Field>
 
       <div>
-        <p className="mb-2 text-sm font-medium text-zinc-300">Exercises this machine supports</p>
+        <p className="mb-2 px-1 text-sm font-medium text-on-surface-variant">
+          Exercises this machine supports
+        </p>
         <ExercisePicker
           catalog={catalog}
           selected={draft.exerciseIds}

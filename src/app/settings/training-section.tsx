@@ -54,13 +54,13 @@ export function TrainingSection() {
       <label className="flex min-h-12 items-center justify-between gap-3 text-sm">
         <span>
           <span className="font-medium">Time-saver mode</span>
-          <span className="block text-xs text-zinc-500">
+          <span className="block text-xs text-on-surface-variant">
             60 s rests. Shorter rests trade a little muscle growth for time (REST-1).
           </span>
         </span>
         <input
           type="checkbox"
-          className="h-6 w-6 accent-lime-400"
+          className="h-6 w-6 accent-primary"
           checked={profile.time_saver_mode}
           onChange={(e) => void saveProfile({ time_saver_mode: e.target.checked })}
         />

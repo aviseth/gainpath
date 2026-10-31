@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ExerciseSummary } from "@/components/exercise-summary";
 import { Segmented } from "@/components/forms";
+import { CheckIcon, MinusIcon, PlusIcon, SkipIcon, SwapIcon } from "@/components/icons";
 import { Button } from "@/components/ui";
 import type { LoggedSet } from "@/data/sessions";
 import type { RecordOf } from "@/data/schema";
@@ -17,41 +18,45 @@ function Stepper({
   label,
   value,
   display,
+  unit,
   onDown,
   onUp,
 }: {
   label: string;
   value: number | null;
   display: string;
+  /** Shown small under the value, so the number itself has room. */
+  unit?: string;
   onDown: () => void;
   onUp: () => void;
 }) {
   return (
-    <div className="flex flex-col items-center gap-1">
-      <span className="text-xs text-zinc-400">{label}</span>
-      <div className="flex items-center gap-1">
+    <div className="flex flex-1 flex-col items-center gap-1.5 rounded-[20px] bg-surface-container-lowest px-2 py-3">
+      <span className="text-label text-on-surface-variant">{label}</span>
+      <div className="flex w-full items-center justify-between gap-1">
         <button
           type="button"
           aria-label={`Less ${label.toLowerCase()}`}
           onClick={onDown}
-          className="h-12 w-12 rounded-sm border border-zinc-100 text-2xl"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container active:bg-secondary-container/70"
         >
-          −
+          <MinusIcon size={22} />
         </button>
         <output
           aria-label={label}
-          className="min-w-20 text-center text-xl font-bold tabular-nums"
+          className="flex min-w-0 flex-col items-center leading-none"
           data-value={value ?? ""}
         >
-          {display}
+          <span className="text-[22px] font-bold whitespace-nowrap tabular-nums">{display}</span>
+          {unit && <span className="mt-0.5 text-xs text-on-surface-variant">{unit}</span>}
         </output>
         <button
           type="button"
           aria-label={`More ${label.toLowerCase()}`}
           onClick={onUp}
-          className="h-12 w-12 rounded-sm border border-zinc-100 text-2xl"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary-container text-on-secondary-container active:bg-secondary-container/70"
         >
-          +
+          <PlusIcon size={22} />
         </button>
       </div>
     </div>
@@ -65,6 +70,7 @@ export function ExerciseCard({
   equipmentById,
   logs,
   current,
+  lead = live.isAnchor,
   onLog,
   onSwap,
   onSkip,
@@ -76,6 +82,8 @@ export function ExerciseCard({
   equipmentById: ReadonlyMap<string, Equipment>;
   logs: RecordOf<"set_logs">[];
   current: boolean;
+  /** This is the one highlighted anchor (Von Restorff). */
+  lead?: boolean;
   onLog: (set: LoggedSet) => Promise<void>;
   onSwap: () => void;
   onSkip: () => void;
@@ -129,14 +137,21 @@ export function ExerciseCard({
   return (
     <article
       aria-label={exercise?.name}
-      className={`border-t-2 pt-3 pb-4 ${current ? "border-lime-400" : "border-zinc-100"}`}
+      className={`rounded-card p-4 ${
+        current ? "bg-surface-container ring-2 ring-primary/60" : "bg-surface-container-low"
+      }`}
     >
-      <ExerciseSummary e={live} exercise={exercise} equipment={equipmentById} />
-      {equipment?.notes && <p className="mt-1 text-xs text-amber-200">{equipment.notes}</p>}
+      {current && (
+        <p className="mb-2 px-1 text-label font-semibold text-primary">
+          Now · set {setsDone(live, logs) + 1} of {live.setsTarget}
+        </p>
+      )}
+      <ExerciseSummary e={live} exercise={exercise} equipment={equipmentById} lead={lead} />
+      {equipment?.notes && <p className="mt-2 px-1 text-xs text-tertiary">{equipment.notes}</p>}
 
       {pending && live.warmups.length > 0 && working.length === 0 && (
         <div className="mt-3">
-          <p className="text-xs uppercase tracking-wide text-zinc-500">Warm-up</p>
+          <p className="px-1 text-label text-on-surface-variant">Warm-up</p>
           <ul className="mt-1 flex flex-col gap-1">
             {live.warmups.map((w, i) => (
               <li key={i}>
@@ -146,12 +161,16 @@ export function ExerciseCard({
                   onClick={() =>
                     void onLog({ weightKg: w.weightKg, reps: w.reps, rpe: null, isWarmup: true })
                   }
-                  className="flex min-h-11 w-full items-center justify-between rounded-lg bg-zinc-950 px-3 text-sm disabled:opacity-50"
+                  className="flex min-h-12 w-full items-center justify-between rounded-2xl bg-surface-container-lowest px-4 text-sm disabled:opacity-60"
                 >
-                  <span>
+                  <span className="tabular-nums">
                     {formatKg(w.weightKg)} × {w.reps}
                   </span>
-                  <span>{i < warmupsDone ? "✓" : "Done"}</span>
+                  {i < warmupsDone ? (
+                    <CheckIcon size={18} className="text-primary" />
+                  ) : (
+                    <span className="font-semibold text-primary">Done</span>
+                  )}
                 </button>
               </li>
             ))}
@@ -162,12 +181,16 @@ export function ExerciseCard({
       {working.length > 0 && (
         <ol className="mt-3 flex flex-col gap-1 text-sm">
           {working.map((l, i) => (
-            <li key={l.id} className="flex justify-between rounded-lg bg-zinc-950 px-3 py-2">
-              <span>
+            <li
+              key={l.id}
+              className="flex items-center justify-between rounded-2xl bg-surface-container-lowest px-4 py-2.5"
+            >
+              <span className="flex items-center gap-2">
+                <CheckIcon size={16} className="text-primary" />
                 Set {i + 1}
                 {l.is_amrap ? " (AMRAP)" : ""}
               </span>
-              <span className="tabular-nums">
+              <span className="tabular-nums text-on-surface-variant">
                 {l.weight_kg > 0 ? `${formatKg(l.weight_kg)} × ` : ""}
                 {l.reps}
                 {live.timed ? "s" : ""} {l.rpe !== null ? `@ RPE ${l.rpe}` : ""}
@@ -179,16 +202,13 @@ export function ExerciseCard({
 
       {pending && current && (
         <div className="mt-4 flex flex-col gap-4">
-          <p className="text-sm text-zinc-400">
-            Set {setsDone(live, logs) + 1} of {live.setsTarget}
-          </p>
           {amrapNext && (
-            <div className="rounded-xl border border-amber-400/30 bg-amber-400/10 p-3 text-sm text-amber-100">
-              <p className="font-medium">Calibration set: take it to failure (AMRAP).</p>
+            <div className="rounded-[20px] bg-tertiary-container p-4 text-sm text-on-tertiary-container">
+              <p className="font-semibold">Calibration set: take it to failure (AMRAP).</p>
               <p className="mt-1">
                 Before you start: at {live.targetReps} reps, how many more could you do?
               </p>
-              <div className="mt-2">
+              <div className="mt-3">
                 <Segmented
                   label="Predicted reps in reserve"
                   value={live.predictedRir ?? -1}
@@ -198,12 +218,13 @@ export function ExerciseCard({
               </div>
             </div>
           )}
-          <div className="flex flex-wrap justify-around gap-3">
+          <div className="flex gap-2">
             {hasLoad && (
               <Stepper
                 label="Weight"
                 value={weight}
-                display={formatKg(weight)}
+                display={weight === null ? "–" : String(Number(weight.toFixed(2)))}
+                unit="kg"
                 onDown={() => step(-1)}
                 onUp={() => step(1)}
               />
@@ -218,11 +239,11 @@ export function ExerciseCard({
           </div>
           {!amrapNext && (
             <div>
-              <p className="mb-1 text-xs text-zinc-400">
-                RPE{" "}
+              <p className="mb-2 px-1 text-xs text-on-surface-variant">
+                <span className="font-semibold text-on-surface">RPE</span>{" "}
                 {rpe !== null
-                  ? `(${Math.max(0, 10 - rpe)} reps in reserve)`
-                  : "(how hard? 10 = nothing left)"}
+                  ? `· ${Math.max(0, 10 - rpe)} reps in reserve`
+                  : "· how hard? 10 = nothing left"}
               </p>
               <div role="radiogroup" aria-label="RPE" className="grid grid-cols-5 gap-1.5">
                 {RPES.map((r) => (
@@ -232,10 +253,10 @@ export function ExerciseCard({
                     role="radio"
                     aria-checked={rpe === r}
                     onClick={() => setRpe(r)}
-                    className={`min-h-11 rounded-lg border text-sm font-semibold ${
+                    className={`min-h-11 rounded-xl text-sm font-semibold tabular-nums transition-colors ${
                       rpe === r
-                        ? "border-zinc-100 bg-zinc-100 text-zinc-950"
-                        : "border-zinc-700 bg-zinc-950"
+                        ? "bg-primary text-on-primary"
+                        : "bg-surface-container-lowest text-on-surface hover:bg-on-surface/8"
                     }`}
                   >
                     {r}
@@ -244,9 +265,11 @@ export function ExerciseCard({
               </div>
             </div>
           )}
+          {/* Fitts: the main action is the biggest target, right under the thumb after RPE. */}
           <Button
             variant="primary"
-            className="bg-lime-400! hover:bg-lime-500! text-white!"
+            size="lg"
+            className="min-h-16"
             disabled={
               busy || (!amrapNext && rpe === null) || (amrapNext && live.predictedRir == null)
             }
@@ -259,8 +282,14 @@ export function ExerciseCard({
 
       {pending && (
         <div className="mt-3 grid grid-cols-2 gap-2">
-          <Button onClick={onSwap}>Swap</Button>
-          <Button onClick={onSkip}>Skip</Button>
+          <Button variant="tonal" onClick={onSwap}>
+            <SwapIcon size={18} />
+            Swap
+          </Button>
+          <Button variant="tonal" onClick={onSkip}>
+            <SkipIcon size={18} />
+            Skip
+          </Button>
         </div>
       )}
     </article>

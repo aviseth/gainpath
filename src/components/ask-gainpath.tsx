@@ -72,28 +72,30 @@ export function AskGainpath({ onClose }: { onClose: () => void }) {
 
   return (
     <Sheet title="Ask Gainpath" onClose={onClose}>
-      <p className="text-xs text-zinc-500">
+      <p className="text-xs text-on-surface-variant">
         AI answers using your own data via the app&apos;s engine. Each question counts toward
         today&apos;s AI limit.
       </p>
       <div className="flex flex-col gap-2" aria-live="polite">
         {lines.map((line, i) =>
           line.kind === "tool" ? (
-            <p key={i} className="text-xs text-zinc-500">
-              ⚙ {line.text}
+            <p key={i} className="px-1 text-xs italic text-on-surface-variant">
+              {line.text}
             </p>
           ) : (
             <p
               key={i}
               className={`whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm ${
-                line.kind === "user" ? "self-end bg-zinc-100 text-zinc-950" : "bg-zinc-900"
+                line.kind === "user"
+                  ? "self-end bg-primary-container text-on-primary-container"
+                  : "bg-surface-container-low"
               }`}
             >
               {line.text}
             </p>
           ),
         )}
-        {busy && <p className="text-sm text-zinc-400">Thinking…</p>}
+        {busy && <p className="text-sm text-on-surface-variant">Thinking…</p>}
       </div>
       {error && <Notice>{error}</Notice>}
       <form

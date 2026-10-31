@@ -13,7 +13,7 @@ export const metadata: Metadata = { title: "Settings · Gainpath" };
 export default function SettingsPage() {
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Settings</h1>
+      <h1 className="px-1">Settings</h1>
       <TrainingSection />
       <AccountSection />
       <SyncSection />

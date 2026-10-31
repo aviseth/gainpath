@@ -9,7 +9,9 @@ test("onboarding, then registering and managing gym equipment", async ({ page })
   await page.getByRole("button", { name: "Next" }).click();
   await page.getByLabel("Gym name").fill("Test Gym");
   await page.getByRole("button", { name: "Finish" }).click();
-  await expect(page.getByRole("heading", { name: "Today" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { level: 1, name: /^(Morning|Afternoon|Evening)/ }),
+  ).toBeVisible();
 
   // Starter templates were registered.
   await page.getByRole("link", { name: "Gym", exact: true }).click();
