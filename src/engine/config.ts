@@ -161,6 +161,13 @@ export const CONFIG = {
   similarExerciseCosine: h(0.8, 0.5, 1, "PROG-3", "Similarity needed to borrow an e1RM"),
   fallbackSteps: h(2, 0, 6, "PROG-2", "Unknown load: equipment steps above minimum"),
   fallbackRir: h(4, 2, 6, "PROG-2", "Unknown load: target RIR for the first set"),
+  fallbackIsolationFactor: h(
+    0.5,
+    0.25,
+    1,
+    "PROG-2",
+    "Unknown isolation load: fraction of the lightest compound load on that equipment",
+  ),
 
   // §17 parser
   rpeGrind: h(9.5, 8.5, 10, "EFF-3", "RPE for 'grind'"),

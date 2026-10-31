@@ -162,7 +162,14 @@ export async function loadTrainingContext(
   const start = weekStart(now);
   const sessions = alive(await db.sessions.toArray());
   const thisWeek = sessions.filter((s) => new Date(`${s.date}T12:00:00`).getTime() >= start);
-  const completed = thisWeek.filter((s) => s.status === "done" && s.date !== date).length;
+  // A training day counts once whether it was a finished session here or sets logged
+  // without one (e.g. imported history), so Today and Progress agree.
+  const trainedDays = new Set(
+    thisWeek.filter((s) => s.status === "done" && s.date !== date).map((s) => s.date),
+  );
+  for (const s of history)
+    if (!s.is_warmup && s.ts >= start && localDate(s.ts) < date) trainedDays.add(localDate(s.ts));
+  const completed = trainedDays.size;
   const carry = add(...thisWeek.map((s) => readLive(s)?.carry ?? {}));
   const lastDone = sessions
     .filter((s) => s.status === "done" && s.date !== date)

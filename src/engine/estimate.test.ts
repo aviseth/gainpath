@@ -76,4 +76,71 @@ describe("new exercise / machine estimates (ALGORITHMS §15)", () => {
     });
     expect(r).toEqual({ kind: "fallback", weightKg: 15, targetRir: 4 });
   });
+
+  describe("no e1RM to borrow, but loads lifted on this equipment (PROG-2, HEURISTIC)", () => {
+    const rack = eq("free_weights", {
+      min_kg: 0.5,
+      max_kg: 22,
+      increment_kg: 2,
+      weights_kg: [0.5, 1, 1.5, 2, 3, 6, 7, 8, 10, 12, 14],
+    });
+    const compoundLoads = [
+      { kind: "compound" as const, weightKg: 10 },
+      { kind: "compound" as const, weightKg: 7 },
+      { kind: "compound" as const, weightKg: 14 },
+    ];
+
+    it("an isolation with only compound history starts at half the lightest compound load", () => {
+      const r = estimateStart({
+        exercise: curl,
+        equipment: rack,
+        known: [],
+        catalog,
+        ratios,
+        equipmentLoads: compoundLoads,
+        cfg,
+      });
+      // 7 × 0.5 = 3.5 → rounds down to the 3 kg dumbbell, instead of 1.5 kg (min + 2 steps).
+      expect(r).toEqual({ kind: "fallback", weightKg: 3, targetRir: 4 });
+    });
+
+    it("prefers the lightest load of the same kind of exercise, unscaled", () => {
+      const r = estimateStart({
+        exercise: curl,
+        equipment: rack,
+        known: [],
+        catalog,
+        ratios,
+        equipmentLoads: [...compoundLoads, { kind: "isolation", weightKg: 6 }],
+        cfg,
+      });
+      expect(r).toEqual({ kind: "fallback", weightKg: 6, targetRir: 4 });
+    });
+
+    it("a compound with only isolation history falls back to minimum + 2 steps", () => {
+      const r = estimateStart({
+        exercise: dbPress,
+        equipment: newMachine,
+        known: [],
+        catalog: catalogOf(curl, dbPress),
+        ratios: [],
+        equipmentLoads: [{ kind: "isolation", weightKg: 40 }],
+        cfg,
+      });
+      expect(r).toEqual({ kind: "fallback", weightKg: 15, targetRir: 4 });
+    });
+
+    it("a compound uses the lightest compound load", () => {
+      const r = estimateStart({
+        exercise: dbPress,
+        equipment: rack,
+        known: [],
+        catalog: catalogOf(curl, dbPress),
+        ratios: [],
+        equipmentLoads: compoundLoads,
+        cfg,
+      });
+      expect(r).toEqual({ kind: "fallback", weightKg: 7, targetRir: 4 });
+    });
+  });
 });

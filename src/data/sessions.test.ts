@@ -48,6 +48,42 @@ async function setup(): Promise<GainpathDB> {
   return db;
 }
 
+describe("week bookkeeping", () => {
+  it("counts a day of logged sets without a session (e.g. imported history) as trained", async () => {
+    const db = await setup();
+    const now = new Date(2026, 9, 29, 12).getTime(); // Thursday
+    const before = await loadTrainingContext(db, now);
+    const eq = (await repo("equipment", db).list())[0]!;
+    // Monday and Tuesday: sets only, no session rows. Wednesday: warm-ups only.
+    const logs: [Date, boolean][] = [
+      [new Date(2026, 9, 26, 10), false],
+      [new Date(2026, 9, 26, 10, 5), false],
+      [new Date(2026, 9, 27, 18), false],
+      [new Date(2026, 9, 28, 18), true],
+      [new Date(2026, 9, 30, 9), false], // Friday: after "now", must not count
+    ];
+    for (const [at, warmup] of logs) {
+      await repo("set_logs", db).create({
+        session_id: null,
+        exercise_id: "machine_chest_press",
+        equipment_id: eq.id,
+        ts: at.getTime(),
+        weight_kg: 20,
+        reps: 10,
+        rpe: 8,
+        rir: null,
+        is_warmup: warmup,
+        is_amrap: false,
+        predicted_rir: null,
+        approximate: false,
+      });
+    }
+    const after = await loadTrainingContext(db, now);
+    expect(before!.week.completed).toBe(0);
+    expect(after!.week.completed).toBe(2);
+  });
+});
+
 describe("session service", () => {
   it("generates and stores today's session, replacing an unstarted plan", async () => {
     const db = await setup();

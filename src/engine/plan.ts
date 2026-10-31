@@ -320,6 +320,12 @@ export function planExercise(
           known: input.knownE1rms,
           catalog: input.catalog,
           ratios: input.ratios,
+          equipmentLoads: history
+            .filter((s) => s.equipment_id === eqId && !s.is_warmup && s.weight_kg > 0)
+            .flatMap((s) => {
+              const kind = input.catalog.get(s.exercise_id)?.kind;
+              return kind ? [{ kind, weightKg: s.weight_kg }] : [];
+            }),
           cfg,
         });
     if (known) {

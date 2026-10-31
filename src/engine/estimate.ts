@@ -1,5 +1,5 @@
 import type { Config } from "./config";
-import { availableLoads, type LoadRange } from "./load";
+import { availableLoads, roundToEquipment, type LoadRange } from "./load";
 import { cosine } from "./vector";
 import type { Equipment, Exercise } from "./types";
 
@@ -48,6 +48,8 @@ export function estimateStart(params: {
   known: readonly KnownE1rm[];
   catalog: ReadonlyMap<string, Exercise>;
   ratios: readonly LoadRatio[];
+  /** Working loads already lifted on this equipment (any exercise), for step 3. */
+  equipmentLoads?: readonly { kind: Exercise["kind"]; weightKg: number }[];
   cfg: Config;
 }): Estimate {
   const { exercise, equipment, known, cfg } = params;
@@ -91,8 +93,26 @@ export function estimateStart(params: {
     };
   }
 
-  // 3. Nothing to go on: a few steps above the machine's minimum, well short of failure.
-  const loads = equipment ? availableLoads(equipment) : [0];
-  const index = Math.min(loads.length - 1, Math.max(0, Math.round(cfg.fallbackSteps)));
-  return { kind: "fallback", weightKg: loads[index] ?? 0, targetRir: cfg.fallbackRir };
+  // 3. HEURISTIC (PROG-2): no e1RM to borrow, but the user has lifted on this equipment: start
+  // at their lightest working load there for the same kind of exercise. An isolation
+  // with only compound history takes a fraction of it. Still RIR 4 on the first set (§15).
+  const loads = params.equipmentLoads?.filter((l) => l.weightKg > 0) ?? [];
+  if (equipment && loads.length > 0) {
+    const sameKind = loads.filter((l) => l.kind === exercise.kind);
+    // Only an isolation borrows across kinds (scaled down); a compound never starts
+    // from isolation loads, which say little about what it can move.
+    const crossKind = exercise.kind === "isolation" ? loads : [];
+    const pool = sameKind.length > 0 ? sameKind : crossKind;
+    if (pool.length > 0) {
+      const factor = sameKind.length > 0 ? 1 : cfg.fallbackIsolationFactor;
+      const lightest = Math.min(...pool.map((l) => l.weightKg));
+      const weightKg = roundToEquipment(lightest * factor, equipment);
+      if (weightKg > 0) return { kind: "fallback", weightKg, targetRir: cfg.fallbackRir };
+    }
+  }
+
+  // 4. Nothing to go on: a few steps above the machine's minimum, well short of failure.
+  const steps = equipment ? availableLoads(equipment) : [0];
+  const index = Math.min(steps.length - 1, Math.max(0, Math.round(cfg.fallbackSteps)));
+  return { kind: "fallback", weightKg: steps[index] ?? 0, targetRir: cfg.fallbackRir };
 }
