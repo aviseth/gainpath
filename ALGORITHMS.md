@@ -265,6 +265,9 @@ For compounds with working load ≥ 40 kg (or ≥ 50% e1RM): ramp 40% × 8, 60% 
 if same exercise on other equipment: e1RM × 0.85
 elif exercise with cos(vector) ≥ 0.8 and same pattern: that e1RM × ratio(patternPair) × 0.8
      // ratio table seeded (H), e.g. leg_press:squat 1.8, machine_chest_press:bench 1.0, db_press (per hand):bench 0.38
+elif the user has working sets on this equipment (any exercise):                  // (H)
+     start at their lightest working load there for the same kind (compound/isolation);
+     an isolation with only compound history takes × 0.5; target RIR 4, then §9 adjusts
 else: start at equipment minimum + 2 steps, target RIR 4 for first set, then §9 adjusts
 ```
 
