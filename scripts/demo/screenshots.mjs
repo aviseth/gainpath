@@ -37,7 +37,7 @@ await page.getByText(/Imported \d+ records/).waitFor();
 
 // Today: check-in, then the generated session.
 await page.goto(`${BASE}/`);
-await page.getByRole("heading", { name: "Today", exact: true }).waitFor();
+await page.getByRole("heading", { level: 1, name: /^(Morning|Afternoon|Evening)/ }).waitFor();
 const checkin = page.getByRole("button", { name: "Save check-in" });
 if (await checkin.isVisible().catch(() => false)) {
   await shot("checkin");
@@ -48,7 +48,7 @@ if (await checkin.isVisible().catch(() => false)) {
   await page.getByRole("radiogroup", { name: "Energy" }).getByRole("radio", { name: "4" }).click();
   await checkin.click();
 }
-await page.getByRole("heading", { name: "Today's session" }).waitFor();
+await page.getByRole("heading", { name: "Today's path" }).waitFor();
 await shot("today");
 
 await page.getByRole("button", { name: "Why does today look like this?" }).click();

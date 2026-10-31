@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Badge, Field, Sheet, TextInput } from "@/components/forms";
+import { StarIcon } from "@/components/icons";
+import { PatternSchematic } from "@/components/schematics";
 import { Button, Notice } from "@/components/ui";
 import { setPreference } from "@/data/actions";
 import { repo } from "@/data/repo";
@@ -37,38 +39,45 @@ export function ExerciseSheet({
 
   return (
     <Sheet title={e.name} onClose={onClose}>
-      <div className="flex flex-wrap gap-2">
-        <Badge>{capitalize(e.kind)}</Badge>
-        <Badge>{capitalize(humanize(e.pattern))}</Badge>
-        {e.custom && <Badge>Custom</Badge>}
-        {available ? (
-          <Badge tone="good">Available here</Badge>
-        ) : (
-          <Badge tone="warn">Not available here</Badge>
-        )}
+      <div className="flex items-center gap-4">
+        <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[24px] bg-surface-container-highest text-on-surface-variant">
+          <PatternSchematic pattern={e.pattern} size={56} />
+        </span>
+        <div className="flex flex-wrap gap-2">
+          <Badge>{capitalize(e.kind)}</Badge>
+          <Badge>{capitalize(humanize(e.pattern))}</Badge>
+          {e.custom && <Badge>Custom</Badge>}
+          {available ? (
+            <Badge tone="good">Available here</Badge>
+          ) : (
+            <Badge tone="warn">Not available here</Badge>
+          )}
+        </div>
       </div>
 
-      <section className="border-t-2 border-zinc-100 pt-3 text-sm">
+      <section className="rounded-card bg-surface-container-low p-5 text-sm leading-relaxed">
         <p>
-          <span className="text-zinc-400">Prime movers (1 set each): </span>
+          <span className="text-on-surface-variant">Prime movers (1 set each): </span>
           {primaryMuscles(e).map(muscleLabel).join(", ")}
         </p>
         {secondaryMuscles(e).length > 0 && (
           <p className="mt-1">
-            <span className="text-zinc-400">Synergists (½ set each): </span>
+            <span className="text-on-surface-variant">Synergists (½ set each): </span>
             {secondaryMuscles(e).map(muscleLabel).join(", ")}
           </p>
         )}
-        <p className="mt-2 text-xs text-zinc-500">Volume is counted fractionally (VOL-2).</p>
+        <p className="mt-2 text-xs text-on-surface-variant">
+          Volume is counted fractionally (VOL-2).
+        </p>
         <p className="mt-2">
-          <span className="text-zinc-400">Needs: </span>
+          <span className="text-on-surface-variant">Needs: </span>
           {e.equipment_types.length === 0
             ? "no equipment"
             : e.equipment_types.map((t) => EQUIPMENT_TYPE_SHORT[t]).join(" + ")}
         </p>
         {machines.length > 0 && (
           <p className="mt-1">
-            <span className="text-zinc-400">On: </span>
+            <span className="text-on-surface-variant">On: </span>
             {machines.map((m) => m.name).join(", ")}
           </p>
         )}
@@ -76,10 +85,12 @@ export function ExerciseSheet({
 
       <div className="grid grid-cols-2 gap-2">
         <Button
-          variant={favourite ? "primary" : "secondary"}
+          variant={favourite ? "tonal" : "secondary"}
           onClick={() => void setPreference({ exerciseId: e.id }, "favourite", !favourite)}
+          aria-pressed={favourite}
         >
-          {favourite ? "★ Favourite" : "☆ Favourite"}
+          <StarIcon filled={favourite} size={18} />
+          Favourite
         </Button>
         <Button
           variant={excluded ? "danger" : "secondary"}

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Chip, Field, NumberInput, Segmented, Select, Sheet, TextInput } from "@/components/forms";
+import { PatternSchematic, SchematicTile } from "@/components/schematics";
 import { Button, Notice } from "@/components/ui";
 import { createCustomExercise } from "@/data/actions";
 import {
@@ -102,8 +103,8 @@ export function CustomExerciseSheet({
         />
       </Field>
       <div>
-        <p className="mb-1 text-sm font-medium text-zinc-300">Muscles worked</p>
-        <p className="mb-2 text-xs text-zinc-500">
+        <p className="mb-1 px-1 text-sm font-medium text-on-surface-variant">Muscles worked</p>
+        <p className="mb-2 px-1 text-xs text-on-surface-variant">
           Tap once for a prime mover (counts 1 set), twice for a synergist (½ set), three times to
           clear.
         </p>
@@ -116,13 +117,20 @@ export function CustomExerciseSheet({
           ))}
         </div>
       </div>
-      <Field label="Movement pattern">
-        <Select<MovementPattern>
-          value={pattern}
-          onChange={setPattern}
-          options={MOVEMENT_PATTERNS.map((p) => ({ value: p, label: capitalize(humanize(p)) }))}
-        />
-      </Field>
+      <div className="flex items-end gap-3">
+        <div className="min-w-0 flex-1">
+          <Field label="Movement pattern">
+            <Select<MovementPattern>
+              value={pattern}
+              onChange={setPattern}
+              options={MOVEMENT_PATTERNS.map((p) => ({ value: p, label: capitalize(humanize(p)) }))}
+            />
+          </Field>
+        </div>
+        <SchematicTile>
+          <PatternSchematic pattern={pattern} />
+        </SchematicTile>
+      </div>
       <Field label="Equipment type">
         <Select<EquipmentType>
           value={type}

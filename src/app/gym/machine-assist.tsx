@@ -194,8 +194,8 @@ export function MachineAssist({
     });
 
   return (
-    <div className="flex flex-col gap-2 rounded-xl border border-zinc-800 p-3">
-      <p className="text-xs text-zinc-400">
+    <div className="flex flex-col gap-2 rounded-[20px] bg-surface-container-low p-4">
+      <p className="text-xs text-on-surface-variant">
         Not sure what it is? AI can propose the exercises it supports.
       </p>
       <div className="grid grid-cols-2 gap-2">
@@ -222,23 +222,23 @@ export function MachineAssist({
           if (file) void ask({ name: draft.name, photo: file });
         }}
       />
-      {busy && <p className="text-sm text-zinc-400">Asking…</p>}
+      {busy && <p className="text-sm text-on-surface-variant">Asking…</p>}
       {error && <Notice>{error}</Notice>}
       {proposal?.recognised && (
-        <div className="flex flex-col gap-2 rounded-lg bg-zinc-950 p-3 text-sm">
+        <div className="flex flex-col gap-2 rounded-[20px] bg-surface-container-lowest p-4 text-sm">
           <p className="font-medium">
             {proposal.name}
             {proposal.brand ? ` · ${proposal.brand}` : ""}
             {proposal.model ? ` ${proposal.model}` : ""}
           </p>
-          <p className="text-xs text-zinc-500">AI proposal: check it before saving.</p>
+          <p className="text-xs text-on-surface-variant">AI proposal: check it before saving.</p>
           <ul className="flex flex-col gap-1">
             {proposal.exerciseIds.map((id) => (
               <li key={id}>
                 <label className="flex min-h-10 items-center gap-2">
                   <input
                     type="checkbox"
-                    className="h-5 w-5 accent-lime-400"
+                    className="h-5 w-5 accent-primary"
                     checked={keep.has(id)}
                     onChange={() => toggle(id)}
                   />
@@ -251,13 +251,13 @@ export function MachineAssist({
                 <label className="flex min-h-10 items-center gap-2">
                   <input
                     type="checkbox"
-                    className="h-5 w-5 accent-lime-400"
+                    className="h-5 w-5 accent-primary"
                     checked={keep.has(`new:${ex.name}`)}
                     onChange={() => toggle(`new:${ex.name}`)}
                   />
                   <span>
                     {ex.name} <Badge tone="warn">new exercise</Badge>
-                    <span className="block text-xs text-zinc-500">
+                    <span className="block text-xs text-on-surface-variant">
                       {Object.keys(ex.vector)
                         .map((m) => muscleLabel(m as Muscle))
                         .join(", ")}

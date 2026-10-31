@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Notice } from "@/components/ui";
+import { Notice, linkClass } from "@/components/ui";
 import { completeGoogleHealth } from "@/lib/google-health-client";
 
 /** OAuth redirect target: finishes connecting Google Health, then links back. */
@@ -37,10 +37,10 @@ export function GoogleHealthReturn() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Google Health</h1>
+      <h1 className="px-1">Google Health</h1>
       <Notice>{state.message}</Notice>
       {state.done && (
-        <Link href="/settings" className="text-zinc-100 underline decoration-1 underline-offset-4">
+        <Link href="/settings" className={`${linkClass} -ml-1 self-start`}>
           Back to Settings
         </Link>
       )}

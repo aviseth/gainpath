@@ -23,13 +23,13 @@ export function AiSection() {
         <span className="font-medium">Use AI on this device</span>
         <input
           type="checkbox"
-          className="h-6 w-6 accent-lime-400"
+          className="h-6 w-6 accent-primary"
           checked={optedIn}
           onChange={(e) => setAiOptIn(e.target.checked)}
         />
       </label>
       {optedIn && status?.enabled && (
-        <p className="text-sm text-zinc-300" data-testid="ai-used">
+        <p className="text-sm text-on-surface" data-testid="ai-used">
           AI used today: <span className="font-semibold tabular-nums">{status.used}</span> /{" "}
           {status.limit}
         </p>

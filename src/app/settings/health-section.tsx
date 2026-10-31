@@ -53,7 +53,7 @@ export function HealthSection() {
           <Notice>Sign in to connect Google Health.</Notice>
         ) : status.connected ? (
           <>
-            <p className="text-sm text-zinc-300">
+            <p className="text-sm text-on-surface">
               Google Health connected
               {status.lastSyncAt
                 ? ` · last sync ${new Date(status.lastSyncAt).toLocaleString()}`
@@ -81,11 +81,11 @@ export function HealthSection() {
           </Button>
         )
       ) : (
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-on-surface-variant">
           Google Health isn&apos;t enabled on this deployment.
         </p>
       )}
-      <p className="text-xs text-zinc-500">
+      <p className="text-xs text-on-surface-variant">
         Samsung Health has no web API. A companion app could send data to this app; see the docs.
       </p>
       {message && <Notice>{message}</Notice>}

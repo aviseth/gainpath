@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Field, Segmented, Sheet, TextInput } from "@/components/forms";
+import { StarIcon } from "@/components/icons";
+import { EquipmentSchematic } from "@/components/schematics";
 import { Button, Notice } from "@/components/ui";
 import {
   removeEquipment,
@@ -12,7 +14,7 @@ import {
 } from "@/data/actions";
 import type { Equipment } from "@/data/schema";
 import type { GymContext } from "@/hooks/use-data";
-import { formatDate } from "@/lib/labels";
+import { EQUIPMENT_TYPE_SHORT, formatDate } from "@/lib/labels";
 import { formatWeights } from "@/lib/weights";
 import { EquipmentForm, draftFields, validateDraft, type EquipmentDraft } from "./equipment-form";
 import { MachineAssist, useCachedDictionary } from "./machine-assist";
@@ -70,6 +72,15 @@ export function EquipmentSheet({
         </Button>
       }
     >
+      <div className="flex items-center gap-4">
+        <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[24px] bg-surface-container-highest text-on-surface-variant">
+          <EquipmentSchematic type={draft.type} size={56} />
+        </span>
+        <span className="flex flex-col text-sm text-on-surface-variant">
+          <span className="text-title text-on-surface">{EQUIPMENT_TYPE_SHORT[draft.type]}</span>
+          {[equipment.brand, equipment.model].filter(Boolean).join(" ") || "Brand not set"}
+        </span>
+      </div>
       <Field label="Status">
         <Segmented
           label="Status"
@@ -100,10 +111,12 @@ export function EquipmentSheet({
 
       <div className="grid grid-cols-2 gap-2">
         <Button
-          variant={favourite ? "primary" : "secondary"}
+          variant={favourite ? "tonal" : "secondary"}
           onClick={() => void setPreference({ equipmentId: equipment.id }, "favourite", !favourite)}
+          aria-pressed={favourite}
         >
-          {favourite ? "★ Favourite" : "☆ Favourite"}
+          <StarIcon filled={favourite} size={18} />
+          Favourite
         </Button>
         <Button
           variant={excluded ? "danger" : "secondary"}

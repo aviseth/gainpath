@@ -68,7 +68,9 @@ export function CheckinCard({ onDone }: { onDone: () => void }) {
         />
       </Field>
       <div>
-        <p className="mb-2 text-sm font-medium text-zinc-300">Anything sore? (tap to cycle)</p>
+        <p className="mb-2 px-1 text-sm font-medium text-on-surface-variant">
+          Anything sore? (tap to cycle)
+        </p>
         <div className="flex flex-wrap gap-2">
           {MAJOR_MUSCLES.map((m) => (
             <Chip key={m} active={!!soreness[m]} onClick={() => cycle(m)}>

@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow_Condensed, Public_Sans } from "next/font/google";
+import { Roboto_Flex } from "next/font/google";
 import { SerwistProvider } from "@serwist/next/react";
 import { AppShell } from "@/components/app-shell";
 import "./globals.css";
 
-// Self-hosted at build time, so they work offline too.
-const display = Barlow_Condensed({
+// Self-hosted at build time, so it works offline too. Variable font with the
+// optical-size axis, so 28px headlines and 12px labels both look right.
+const sans = Roboto_Flex({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-barlow-condensed",
+  variable: "--font-roboto-flex",
+  axes: ["opsz"],
 });
-const body = Public_Sans({ subsets: ["latin"], variable: "--font-public-sans" });
 
 export const metadata: Metadata = {
   title: "Gainpath",
@@ -21,8 +21,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f2f1ec",
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fbf8ff" },
+    { media: "(prefers-color-scheme: dark)", color: "#121318" },
+  ],
+  colorScheme: "light dark",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -30,8 +33,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-100">
+    <html lang="en" className={`${sans.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col bg-surface text-on-surface">
         {/* Service worker only in production builds; dev serves fresh files. */}
         <SerwistProvider swUrl="/sw.js" disable={process.env.NODE_ENV !== "production"}>
           <AppShell>{children}</AppShell>

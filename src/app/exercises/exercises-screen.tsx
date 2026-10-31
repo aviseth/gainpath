@@ -2,7 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { Badge, Chip, EmptyState, TextInput } from "@/components/forms";
-import { Button } from "@/components/ui";
+import { ChevronRightIcon, PlusIcon, StarIcon } from "@/components/icons";
+import { PatternSchematic, SchematicTile } from "@/components/schematics";
+import { Button, PageHeader } from "@/components/ui";
 import { availableCandidates } from "@/engine/availability";
 import type { Exercise } from "@/engine/types";
 import { useGymContext } from "@/hooks/use-data";
@@ -32,7 +34,7 @@ export function ExercisesScreen() {
     );
   }, [ctx]);
 
-  if (!ctx) return <p className="text-zinc-400">Loading…</p>;
+  if (!ctx) return <p className="px-1 text-on-surface-variant">Loading…</p>;
   const all = [...ctx.catalog.values()];
   const pool: Exercise[] = {
     gym: all.filter((e) => available.has(e.id)),
@@ -46,14 +48,14 @@ export function ExercisesScreen() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Exercises</h1>
+      <PageHeader title="Exercises" />
       <TextInput
         placeholder="Search by name, e.g. pec deck"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         aria-label="Search exercises"
       />
-      <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
+      <div className="flex flex-wrap gap-2">
         {(
           [
             ["gym", `At ${ctx.gym?.name ?? "this gym"}`],
@@ -68,7 +70,10 @@ export function ExercisesScreen() {
           </Chip>
         ))}
       </div>
-      <Button onClick={() => setCreating(true)}>+ New custom exercise</Button>
+      <Button variant="tonal" onClick={() => setCreating(true)}>
+        <PlusIcon size={18} />
+        New custom exercise
+      </Button>
 
       {results.length === 0 ? (
         <EmptyState>
@@ -77,27 +82,37 @@ export function ExercisesScreen() {
             : "No exercises match."}
         </EmptyState>
       ) : (
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col rounded-card bg-surface-container-low py-2">
           {results.map((e) => (
             <li key={e.id}>
               <button
                 type="button"
                 onClick={() => setOpen(e.id)}
-                className={`flex min-h-14 w-full items-center justify-between gap-3 border-b border-zinc-700 px-3 py-2 text-left ${
+                className={`flex min-h-[4.25rem] w-full items-center gap-3.5 px-4 py-2 text-left hover:bg-on-surface/5 ${
                   ctx.excludedExercises.has(e.id) ? "opacity-50" : ""
                 }`}
               >
-                <span className="flex min-w-0 flex-col">
-                  <span className="truncate font-medium">
-                    {ctx.favouriteExercises.has(e.id) && "★ "}
-                    {e.name}
+                <SchematicTile size={44}>
+                  <PatternSchematic pattern={e.pattern} size={30} />
+                </SchematicTile>
+                <span className="flex min-w-0 flex-1 flex-col">
+                  <span className="flex items-center gap-1 text-title">
+                    {ctx.favouriteExercises.has(e.id) && (
+                      <span aria-label="favourite" role="img" className="shrink-0 text-tertiary">
+                        <StarIcon filled size={16} />
+                      </span>
+                    )}
+                    <span className="truncate">{e.name}</span>
                   </span>
-                  <span className="truncate text-xs text-zinc-500">{musclesText(e)}</span>
+                  <span className="truncate text-[13px] text-on-surface-variant">
+                    {musclesText(e)}
+                  </span>
                 </span>
-                <span className="flex shrink-0 gap-1">
+                <span className="flex shrink-0 items-center gap-1">
                   {e.custom && <Badge>Custom</Badge>}
                   {ctx.excludedExercises.has(e.id) && <Badge tone="warn">Excluded</Badge>}
                   {filter !== "gym" && available.has(e.id) && <Badge tone="good">Here</Badge>}
+                  <ChevronRightIcon size={18} className="text-on-surface-variant" />
                 </span>
               </button>
             </li>

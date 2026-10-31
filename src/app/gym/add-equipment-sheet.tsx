@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import { Segmented, Sheet } from "@/components/forms";
+import { CheckIcon, PlusIcon } from "@/components/icons";
+import { EquipmentSchematic } from "@/components/schematics";
 import { Button, Notice } from "@/components/ui";
 import { addEquipment, addFromTemplate } from "@/data/actions";
 import type { GymContext } from "@/hooks/use-data";
+import type { EquipmentType } from "@/data/schema";
 import { EQUIPMENT_TYPE_LABELS } from "@/lib/labels";
 import { EQUIPMENT_TEMPLATES } from "@/seed/catalog";
 import {
@@ -49,7 +52,9 @@ export function AddEquipmentSheet({
             Save machine
           </Button>
         ) : (
-          <Button onClick={onClose}>Done</Button>
+          <Button variant="tonal" onClick={onClose}>
+            Done
+          </Button>
         )
       }
     >
@@ -65,7 +70,7 @@ export function AddEquipmentSheet({
 
       {mode === "templates" && (
         <>
-          <p className="text-sm text-zinc-400">
+          <p className="px-1 text-sm text-on-surface-variant">
             Tap to add. Each item is a starting point you can edit afterwards (exact weights, linked
             exercises).
           </p>
@@ -74,24 +79,43 @@ export function AddEquipmentSheet({
             const items = EQUIPMENT_TEMPLATES.filter((t) => t.type === type);
             if (items.length === 0) return null;
             return (
-              <section key={type}>
-                <h3 className="mb-1 text-xs uppercase tracking-wide text-zinc-500">{label}</h3>
-                <ul className="flex flex-col gap-1">
-                  {items.map((t) => (
-                    <li key={t.id}>
-                      <button
-                        type="button"
-                        className="flex min-h-12 w-full items-center justify-between rounded-xl border border-zinc-800 px-3 text-left"
-                        onClick={async () => {
-                          await addFromTemplate(gymId, t);
-                          setAdded((a) => [...a, t.name]);
-                        }}
-                      >
-                        <span>{t.name}</span>
-                        <span className="font-semibold underline underline-offset-4">+ Add</span>
-                      </button>
-                    </li>
-                  ))}
+              <section key={type} className="rounded-card bg-surface-container-low py-2">
+                <h3 className="flex items-center gap-3 px-4 pt-2 pb-1 text-title">
+                  <EquipmentSchematic
+                    type={type as EquipmentType}
+                    size={24}
+                    className="text-on-surface-variant"
+                  />
+                  {label}
+                </h3>
+                <ul className="flex flex-col">
+                  {items.map((t) => {
+                    const count = added.filter((n) => n === t.name).length;
+                    return (
+                      <li key={t.id}>
+                        <button
+                          type="button"
+                          className="flex min-h-14 w-full items-center justify-between gap-3 px-4 text-left hover:bg-on-surface/5"
+                          onClick={async () => {
+                            await addFromTemplate(gymId, t);
+                            setAdded((a) => [...a, t.name]);
+                          }}
+                        >
+                          <span>{t.name}</span>
+                          <span
+                            className={`inline-flex min-h-9 shrink-0 items-center gap-1 rounded-full px-3 text-sm font-semibold ${
+                              count > 0
+                                ? "bg-primary-container text-on-primary-container"
+                                : "bg-secondary-container text-on-secondary-container"
+                            }`}
+                          >
+                            {count > 0 ? <CheckIcon size={16} /> : <PlusIcon size={16} />}
+                            {count > 0 ? `Added${count > 1 ? ` ×${count}` : ""}` : "Add"}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </section>
             );

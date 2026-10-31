@@ -23,13 +23,15 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <header className="sticky top-0 z-10 border-b-2 border-zinc-100 bg-zinc-950 pt-[env(safe-area-inset-top)]">
-        <div className="mx-auto flex max-w-lg items-center justify-between px-4 py-2">
-          <span className="font-display text-xl font-bold uppercase tracking-wide">Gainpath</span>
+      <header className="bg-surface pt-[env(safe-area-inset-top)]">
+        <div className="mx-auto flex max-w-lg items-center justify-between px-5 pt-2">
+          <span className="text-sm font-semibold tracking-wide text-primary">Gainpath</span>
           <SyncIndicator />
         </div>
       </header>
-      <main className="mx-auto w-full max-w-lg flex-1 px-4 pt-4 pb-28">{children}</main>
+      <main className="mx-auto w-full max-w-lg flex-1 px-4 pt-2 pb-[calc(6.5rem+env(safe-area-inset-bottom))]">
+        {children}
+      </main>
       <Suspense>
         <BottomNav />
       </Suspense>

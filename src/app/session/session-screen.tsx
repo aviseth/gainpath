@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { CelebrationCard } from "@/components/celebration-card";
 import { TextInput } from "@/components/forms";
-import { Button, Notice } from "@/components/ui";
+import { CloseIcon } from "@/components/icons";
+import { Button, Notice, PageHeader, linkClass } from "@/components/ui";
 import { WhySheet } from "@/components/why-sheet";
 import { getDB } from "@/data/db";
 import { repo } from "@/data/repo";
@@ -20,7 +22,8 @@ import {
 import { readLive, slotOf } from "@/data/training";
 import { explain } from "@/engine/explain";
 import { parseLog, type ParsedLog } from "@/engine/parser";
-import { busyPattern, setsRemaining } from "@/engine/session";
+import { busyPattern, setsDone, setsRemaining } from "@/engine/session";
+import { useSessionCelebration } from "@/hooks/use-celebration";
 import { useTodaySession, useSessionLogs, useTrainingContext } from "@/hooks/use-training";
 import { useWakeLock } from "@/hooks/use-wake-lock";
 import { z } from "zod";
@@ -55,16 +58,17 @@ export function SessionScreen() {
     bucket: number;
   } | null>(null);
   const active = !!session && session.status !== "done";
+  const celebration = useSessionCelebration(session, ctx);
   useWakeLock(active);
 
   if (ctx === undefined || session === undefined || logs === undefined)
-    return <p className="text-zinc-400">Loading…</p>;
+    return <p className="px-1 text-on-surface-variant">Loading…</p>;
   if (!ctx || !session) {
     return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">Session</h1>
+        <PageHeader title="Session" />
         <Notice>No session today yet.</Notice>
-        <Link href="/" className="text-zinc-100 underline decoration-1 underline-offset-4">
+        <Link href="/" className={`${linkClass} self-start`}>
           ← Today
         </Link>
       </div>
@@ -179,20 +183,59 @@ export function SessionScreen() {
     } else setReview({ ...review, issues: [...review.issues, "The AI couldn't read it either."] });
   }
 
+  const doneSets = visible.reduce((s, e) => s + setsDone(e, logs), 0);
+  const totalSets = visible.reduce((s, e) => s + setsDone(e, logs) + setsRemaining(e, logs), 0);
+  const restShowing = !!restEndsAt && active;
+
   return (
-    <div className="flex flex-col gap-4 pb-24">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">
-          {session.status === "done" ? "Session done" : "Session"}
-        </h1>
-        <button
-          type="button"
-          className="text-sm text-zinc-100 underline decoration-1 underline-offset-4"
-          onClick={() => setWhy(true)}
-        >
-          Why?
-        </button>
-      </div>
+    // Extra room at the bottom while the rest timer is docked over the content.
+    <div className={`flex flex-col gap-4 ${restShowing ? "pb-28" : "pb-4"}`}>
+      <PageHeader
+        title={session.status === "done" ? "Session done" : "Session"}
+        overline={ctx.gym.name}
+        action={
+          <button type="button" className={linkClass} onClick={() => setWhy(true)}>
+            Why?
+          </button>
+        }
+      />
+
+      {session.status === "done" && celebration && (
+        <CelebrationCard label="Session done" celebration={celebration} />
+      )}
+
+      {active && totalSets > 0 && (
+        // Goal-gradient: how far through today's sets you are.
+        <div className="flex flex-col gap-2 rounded-card bg-primary-container px-5 py-4 text-on-primary-container">
+          <div className="flex items-baseline justify-between">
+            <span className="text-title">
+              {doneSets} of {totalSets} sets
+            </span>
+            <span className="text-[13px] opacity-85">
+              {doneSets === 0
+                ? "Let's go"
+                : totalSets - doneSets <= 2 && doneSets < totalSets
+                  ? "Nearly there"
+                  : doneSets >= totalSets
+                    ? "All planned sets done"
+                    : `${totalSets - doneSets} to go`}
+            </span>
+          </div>
+          <div
+            role="progressbar"
+            aria-label="Sets done"
+            aria-valuemin={0}
+            aria-valuemax={totalSets}
+            aria-valuenow={doneSets}
+            className="h-2 overflow-hidden rounded-full bg-on-primary-container/15"
+          >
+            <div
+              className="h-full rounded-full bg-primary transition-[width]"
+              style={{ width: `${Math.min(100, (doneSets / totalSets) * 100)}%` }}
+            />
+          </div>
+        </div>
+      )}
 
       {active && (
         <form
@@ -205,18 +248,23 @@ export function SessionScreen() {
           <TextInput
             value={quick}
             onChange={(e) => setQuick(e.target.value)}
-            placeholder='Quick log: "80x8 @9" or "bench 3x8 @ 80"'
+            placeholder='Quick log, e.g. "80x8 @9"'
             aria-label="Quick log"
           />
-          <Button type="submit" className="w-auto! px-4" disabled={!quick.trim()}>
+          <Button
+            type="submit"
+            variant="tonal"
+            className="min-h-14! w-auto! px-5"
+            disabled={!quick.trim()}
+          >
             Log
           </Button>
         </form>
       )}
 
       {review && (
-        <div className="rounded-2xl border border-amber-400/30 bg-amber-400/10 p-4 text-sm">
-          <p className="font-medium text-amber-100">Check this before logging</p>
+        <div className="rounded-card bg-tertiary-container p-5 text-sm text-on-tertiary-container">
+          <p className="text-title">Check this before logging</p>
           <p className="mt-1">
             {review.exerciseId ? ctx.catalog.get(review.exerciseId)?.name : "Exercise?"}:{" "}
             {review.sets
@@ -227,24 +275,24 @@ export function SessionScreen() {
               .join(", ") || "no sets"}
           </p>
           {review.issues.length > 0 && (
-            <p className="mt-1 text-amber-200">{review.issues.join("; ")}</p>
+            <p className="mt-1 opacity-85">{review.issues.join("; ")}</p>
           )}
           <div className="mt-3 flex flex-wrap gap-2">
             {review.exerciseId && review.sets.length > 0 && (
               <Button
                 variant="primary"
-                className="w-auto! px-4"
+                className="w-auto! px-5"
                 onClick={() => void commitParsed(review)}
               >
                 Log it
               </Button>
             )}
             {ai?.enabled && (
-              <Button className="w-auto! px-4" onClick={() => void askAiToParse()}>
+              <Button variant="tonal" className="w-auto! px-5" onClick={() => void askAiToParse()}>
                 Ask AI
               </Button>
             )}
-            <Button className="w-auto! px-4" onClick={() => setReview(null)}>
+            <Button variant="text" className="w-auto! px-4" onClick={() => setReview(null)}>
               Cancel
             </Button>
           </div>
@@ -252,14 +300,14 @@ export function SessionScreen() {
       )}
 
       {busyPrompt && (
-        <Notice>
+        <div role="status" className="rounded-card bg-surface-container-high p-5 text-sm">
           {ctx.equipmentById.get(busyPrompt.equipmentId)?.name} is often busy at this time.
           Deprioritise it on {WEEKDAYS[busyPrompt.weekday]}s around {busyPrompt.bucket * 2}:00–
           {busyPrompt.bucket * 2 + 2}:00?
-          <span className="mt-2 flex gap-2">
+          <span className="mt-3 flex gap-2">
             <Button
-              variant="primary"
-              className="w-auto! px-4"
+              variant="tonal"
+              className="w-auto! px-5"
               onClick={async () => {
                 await repo("exercise_prefs", db).create({
                   exercise_id: null,
@@ -272,11 +320,11 @@ export function SessionScreen() {
             >
               Yes
             </Button>
-            <Button className="w-auto! px-4" onClick={() => setBusyPrompt(null)}>
+            <Button variant="text" className="w-auto! px-4" onClick={() => setBusyPrompt(null)}>
               No
             </Button>
           </span>
-        </Notice>
+        </div>
       )}
 
       {visible.map((e) => (
@@ -288,6 +336,7 @@ export function SessionScreen() {
           equipmentById={ctx.equipmentById}
           logs={logs}
           current={e === current}
+          lead={e === visible.find((x) => x.isAnchor)}
           onLog={(set) => onLog(e.exerciseId, set)}
           onSwap={() => setSwapping(e.exerciseId)}
           onSkip={async () => {
@@ -308,7 +357,9 @@ export function SessionScreen() {
 
       {active && (
         <Button
-          variant={current ? "secondary" : "primary"}
+          variant={current ? "tonal" : "primary"}
+          size={current ? "md" : "lg"}
+          className={current ? "" : "min-h-16"}
           onClick={async () => {
             const remaining = live.exercises.reduce((s, e) => s + setsRemaining(e, logs), 0);
             if (
@@ -331,29 +382,34 @@ export function SessionScreen() {
       {toast && (
         <div
           role="status"
-          className="fixed inset-x-4 top-16 z-30 mx-auto flex max-w-lg items-center justify-between gap-3 border-2 border-zinc-100 bg-zinc-950 p-3 text-sm shadow-lg"
+          className="fixed inset-x-3 top-[calc(env(safe-area-inset-top)+0.75rem)] z-30 mx-auto flex max-w-lg items-center justify-between gap-3 rounded-xl bg-inverse-surface py-2 pr-2 pl-4 text-sm text-inverse-on-surface shadow-lg"
         >
-          <span>{toast.text}</span>
-          <span className="flex shrink-0 gap-2">
+          <span className="py-1.5">{toast.text}</span>
+          <span className="flex shrink-0 items-center gap-1">
             {toast.undo && (
               <button
                 type="button"
-                className="font-semibold text-zinc-100 underline decoration-1 underline-offset-4"
+                className="min-h-10 rounded-full px-3 font-semibold text-inverse-primary"
                 onClick={() => void undo(toast.undo!)}
               >
                 Undo
               </button>
             )}
-            <button type="button" aria-label="Dismiss" onClick={() => setToast(null)}>
-              ×
+            <button
+              type="button"
+              aria-label="Dismiss"
+              className="flex h-10 w-10 items-center justify-center rounded-full"
+              onClick={() => setToast(null)}
+            >
+              <CloseIcon size={18} />
             </button>
           </span>
         </div>
       )}
 
-      {restEndsAt && active && (
+      {restShowing && (
         <RestTimer
-          endsAt={restEndsAt}
+          endsAt={restEndsAt!}
           onExtend={() => setRestEndsAt((t) => (t ?? now()) + 30_000)}
           onDismiss={() => setRestEndsAt(null)}
         />

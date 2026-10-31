@@ -55,10 +55,10 @@ export function ExercisePicker({
         aria-label="Search exercises"
       />
       {equipmentType && !query && (
-        <label className="flex items-center gap-2 text-sm text-zinc-400">
+        <label className="flex items-center gap-2 text-sm text-on-surface-variant">
           <input
             type="checkbox"
-            className="h-4 w-4 accent-lime-400"
+            className="h-4 w-4 accent-primary"
             checked={showAll}
             onChange={(e) => setShowAll(e.target.checked)}
           />
@@ -68,16 +68,16 @@ export function ExercisePicker({
       <ul className="flex max-h-80 flex-col gap-1 overflow-y-auto">
         {results.map((e) => (
           <li key={e.id}>
-            <label className="flex min-h-12 items-center gap-3 rounded-xl border border-zinc-800 px-3 py-2">
+            <label className="flex min-h-12 items-center gap-3 rounded-2xl bg-surface-container-low px-4 py-2">
               <input
                 type="checkbox"
-                className="h-5 w-5 shrink-0 accent-lime-400"
+                className="h-5 w-5 shrink-0 accent-primary"
                 checked={selected.has(e.id)}
                 onChange={() => toggle(e.id)}
               />
               <span className="flex flex-col">
                 <span>{e.name}</span>
-                <span className="text-xs text-zinc-500">{musclesText(e)}</span>
+                <span className="text-xs text-on-surface-variant">{musclesText(e)}</span>
               </span>
             </label>
           </li>

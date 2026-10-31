@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Badge, Field, Sheet, TextInput } from "@/components/forms";
+import { PatternSchematic, SchematicTile } from "@/components/schematics";
 import { Button, Notice } from "@/components/ui";
 import { localDate } from "@/data/actions";
 import { getDB } from "@/data/db";
@@ -180,20 +181,22 @@ export function SwapSheet({
     <Sheet title={`Swap ${name}`} onClose={() => onClose()}>
       {step === "reason" && (
         <>
-          <p className="text-sm text-zinc-400">Why?</p>
-          {REASONS.map((r) => (
-            <button
-              key={r.value}
-              type="button"
-              disabled={busy}
-              onClick={() => void pickReason(r.value)}
-              className="flex min-h-14 flex-col items-start justify-center border-b border-zinc-700 px-4 text-left"
-            >
-              <span className="font-medium">{r.label}</span>
-              <span className="text-xs text-zinc-500">{r.hint}</span>
-            </button>
-          ))}
-          <Button onClick={() => void skipIt()} disabled={busy}>
+          <p className="px-1 text-sm text-on-surface-variant">Why?</p>
+          <div className="flex flex-col overflow-hidden rounded-card bg-surface-container-low py-2">
+            {REASONS.map((r) => (
+              <button
+                key={r.value}
+                type="button"
+                disabled={busy}
+                onClick={() => void pickReason(r.value)}
+                className="flex min-h-16 flex-col items-start justify-center px-5 py-2 text-left hover:bg-on-surface/8 disabled:opacity-50"
+              >
+                <span className="text-title">{r.label}</span>
+                <span className="text-[13px] text-on-surface-variant">{r.hint}</span>
+              </button>
+            ))}
+          </div>
+          <Button variant="tonal" onClick={() => void skipIt()} disabled={busy}>
             Skip without replacing
           </Button>
         </>
@@ -201,7 +204,7 @@ export function SwapSheet({
 
       {step === "dislike" && (
         <>
-          <p>Exclude {name} permanently? You can undo this in Exercises.</p>
+          <p className="px-1">Exclude {name} permanently? You can undo this in Exercises.</p>
           <Button
             variant="danger"
             disabled={busy}
@@ -220,6 +223,7 @@ export function SwapSheet({
             Yes, never program it
           </Button>
           <Button
+            variant="tonal"
             disabled={busy}
             onClick={async () => {
               setBusy(true);
@@ -239,13 +243,15 @@ export function SwapSheet({
 
       {step === "pain" && (
         <>
-          <p className="text-sm text-zinc-300">
+          <p className="px-1 text-sm text-on-surface-variant">
             Where is it? Everything loading that area is removed for today.
           </p>
           <div className="grid grid-cols-3 gap-2">
             {BODY_REGIONS.map((region) => (
               <Button
                 key={region}
+                variant="tonal"
+                className="px-2!"
                 disabled={busy}
                 onClick={async () => {
                   setBusy(true);
@@ -284,8 +290,8 @@ export function SwapSheet({
         <>
           {empty && <Notice>{empty}</Notice>}
           {options.map(({ option, loads }, i) => (
-            <div key={i} className="border-t-2 border-zinc-100 pt-3 pb-2">
-              <div className="mb-2 flex items-center justify-between gap-2">
+            <div key={i} className="rounded-card bg-surface-container-low p-4">
+              <div className="mb-3 flex items-center justify-between gap-2">
                 <Badge tone={option.matchPct >= 85 ? "good" : "warn"}>
                   {option.matchPct}% match
                 </Badge>
@@ -293,23 +299,27 @@ export function SwapSheet({
               </div>
               <ul className="flex flex-col gap-1">
                 {option.items.map((item, j) => (
-                  <li key={item.exercise.id} className="flex justify-between gap-2">
-                    <span className="font-medium">{item.exercise.name}</span>
-                    <span className="shrink-0 text-sm text-zinc-300 tabular-nums">
-                      {item.sets} ×{" "}
-                      {loads[j] !== null && loads[j]! > 0 ? `@ ${formatKg(loads[j])}` : ""}
+                  <li key={item.exercise.id} className="flex items-center gap-3">
+                    <SchematicTile size={44}>
+                      <PatternSchematic pattern={item.exercise.pattern} size={30} />
+                    </SchematicTile>
+                    <span className="min-w-0 flex-1 text-title">{item.exercise.name}</span>
+                    <span className="shrink-0 text-sm text-on-surface-variant tabular-nums">
+                      {item.sets} set{item.sets === 1 ? "" : "s"}
+                      {loads[j] !== null && loads[j]! > 0 ? ` · ${formatKg(loads[j])}` : ""}
                     </span>
                   </li>
                 ))}
               </ul>
               {option.items.some((i) => i.equipment) && (
-                <p className="mt-1 text-xs text-zinc-500">
+                <p className="mt-2 text-xs text-on-surface-variant">
                   {option.items.map((i) => i.equipment?.name ?? "No equipment").join(" + ")}
                 </p>
               )}
-              <p className="mt-2 text-sm text-zinc-400">{option.diffText}</p>
+              <p className="mt-2 text-sm text-on-surface-variant">{option.diffText}</p>
+              {/* Hick: only the best match gets the filled button. */}
               <Button
-                variant="primary"
+                variant={i === 0 ? "primary" : "tonal"}
                 className="mt-3"
                 disabled={busy}
                 onClick={() => void accept(option)}
@@ -318,13 +328,17 @@ export function SwapSheet({
               </Button>
             </div>
           ))}
-          <Button disabled={busy} onClick={() => void skipIt()}>
+          <Button variant="tonal" disabled={busy} onClick={() => void skipIt()}>
             Skip without replacing
           </Button>
           <Field label="Something else unavailable?" hint='e.g. "all the cable stations are taken"'>
             <TextInput value={constraint} onChange={(e) => setConstraint(e.target.value)} />
           </Field>
-          <Button disabled={busy || !constraint.trim()} onClick={() => void applyConstraint()}>
+          <Button
+            variant="tonal"
+            disabled={busy || !constraint.trim()}
+            onClick={() => void applyConstraint()}
+          >
             Update options
           </Button>
           {message && <Notice>{message}</Notice>}

@@ -22,7 +22,7 @@ export function WhySheet({
     seen.add(text);
     return (
       <li key={text} className="flex gap-2">
-        <span className="shrink-0 rounded bg-zinc-800 px-1.5 py-0.5 font-mono text-[10px] text-zinc-400">
+        <span className="h-fit min-w-[3.75rem] shrink-0 rounded-chip bg-secondary-container px-1.5 py-0.5 text-center font-mono text-[10px] font-semibold text-on-secondary-container">
           {citation(entry)}
         </span>
         <span>{text}</span>
@@ -32,9 +32,11 @@ export function WhySheet({
 
   return (
     <Sheet title="Why today looks like this" onClose={onClose}>
-      <section>
-        <h3 className="mb-2 text-sm font-semibold text-zinc-300">Today overall</h3>
-        <ul className="flex flex-col gap-2 text-sm">{live.meta.rationale.map(line)}</ul>
+      <section className="rounded-card bg-surface-container-low p-4">
+        <h3 className="mb-2 text-title">Today overall</h3>
+        <ul className="flex flex-col gap-2.5 text-sm leading-relaxed">
+          {live.meta.rationale.map(line)}
+        </ul>
       </section>
       {live.exercises
         .filter((e) => e.status !== "swapped_out")
@@ -42,15 +44,13 @@ export function WhySheet({
           const items = e.rationale.map(line).filter(Boolean);
           if (items.length === 0) return null;
           return (
-            <section key={e.exerciseId}>
-              <h3 className="mb-2 text-sm font-semibold text-zinc-300">
-                {catalog.get(e.exerciseId)?.name ?? e.exerciseId}
-              </h3>
-              <ul className="flex flex-col gap-2 text-sm">{items}</ul>
+            <section key={e.exerciseId} className="rounded-card bg-surface-container-low p-4">
+              <h3 className="mb-2 text-title">{catalog.get(e.exerciseId)?.name ?? e.exerciseId}</h3>
+              <ul className="flex flex-col gap-2.5 text-sm leading-relaxed">{items}</ul>
             </section>
           );
         })}
-      <p className="text-xs text-zinc-500">
+      <p className="text-xs text-on-surface-variant">
         Rule IDs refer to EVIDENCE.md. &quot;Rule of thumb&quot; marks heuristics rather than
         research findings.
       </p>

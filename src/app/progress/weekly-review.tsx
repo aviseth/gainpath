@@ -55,14 +55,14 @@ export function WeeklyReview({ ctx }: { ctx: TrainingContext }) {
     >
       {cached ? (
         <article className="flex flex-col gap-2 text-sm">
-          <p className="font-semibold">{cached.headline}</p>
+          <p className="text-title">{cached.headline}</p>
           {cached.paragraphs.map((p, i) => (
-            <p key={i} className="text-zinc-300">
+            <p key={i} className="text-on-surface">
               {p}
             </p>
           ))}
           {cached.suggestions.length > 0 && (
-            <ul className="list-disc pl-5 text-zinc-300">
+            <ul className="list-disc pl-5 text-on-surface">
               {cached.suggestions.map((s, i) => (
                 <li key={i}>{s}</li>
               ))}
@@ -73,10 +73,12 @@ export function WeeklyReview({ ctx }: { ctx: TrainingContext }) {
               <Badge key={r}>{r}</Badge>
             ))}
           </div>
-          <p className="text-xs text-zinc-500">Written by AI from the app&apos;s own numbers.</p>
+          <p className="text-xs text-on-surface-variant">
+            Written by AI from the app&apos;s own numbers.
+          </p>
         </article>
       ) : (
-        <Button disabled={busy} onClick={() => void generate()}>
+        <Button variant="tonal" disabled={busy} onClick={() => void generate()}>
           {busy ? "Writing…" : "Weekly review (AI)"}
         </Button>
       )}

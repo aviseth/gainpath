@@ -50,7 +50,7 @@ export function AdvancedSection() {
               type="button"
               onClick={() => setFilter(f)}
               aria-pressed={filter === f}
-              className={`min-h-9 rounded-sm border px-3 ${filter === f ? "border-zinc-100 bg-zinc-100 text-zinc-950" : "border-zinc-700"}`}
+              className={`min-h-10 rounded-chip px-3 font-medium ${filter === f ? "bg-secondary-container text-on-secondary-container" : "border border-outline-variant text-on-surface-variant"}`}
             >
               {f === "heuristic" ? "Rules of thumb" : f === "changed" ? "Changed" : "All"}
             </button>
@@ -61,7 +61,7 @@ export function AdvancedSection() {
             const current = key in overrides ? overrides[key] : entry.value;
             const draft = drafts[key];
             return (
-              <li key={key} className="border-b border-zinc-700 py-3">
+              <li key={key} className="rounded-2xl bg-surface-container-lowest p-3">
                 <div className="flex items-start justify-between gap-2">
                   <label htmlFor={`cfg-${key}`} className="text-sm">
                     {entry.label}
@@ -82,14 +82,14 @@ export function AdvancedSection() {
                     onBlur={() => draft !== undefined && commit(key, draft)}
                     className="max-w-32"
                   />
-                  <span className="text-xs text-zinc-500">
+                  <span className="text-xs text-on-surface-variant">
                     {entry.min}–{entry.max} · default {entry.value}
                   </span>
                 </div>
                 {key in overrides && (
                   <button
                     type="button"
-                    className="mt-1 text-xs text-lime-300 underline"
+                    className="mt-1 min-h-9 text-xs font-semibold text-primary"
                     onClick={() => commit(key, null)}
                   >
                     Reset to default
@@ -98,7 +98,9 @@ export function AdvancedSection() {
               </li>
             );
           })}
-          {shown.length === 0 && <li className="text-sm text-zinc-500">Nothing changed yet.</li>}
+          {shown.length === 0 && (
+            <li className="text-sm text-on-surface-variant">Nothing changed yet.</li>
+          )}
         </ul>
         {changed > 0 && (
           <Button className="mt-3" onClick={() => void saveProfile({ config_overrides: {} })}>

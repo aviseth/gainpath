@@ -1,60 +1,138 @@
 @import "tailwindcss";
 
 /*
- * Gainpath look: a printed training log. Warm light ground, near-black ink,
- * one accent (competition-plate red) used sparingly for what's current or
- * behind. Hairline rules and square corners instead of floating cards.
+ * Gainpath look: "Coach", Material 3 inspired. Colour roles are CSS custom
+ * properties (light scheme below, a matching dark scheme under
+ * prefers-color-scheme) exposed to Tailwind as theme tokens, so components
+ * say what a colour *means*: bg-primary, bg-surface-container, text-error…
  *
- * Components use Tailwind's zinc/lime/amber/red classes; those palettes are
- * remapped here so the whole app follows the design from one place:
- *   zinc  = ink → ground scale (950 is the page, 100 is the text)
- *   lime  = plate red (accent)
- *   amber = ochre (warnings), red = oxblood (errors)
+ * Shapes: large containers 28px (rounded-card), list-tile icon containers 16px
+ * (rounded-tile), chips 8px (rounded-chip), buttons a full pill.
  */
-@theme {
-  --color-zinc-50: #0e0f10;
-  --color-zinc-100: #16181a;
-  --color-zinc-200: #22252a;
-  --color-zinc-300: #2e3134;
-  --color-zinc-400: #45484c;
-  --color-zinc-500: #5a5d61;
-  --color-zinc-600: #7a7d81;
-  --color-zinc-700: #a9a79f;
-  --color-zinc-800: #dddbd3;
-  --color-zinc-900: #f8f7f3;
-  --color-zinc-950: #f2f1ec;
+:root {
+  color-scheme: light;
+  --md-primary: #4355b9;
+  --md-on-primary: #ffffff;
+  --md-primary-container: #dee0ff;
+  --md-on-primary-container: #00105c;
+  --md-secondary: #5a5d72;
+  --md-on-secondary: #ffffff;
+  --md-secondary-container: #e0e1f9;
+  --md-on-secondary-container: #181a2c;
+  --md-tertiary: #8f4c38;
+  --md-on-tertiary: #ffffff;
+  --md-tertiary-container: #ffdbd1;
+  --md-on-tertiary-container: #3a0b01;
+  --md-error: #ba1a1a;
+  --md-on-error: #ffffff;
+  --md-error-container: #ffdad6;
+  --md-on-error-container: #410002;
+  --md-surface: #fbf8ff;
+  --md-surface-container-lowest: #ffffff;
+  --md-surface-container-low: #f5f2fa;
+  --md-surface-container: #efedf4;
+  --md-surface-container-high: #e9e7ef;
+  --md-surface-container-highest: #e3e1e9;
+  --md-on-surface: #1b1b21;
+  --md-on-surface-variant: #46464f;
+  --md-outline: #767680;
+  --md-outline-variant: #c6c5d0;
+  --md-inverse-surface: #303036;
+  --md-inverse-on-surface: #f2eff7;
+  --md-inverse-primary: #bac3ff;
+  --md-scrim: rgb(0 0 0 / 0.32);
+}
 
-  --color-lime-100: #6e1c0f;
-  --color-lime-200: #7f2112;
-  --color-lime-300: #9e2814;
-  --color-lime-400: #b8301a;
-  --color-lime-500: #a12a17;
-
-  --color-amber-100: #5c400b;
-  --color-amber-200: #6b4a0c;
-  --color-amber-300: #7d560e;
-  --color-amber-400: #b9811c;
-
-  --color-red-200: #6d1222;
-  --color-red-300: #7a1424;
-  --color-red-400: #9a1f33;
-  --color-red-500: #8f1d2c;
-
-  --radius-sm: 2px;
-  --radius-md: 2px;
-  --radius-lg: 2px;
-  --radius-xl: 3px;
-  --radius-2xl: 4px;
+/* M3 dark tonal values for the same seed (#4355B9). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --md-primary: #bac3ff;
+    --md-on-primary: #08218a;
+    --md-primary-container: #293ca0;
+    --md-on-primary-container: #dee0ff;
+    --md-secondary: #c3c5dd;
+    --md-on-secondary: #2d2f42;
+    --md-secondary-container: #434659;
+    --md-on-secondary-container: #e0e1f9;
+    --md-tertiary: #ffb59f;
+    --md-on-tertiary: #561f0f;
+    --md-tertiary-container: #733423;
+    --md-on-tertiary-container: #ffdbd1;
+    --md-error: #ffb4ab;
+    --md-on-error: #690005;
+    --md-error-container: #93000a;
+    --md-on-error-container: #ffdad6;
+    --md-surface: #121318;
+    --md-surface-container-lowest: #0d0e13;
+    --md-surface-container-low: #1b1b21;
+    --md-surface-container: #1f1f25;
+    --md-surface-container-high: #292a2f;
+    --md-surface-container-highest: #34343a;
+    --md-on-surface: #e4e1e9;
+    --md-on-surface-variant: #c6c5d0;
+    --md-outline: #90909a;
+    --md-outline-variant: #46464f;
+    --md-inverse-surface: #e4e1e9;
+    --md-inverse-on-surface: #303036;
+    --md-inverse-primary: #4355b9;
+    --md-scrim: rgb(0 0 0 / 0.6);
+  }
 }
 
 @theme inline {
-  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-barlow-condensed), var(--font-public-sans), sans-serif;
+  --color-primary: var(--md-primary);
+  --color-on-primary: var(--md-on-primary);
+  --color-primary-container: var(--md-primary-container);
+  --color-on-primary-container: var(--md-on-primary-container);
+  --color-secondary: var(--md-secondary);
+  --color-on-secondary: var(--md-on-secondary);
+  --color-secondary-container: var(--md-secondary-container);
+  --color-on-secondary-container: var(--md-on-secondary-container);
+  --color-tertiary: var(--md-tertiary);
+  --color-on-tertiary: var(--md-on-tertiary);
+  --color-tertiary-container: var(--md-tertiary-container);
+  --color-on-tertiary-container: var(--md-on-tertiary-container);
+  --color-error: var(--md-error);
+  --color-on-error: var(--md-on-error);
+  --color-error-container: var(--md-error-container);
+  --color-on-error-container: var(--md-on-error-container);
+  --color-surface: var(--md-surface);
+  --color-surface-container-lowest: var(--md-surface-container-lowest);
+  --color-surface-container-low: var(--md-surface-container-low);
+  --color-surface-container: var(--md-surface-container);
+  --color-surface-container-high: var(--md-surface-container-high);
+  --color-surface-container-highest: var(--md-surface-container-highest);
+  --color-on-surface: var(--md-on-surface);
+  --color-on-surface-variant: var(--md-on-surface-variant);
+  --color-outline: var(--md-outline);
+  --color-outline-variant: var(--md-outline-variant);
+  --color-inverse-surface: var(--md-inverse-surface);
+  --color-inverse-on-surface: var(--md-inverse-on-surface);
+  --color-inverse-primary: var(--md-inverse-primary);
+  --color-scrim: var(--md-scrim);
+
+  --font-sans: var(--font-roboto-flex), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
-:root {
-  color-scheme: light;
+@theme {
+  /* M3 shape scale. */
+  --radius-chip: 8px;
+  --radius-tile: 16px;
+  --radius-card: 28px;
+
+  /* M3 type roles (Roboto Flex). */
+  --text-headline: 28px;
+  --text-headline--line-height: 36px;
+  --text-headline--letter-spacing: -0.01em;
+  --text-headline--font-weight: 600;
+  --text-title: 16px;
+  --text-title--line-height: 24px;
+  --text-title--font-weight: 600;
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-label--font-weight: 500;
 }
 
 body {
@@ -62,16 +140,24 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Headings read like a scoreboard. */
-h1,
-h2 {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-}
-h1 {
-  font-weight: 700;
-}
-h2 {
-  font-weight: 600;
+@layer base {
+  h1 {
+    font-size: var(--text-headline);
+    line-height: var(--text-headline--line-height);
+    letter-spacing: var(--text-headline--letter-spacing);
+    font-weight: 600;
+  }
+  h2 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 600;
+  }
+  :focus-visible {
+    outline: 2px solid var(--md-primary);
+    outline-offset: 2px;
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: var(--md-primary);
+  }
 }

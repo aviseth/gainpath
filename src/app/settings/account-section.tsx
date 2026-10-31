@@ -55,7 +55,9 @@ export function AccountSection() {
         <Button disabled={busy} onClick={() => attempt(signOut)}>
           Sign out
         </Button>
-        <p className="text-xs text-zinc-500">Signing out keeps your data on this device.</p>
+        <p className="text-xs text-on-surface-variant">
+          Signing out keeps your data on this device.
+        </p>
         {error && <Notice tone="error">{error}</Notice>}
       </Section>
     );
@@ -89,7 +91,7 @@ export function AccountSection() {
       }
     >
       {INVITE_ONLY && (
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-on-surface-variant">
           {ACCESS_URL && (
             <>
               <a className="underline underline-offset-2" href={ACCESS_URL}>
@@ -127,7 +129,7 @@ export function AccountSection() {
           </Button>
           <button
             type="button"
-            className="min-h-10 text-sm text-zinc-400"
+            className="min-h-10 self-start rounded-full px-3 text-sm font-semibold text-primary hover:bg-primary/8"
             onClick={() => setSentTo(null)}
           >
             Use a different email
@@ -160,7 +162,7 @@ export function AccountSection() {
           </Button>
           <button
             type="button"
-            className="min-h-10 text-sm text-zinc-400"
+            className="min-h-10 self-start rounded-full px-3 text-sm font-semibold text-primary hover:bg-primary/8"
             onClick={() => setUsePassword(false)}
           >
             Email me a sign-in link instead
@@ -184,7 +186,7 @@ export function AccountSection() {
           {INVITE_ONLY && (
             <button
               type="button"
-              className="min-h-10 text-sm text-zinc-400"
+              className="min-h-10 self-start rounded-full px-3 text-sm font-semibold text-primary hover:bg-primary/8"
               onClick={() => setUsePassword(true)}
             >
               Sign in with a password instead
