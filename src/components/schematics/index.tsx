@@ -53,6 +53,43 @@ export function EquipmentSchematic({ type, ...rest }: SchematicProps & { type: E
 }
 
 /**
+ * The movement a machine is mostly used for: the most common pattern among its
+ * linked exercises (ties go to the first linked). Null when nothing is linked.
+ */
+export function machinePattern(
+  exerciseIds: Iterable<string>,
+  catalog: ReadonlyMap<string, { pattern: MovementPattern }>,
+): MovementPattern | null {
+  const counts = new Map<MovementPattern, number>();
+  let best: MovementPattern | null = null;
+  for (const id of exerciseIds) {
+    const pattern = catalog.get(id)?.pattern;
+    if (!pattern) continue;
+    const n = (counts.get(pattern) ?? 0) + 1;
+    counts.set(pattern, n);
+    if (best === null || n > (counts.get(best) ?? 0)) best = pattern;
+  }
+  return best;
+}
+
+/**
+ * A machine drawn as what it's for (a leg extension shows a leg extension), so
+ * machines of the same type don't all look alike. Falls back to the equipment
+ * type's drawing when no exercise is linked.
+ */
+export function MachineSchematic({
+  type,
+  pattern,
+  ...rest
+}: SchematicProps & { type: EquipmentType; pattern: MovementPattern | null }) {
+  return pattern ? (
+    <PatternSchematic pattern={pattern} {...rest} />
+  ) : (
+    <EquipmentSchematic type={type} {...rest} />
+  );
+}
+
+/**
  * The rounded tile a schematic sits in on list rows (M3 list-tile leading
  * element, 16px corners). `highlight` is for the one item that should stand
  * out (Von Restorff), e.g. today's anchor lift.

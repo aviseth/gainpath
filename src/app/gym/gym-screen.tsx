@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { Badge, EmptyState, Field, Select, Sheet, TextInput } from "@/components/forms";
 import { ChevronRightIcon, PlusIcon, StarIcon } from "@/components/icons";
-import { EquipmentSchematic, SchematicTile } from "@/components/schematics";
+import { MachineSchematic, SchematicTile, machinePattern } from "@/components/schematics";
 import { Button, PageHeader, linkClass, primaryLinkClass } from "@/components/ui";
 import { createGym, setDefaultGym, switchGym } from "@/data/actions";
-import type { Equipment } from "@/data/schema";
+import type { Equipment, MovementPattern } from "@/data/schema";
 import { useGymContext } from "@/hooks/use-data";
 import { EQUIPMENT_TYPE_LABELS, formatDate, formatKg } from "@/lib/labels";
 import { AddEquipmentSheet } from "./add-equipment-sheet";
@@ -20,7 +20,7 @@ export function GymScreen() {
   const [newGym, setNewGym] = useState<string | null>(null);
 
   if (!ctx) return <p className="px-1 text-on-surface-variant">Loading…</p>;
-  const { gym, gyms, equipment, links } = ctx;
+  const { gym, gyms, equipment, links, catalog } = ctx;
 
   if (!gym) {
     return (
@@ -35,6 +35,11 @@ export function GymScreen() {
   }
 
   const linkCount = (id: string) => links.filter((l) => l.equipment_id === id).length;
+  const patternOf = (id: string) =>
+    machinePattern(
+      links.filter((l) => l.equipment_id === id).map((l) => l.exercise_id),
+      catalog,
+    );
   const visible = equipment.filter((e) => e.status !== "archived");
   const archived = equipment.filter((e) => e.status === "archived");
 
@@ -108,6 +113,7 @@ export function GymScreen() {
                   <EquipmentRow
                     equipment={e}
                     links={linkCount(e.id)}
+                    pattern={patternOf(e.id)}
                     favourite={ctx.favouriteEquipment.has(e.id)}
                     excluded={ctx.excludedEquipment.has(e.id)}
                     onClick={() => setEditing(e)}
@@ -127,7 +133,12 @@ export function GymScreen() {
           <ul className="flex flex-col">
             {archived.map((e) => (
               <li key={e.id}>
-                <EquipmentRow equipment={e} links={linkCount(e.id)} onClick={() => setEditing(e)} />
+                <EquipmentRow
+                  equipment={e}
+                  links={linkCount(e.id)}
+                  pattern={patternOf(e.id)}
+                  onClick={() => setEditing(e)}
+                />
               </li>
             ))}
           </ul>
@@ -172,12 +183,14 @@ export function GymScreen() {
 function EquipmentRow({
   equipment: e,
   links,
+  pattern,
   favourite,
   excluded,
   onClick,
 }: {
   equipment: Equipment;
   links: number;
+  pattern: MovementPattern | null;
   favourite?: boolean;
   excluded?: boolean;
   onClick: () => void;
@@ -191,7 +204,7 @@ function EquipmentRow({
     >
       <span className={broken || excluded || e.status === "archived" ? "opacity-50" : ""}>
         <SchematicTile size={44}>
-          <EquipmentSchematic type={e.type} size={30} />
+          <MachineSchematic type={e.type} pattern={pattern} size={30} />
         </SchematicTile>
       </span>
       <span

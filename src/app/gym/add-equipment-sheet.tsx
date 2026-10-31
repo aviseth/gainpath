@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Segmented, Sheet } from "@/components/forms";
 import { CheckIcon, PlusIcon } from "@/components/icons";
-import { EquipmentSchematic } from "@/components/schematics";
+import { EquipmentSchematic, MachineSchematic, machinePattern } from "@/components/schematics";
 import { Button, Notice } from "@/components/ui";
 import { addEquipment, addFromTemplate } from "@/data/actions";
 import type { GymContext } from "@/hooks/use-data";
@@ -101,7 +101,15 @@ export function AddEquipmentSheet({
                             setAdded((a) => [...a, t.name]);
                           }}
                         >
-                          <span>{t.name}</span>
+                          <span className="flex items-center gap-3">
+                            <MachineSchematic
+                              type={t.type}
+                              pattern={machinePattern(t.exercise_ids, ctx.catalog)}
+                              size={26}
+                              className="shrink-0 text-on-surface-variant"
+                            />
+                            {t.name}
+                          </span>
                           <span
                             className={`inline-flex min-h-9 shrink-0 items-center gap-1 rounded-full px-3 text-sm font-semibold ${
                               count > 0

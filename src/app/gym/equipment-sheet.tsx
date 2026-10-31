@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Field, Segmented, Sheet, TextInput } from "@/components/forms";
 import { StarIcon } from "@/components/icons";
-import { EquipmentSchematic } from "@/components/schematics";
+import { MachineSchematic, machinePattern } from "@/components/schematics";
 import { Button, Notice } from "@/components/ui";
 import {
   removeEquipment,
@@ -74,7 +74,11 @@ export function EquipmentSheet({
     >
       <div className="flex items-center gap-4">
         <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[24px] bg-surface-container-highest text-on-surface-variant">
-          <EquipmentSchematic type={draft.type} size={56} />
+          <MachineSchematic
+            type={draft.type}
+            pattern={machinePattern(draft.exerciseIds, ctx.catalog)}
+            size={56}
+          />
         </span>
         <span className="flex flex-col text-sm text-on-surface-variant">
           <span className="text-title text-on-surface">{EQUIPMENT_TYPE_SHORT[draft.type]}</span>
