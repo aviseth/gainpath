@@ -168,7 +168,7 @@ export async function loadTrainingContext(
     thisWeek.filter((s) => s.status === "done" && s.date !== date).map((s) => s.date),
   );
   for (const s of history)
-    if (!s.is_warmup && s.ts >= start && localDate(s.ts) !== date) trainedDays.add(localDate(s.ts));
+    if (!s.is_warmup && s.ts >= start && localDate(s.ts) < date) trainedDays.add(localDate(s.ts));
   const completed = trainedDays.size;
   const carry = add(...thisWeek.map((s) => readLive(s)?.carry ?? {}));
   const lastDone = sessions

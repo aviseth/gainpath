@@ -93,18 +93,22 @@ export function estimateStart(params: {
     };
   }
 
-  // 3. HEURISTIC: no e1RM to borrow, but the user has lifted on this equipment: start
+  // 3. HEURISTIC (PROG-2): no e1RM to borrow, but the user has lifted on this equipment: start
   // at their lightest working load there for the same kind of exercise. An isolation
   // with only compound history takes a fraction of it. Still RIR 4 on the first set (§15).
   const loads = params.equipmentLoads?.filter((l) => l.weightKg > 0) ?? [];
   if (equipment && loads.length > 0) {
     const sameKind = loads.filter((l) => l.kind === exercise.kind);
-    const pool = sameKind.length > 0 ? sameKind : loads;
-    const factor =
-      sameKind.length === 0 && exercise.kind === "isolation" ? cfg.fallbackIsolationFactor : 1;
-    const lightest = Math.min(...pool.map((l) => l.weightKg));
-    const weightKg = roundToEquipment(lightest * factor, equipment);
-    if (weightKg > 0) return { kind: "fallback", weightKg, targetRir: cfg.fallbackRir };
+    // Only an isolation borrows across kinds (scaled down); a compound never starts
+    // from isolation loads, which say little about what it can move.
+    const crossKind = exercise.kind === "isolation" ? loads : [];
+    const pool = sameKind.length > 0 ? sameKind : crossKind;
+    if (pool.length > 0) {
+      const factor = sameKind.length > 0 ? 1 : cfg.fallbackIsolationFactor;
+      const lightest = Math.min(...pool.map((l) => l.weightKg));
+      const weightKg = roundToEquipment(lightest * factor, equipment);
+      if (weightKg > 0) return { kind: "fallback", weightKg, targetRir: cfg.fallbackRir };
+    }
   }
 
   // 4. Nothing to go on: a few steps above the machine's minimum, well short of failure.

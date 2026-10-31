@@ -77,4 +77,18 @@ describe("progress", () => {
     expect(weeks[2].total).toBe(1);
     expect(weeks[0].total).toBe(0);
   });
+
+  it("counts training days, not session ids, so one day counts once (PHIL-1)", () => {
+    const weeks = weeklyVolume(
+      [
+        set({ ts: now - DAY, session_id: "a" }),
+        set({ ts: now - DAY + 3600_000, session_id: "b" }),
+        set({ ts: now - 2 * DAY, session_id: null }),
+      ],
+      catalog,
+      now,
+      1,
+    );
+    expect(weeks[0].sessions).toBe(2);
+  });
 });

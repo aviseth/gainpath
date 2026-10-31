@@ -60,6 +60,7 @@ describe("week bookkeeping", () => {
       [new Date(2026, 9, 26, 10, 5), false],
       [new Date(2026, 9, 27, 18), false],
       [new Date(2026, 9, 28, 18), true],
+      [new Date(2026, 9, 30, 9), false], // Friday: after "now", must not count
     ];
     for (const [at, warmup] of logs) {
       await repo("set_logs", db).create({

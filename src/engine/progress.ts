@@ -99,7 +99,8 @@ export function weeklyVolume(
     for (const [m, w] of Object.entries(exercise.vector) as Array<[Muscle, number]>)
       week.perMuscle[m] += w;
     week.total += 1;
-    week.sessions.add(set.session_id ?? new Date(set.ts).toDateString());
+    // One training day counts once, matching the week count on Today (PHIL-1).
+    week.sessions.add(new Date(set.ts).toDateString());
   }
   return [...byWeek.values()].map((w) => ({ ...w, sessions: w.sessions.size }));
 }

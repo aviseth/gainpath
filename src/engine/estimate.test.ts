@@ -77,7 +77,7 @@ describe("new exercise / machine estimates (ALGORITHMS §15)", () => {
     expect(r).toEqual({ kind: "fallback", weightKg: 15, targetRir: 4 });
   });
 
-  describe("no e1RM to borrow, but loads lifted on this equipment (HEURISTIC)", () => {
+  describe("no e1RM to borrow, but loads lifted on this equipment (PROG-2, HEURISTIC)", () => {
     const rack = eq("free_weights", {
       min_kg: 0.5,
       max_kg: 22,
@@ -115,6 +115,19 @@ describe("new exercise / machine estimates (ALGORITHMS §15)", () => {
         cfg,
       });
       expect(r).toEqual({ kind: "fallback", weightKg: 6, targetRir: 4 });
+    });
+
+    it("a compound with only isolation history falls back to minimum + 2 steps", () => {
+      const r = estimateStart({
+        exercise: dbPress,
+        equipment: newMachine,
+        known: [],
+        catalog: catalogOf(curl, dbPress),
+        ratios: [],
+        equipmentLoads: [{ kind: "isolation", weightKg: 40 }],
+        cfg,
+      });
+      expect(r).toEqual({ kind: "fallback", weightKg: 15, targetRir: 4 });
     });
 
     it("a compound uses the lightest compound load", () => {
