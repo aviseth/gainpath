@@ -19,7 +19,7 @@ const browser = await chromium.launch({
 const context = await browser.newContext({
   ...devices["Pixel 7"],
   deviceScaleFactor: 2,
-  colorScheme: "dark",
+  colorScheme: "light",
   serviceWorkers: "block",
 });
 const page = await context.newPage();
@@ -39,6 +39,11 @@ await page.getByText(/Imported \d+ records/).waitFor();
 await page.goto(`${BASE}/`);
 await page.getByRole("heading", { level: 1, name: /^(Morning|Afternoon|Evening)/ }).waitFor();
 const checkin = page.getByRole("button", { name: "Save check-in" });
+// Wait for whichever renders first: the check-in card or the plan.
+await checkin
+  .or(page.getByRole("heading", { name: "Today's path" }))
+  .first()
+  .waitFor();
 if (await checkin.isVisible().catch(() => false)) {
   await shot("checkin");
   await page
