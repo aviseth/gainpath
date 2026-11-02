@@ -149,9 +149,9 @@ Free hosting: Cloudflare Workers for the app, Supabase for sign-in and sync.
 | `AI_MODEL_FAST`, `AI_MODEL_DEEP`                                                  | Model overrides                |
 | `GOOGLE_HEALTH_ENABLED`, `GOOGLE_HEALTH_CLIENT_ID`, `GOOGLE_HEALTH_CLIENT_SECRET` | Google Health sync             |
 
-To run one shared copy where you create each account yourself, see
-[hosted, invite-only](docs/hosted.md). People sign in with an emailed code or a password I
-give them.
+I run a shared copy where I create each account myself. People sign in with an emailed code
+or a password I give them. To run your own copy the same way, see
+[hosted, invite-only](docs/hosted.md).
 
 On Supabase's free plan, a project pauses after about a week without use and sign-in stops
 working until you restore it from the Supabase dashboard.
